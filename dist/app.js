@@ -1,4 +1,19 @@
 const STORAGE_KEY = "pliego-claro-mvp-opportunities-v3";
+const SETTINGS_KEY = "pliego-claro-mvp-settings-v1";
+
+const defaultSettings = {
+  workspaceName: "Mi empresa (ejemplo)",
+  timezone: "Europe/Madrid",
+  sectors: "",
+  locations: "",
+  includeProximity: true,
+  strictLCSP: true,
+  defaultDecision: "REVISAR",
+  deadlineReminders: true,
+  reminderDays: "7, 2, 1",
+  density: "compact",
+  showExampleLabels: true
+};
 
 const seedOpportunities = [
   {
@@ -69,6 +84,7 @@ const seedOpportunities = [
 ];
 
 let opportunities = loadOpportunities();
+let settings = loadSettings();
 let selectedId = opportunities[0]?.id;
 let activeFilter = "all";
 let activeDetailTab = "summary";
@@ -88,6 +104,20 @@ function loadOpportunities() {
   } catch (error) {
     return structuredClone(seedOpportunities);
   }
+}
+
+function loadSettings() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(SETTINGS_KEY));
+    return saved && typeof saved === "object" ? { ...defaultSettings, ...saved } : { ...defaultSettings };
+  } catch (error) {
+    return { ...defaultSettings };
+  }
+}
+
+function persistSettings(message = "Ajustes guardados") {
+  localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+  showToast(message);
 }
 
 function persist(message = "Guardado local") {
@@ -248,6 +278,96 @@ function currentRoute() {
   return ["hoy", "oportunidades", "expedientes", "tareas", "empresa", "pruebas", "ajustes"].includes(route) ? route : "oportunidades";
 }
 
+function renderSettingsMarkup() {
+  const storageBytes = new Blob([JSON.stringify({ opportunities, settings })]).size;
+  return `
+    <div class="settings-header">
+      <div>
+        <p class="eyebrow">Espacio de trabajo · Ajustes</p>
+        <h1>Ajustes de la aplicación</h1>
+        <p class="route-intro">Configura cómo Pliego Claro busca, filtra y presenta las oportunidades. Esta versión guarda los cambios solo en este navegador.</p>
+      </div>
+      <div class="settings-header-actions"><span class="settings-badge"><i></i> Datos locales · editable</span><span class="settings-badge settings-badge-muted">Sin conexión externa</span></div>
+    </div>
+    <div class="settings-notice"><span class="settings-notice-icon">◆</span><div><strong>Control de datos</strong><p>En este MVP no se sincronizan expedientes ni se envían pliegos a terceros. Las conexiones oficiales, cuentas de usuario y notificaciones nativas quedan pendientes de una próxima iteración.</p></div></div>
+    <div class="settings-shell">
+      <aside class="settings-nav" aria-label="Secciones de ajustes">
+        <span>Secciones de ajuste</span>
+        <a href="#ajuste-espacio">Espacio de trabajo</a>
+        <a href="#ajuste-empresa">Perfil de licitador</a>
+        <a href="#ajuste-busqueda">Búsqueda y proximidad</a>
+        <a href="#ajuste-decision">Reglas de decisión</a>
+        <a href="#ajuste-avisos">Avisos de fechas</a>
+        <a href="#ajuste-datos">Datos y resguardo</a>
+        <a href="#ajuste-apariencia">Apariencia</a>
+        <a class="settings-nav-danger" href="#ajuste-riesgo">Zona de riesgo</a>
+      </aside>
+      <div class="settings-main">
+        <section class="settings-section" id="ajuste-espacio">
+          <div class="settings-section-heading"><div><span class="settings-kicker">01 · CONTEXTO</span><h2>Espacio de trabajo</h2><p>Identifica este entorno sin simular una cuenta o una conexión que todavía no existe.</p></div><span class="settings-section-icon">⌂</span></div>
+          <div class="settings-field-grid">
+            <label class="settings-field"><span>Nombre visible</span><input data-setting="workspaceName" type="text" value="${escapeAttribute(settings.workspaceName)}" placeholder="Ej. Mi empresa" /></label>
+            <label class="settings-field"><span>Zona horaria de referencia</span><select data-setting="timezone"><option value="Europe/Madrid" ${settings.timezone === "Europe/Madrid" ? "selected" : ""}>Europe/Madrid</option><option value="UTC" ${settings.timezone === "UTC" ? "selected" : ""}>UTC</option></select></label>
+            <div class="settings-readonly"><span>Estado del entorno</span><strong><i></i> Datos locales · modo prueba</strong><small>No implica que exista una conexión oficial.</small></div>
+          </div>
+        </section>
+
+        <section class="settings-section" id="ajuste-empresa">
+          <div class="settings-section-heading"><div><span class="settings-kicker">02 · ENCAJE</span><h2>Perfil de licitador</h2><p>Estos datos servirán para comparar una oportunidad con lo que realmente puedes hacer. Déjalos vacíos hasta validarlos.</p></div><span class="settings-section-icon">○</span></div>
+          <div class="settings-field-grid">
+            <label class="settings-field settings-field-wide"><span>Sectores, servicios o palabras clave propias</span><textarea data-setting="sectors" rows="3" placeholder="Ej. mantenimiento preventivo, digitalización, formación…">${escapeHtml(settings.sectors)}</textarea><small>Se utilizarán para mejorar filtros y búsquedas; no sustituyen la lectura del pliego.</small></label>
+            <label class="settings-field settings-field-wide"><span>Zonas en las que puedes ejecutar</span><textarea data-setting="locations" rows="2" placeholder="Ej. Madrid, Guadalajara, remoto…">${escapeHtml(settings.locations)}</textarea><small>La proximidad será una señal de encaje, no una garantía de adjudicación.</small></label>
+          </div>
+        </section>
+
+        <section class="settings-section" id="ajuste-busqueda">
+          <div class="settings-section-heading"><div><span class="settings-kicker">03 · DESCUBRIMIENTO</span><h2>Búsqueda y proximidad</h2><p>Controla qué señales deben aparecer en las oportunidades sin convertirlas en una puntuación opaca.</p></div><span class="settings-section-icon">⌕</span></div>
+          <div class="settings-option-list">
+            <label class="settings-toggle"><span><strong>Usar proximidad como señal</strong><small>Mostrar distancia o coincidencia territorial cuando exista el dato. No descarta por sí sola.</small></span><input data-setting="includeProximity" type="checkbox" ${settings.includeProximity ? "checked" : ""} /></label>
+            <div class="settings-inline-note"><strong>Importante:</strong> la búsqueda real todavía no está conectada a fuentes oficiales; esta preferencia prepara el criterio del MVP.</div>
+          </div>
+        </section>
+
+        <section class="settings-section" id="ajuste-decision">
+          <div class="settings-section-heading"><div><span class="settings-kicker">04 · TRIAJE</span><h2>Reglas de decisión</h2><p>Define los valores iniciales de la mesa. La decisión final debe seguir siendo explicable y revisable.</p></div><span class="settings-section-icon">✓</span></div>
+          <div class="settings-field-grid">
+            <label class="settings-field"><span>Estado inicial de una oportunidad nueva</span><select data-setting="defaultDecision"><option value="REVISAR" ${settings.defaultDecision === "REVISAR" ? "selected" : ""}>REVISAR · recomendado</option><option value="GO" ${settings.defaultDecision === "GO" ? "selected" : ""}>GO · solo si está confirmado</option><option value="NO-GO" ${settings.defaultDecision === "NO-GO" ? "selected" : ""}>NO-GO · solo si está descartada</option></select></label>
+            <label class="settings-toggle settings-toggle-card"><span><strong>Modo estricto de requisitos</strong><small>No presentar como GO una oportunidad con requisitos decisivos pendientes.</small></span><input data-setting="strictLCSP" type="checkbox" ${settings.strictLCSP ? "checked" : ""} /></label>
+          </div>
+          <div class="settings-status-legend"><span><i class="status-dot status-dot-go"></i>Confirmado</span><span><i class="status-dot status-dot-review"></i>Pendiente de comprobar</span><span><i class="status-dot status-dot-no-go"></i>No encontrado o incompatible</span></div>
+        </section>
+
+        <section class="settings-section" id="ajuste-avisos">
+          <div class="settings-section-heading"><div><span class="settings-kicker">05 · SEGUIMIENTO</span><h2>Avisos de fechas</h2><p>Prepara qué debe aparecer en “Hoy”. La integración con Calendar o notificaciones del sistema aún no está conectada.</p></div><span class="settings-section-icon">!</span></div>
+          <div class="settings-field-grid">
+            <label class="settings-toggle settings-toggle-card"><span><strong>Mostrar avisos en Hoy</strong><small>Destacar oportunidades que se acercan al cierre dentro del MVP.</small></span><input data-setting="deadlineReminders" type="checkbox" ${settings.deadlineReminders ? "checked" : ""} /></label>
+            <label class="settings-field"><span>Anticipación de aviso</span><input data-setting="reminderDays" type="text" value="${escapeAttribute(settings.reminderDays)}" placeholder="7, 2, 1" /><small>Días antes del cierre, separados por comas.</small></label>
+          </div>
+          <div class="settings-inline-note"><strong>Estado actual:</strong> avisos internos preparados; recordatorios de calendario y alertas del sistema: pendientes.</div>
+        </section>
+
+        <section class="settings-section" id="ajuste-datos">
+          <div class="settings-section-heading"><div><span class="settings-kicker">06 · SOBERANÍA</span><h2>Datos y resguardo</h2><p>Exporta o importa una copia antes de probar cambios importantes. El tamaño mostrado es orientativo del almacenamiento de esta prueba.</p></div><span class="settings-section-icon">□</span></div>
+          <div class="settings-storage"><div><strong>Almacenamiento local</strong><span>${storageBytes} bytes · localStorage</span></div><div class="settings-storage-bar"><i style="width: 8%"></i></div></div>
+          <div class="settings-action-grid"><button class="settings-action" data-export-local type="button"><strong>↓ Exportar copia</strong><span> oportunidades + ajustes en JSON</span></button><label class="settings-action"><strong>↑ Importar copia</strong><span> seleccionar un JSON previamente exportado</span><input data-import-local type="file" accept="application/json" hidden /></label><button class="settings-action" data-settings-defaults type="button"><strong>↺ Restaurar ajustes</strong><span> volver a los valores del MVP</span></button></div>
+        </section>
+
+        <section class="settings-section" id="ajuste-apariencia">
+          <div class="settings-section-heading"><div><span class="settings-kicker">07 · LECTURA</span><h2>Apariencia y legibilidad</h2><p>La interfaz prioriza lectura documental, contraste y densidad controlada.</p></div><span class="settings-section-icon">✦</span></div>
+          <div class="settings-field-grid">
+            <label class="settings-field"><span>Densidad de la lista</span><select data-setting="density"><option value="compact" ${settings.density === "compact" ? "selected" : ""}>Compacta · más casos visibles</option><option value="comfortable" ${settings.density === "comfortable" ? "selected" : ""}>Cómoda · más espacio por caso</option></select></label>
+            <label class="settings-toggle settings-toggle-card"><span><strong>Mostrar etiquetas de ejemplo</strong><small>Recordar qué datos aún no están conectados a fuentes oficiales.</small></span><input data-setting="showExampleLabels" type="checkbox" ${settings.showExampleLabels ? "checked" : ""} /></label>
+          </div>
+        </section>
+
+        <section class="settings-section settings-section-risk" id="ajuste-riesgo">
+          <div class="settings-section-heading"><div><span class="settings-kicker settings-kicker-danger">08 · PRECAUCIÓN</span><h2>Zona de riesgo</h2><p>Acciones que pueden sustituir datos locales. Las mantengo separadas de los ajustes normales.</p></div><span class="settings-section-icon settings-section-icon-danger">×</span></div>
+          <div class="settings-danger-row"><div><strong>Restaurar oportunidades de ejemplo</strong><small>Reemplaza las oportunidades locales por los tres casos de prueba iniciales.</small></div><button class="button button-danger" data-route-reset type="button">Restaurar ejemplos</button></div>
+        </section>
+      </div>
+    </div>`;
+}
+
 function renderRoute() {
   const route = currentRoute();
   const breadcrumbLabels = { hoy: "Hoy", oportunidades: "Oportunidades", expedientes: "Expedientes", tareas: "Tareas", empresa: "Mi empresa", pruebas: "Notas de prueba", ajustes: "Ajustes" };
@@ -293,16 +413,58 @@ function renderRoute() {
       eyebrow: "Espacio de trabajo · Ajustes",
       title: "Ajustes del prototipo",
       intro: "Controles básicos de esta versión local.",
-      body: `<div class="route-grid"><article class="route-card"><span>ALMACENAMIENTO</span><strong>Datos guardados en este navegador</strong><p>Esta beta utiliza localStorage. No hay usuarios ni sincronización todavía.</p><button class="button button-outline" data-route-reset type="button">Restaurar ejemplos</button></article><article class="route-card"><span>IDENTIDAD</span><strong>Pliego Claro · nombre de trabajo</strong><p>El repositorio y la pantalla original de Stitch se mantienen separados.</p></article></div>`
+      body: renderSettingsMarkup()
     }
   }[route];
-  routeElement.innerHTML = `<div class="route-header"><p class="eyebrow">${routeData.eyebrow}</p><h1>${routeData.title}</h1><p class="route-intro">${routeData.intro}</p></div>${routeData.body}`;
+  routeElement.innerHTML = route === "ajustes" ? routeData.body : `<div class="route-header"><p class="eyebrow">${routeData.eyebrow}</p><h1>${routeData.title}</h1><p class="route-intro">${routeData.intro}</p></div>${routeData.body}`;
   routeElement.querySelectorAll("[data-open-opportunity]").forEach((button) => button.addEventListener("click", () => {
     selectedId = button.dataset.openOpportunity;
     activeDetailTab = "summary";
     window.location.hash = "oportunidades";
   }));
   routeElement.querySelector("[data-route-reset]")?.addEventListener("click", () => document.querySelector("#resetDemo").click());
+  routeElement.querySelectorAll("[data-setting]").forEach((control) => control.addEventListener("change", () => {
+    settings[control.dataset.setting] = control.type === "checkbox" ? control.checked : control.value;
+    persistSettings();
+  }));
+  routeElement.querySelector("[data-settings-defaults]")?.addEventListener("click", () => {
+    settings = { ...defaultSettings };
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+    renderRoute();
+    showToast("Ajustes restaurados.");
+  });
+  routeElement.querySelector("[data-export-local]")?.addEventListener("click", () => {
+    const payload = { format: "pliego-claro-mvp", exportedAt: new Date().toISOString(), opportunities, settings };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "pliego-claro-copia-local.json";
+    link.click();
+    URL.revokeObjectURL(url);
+    showToast("Copia local preparada.");
+  });
+  routeElement.querySelector("[data-import-local]")?.addEventListener("change", (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+      try {
+        const payload = JSON.parse(String(reader.result));
+        if (!Array.isArray(payload.opportunities)) throw new Error("Formato no reconocido");
+        opportunities = payload.opportunities;
+        settings = { ...defaultSettings, ...(payload.settings || {}) };
+        selectedId = opportunities[0]?.id;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(opportunities));
+        localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+        render();
+        showToast("Copia local importada.");
+      } catch (error) {
+        showToast("No se ha podido importar: formato no reconocido.");
+      }
+    });
+    reader.readAsText(file);
+  });
 }
 
 function selectOpportunity(id) {
