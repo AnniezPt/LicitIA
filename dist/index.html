@@ -25,10 +25,10 @@
 
         <nav class="nav-list">
           <span class="nav-heading">Espacio de trabajo</span>
-          <a class="nav-item" data-route="hoy" href="#hoy"><span class="nav-icon">⌂</span>Hoy <span class="nav-count">3</span></a>
+          <a class="nav-item" data-route="hoy" href="#hoy"><span class="nav-icon">⌂</span>Hoy <span class="nav-count" data-route-count="hoy">3</span></a>
           <a class="nav-item active" data-route="oportunidades" href="#oportunidades"><span class="nav-icon">◈</span>Oportunidades</a>
           <a class="nav-item" data-route="expedientes" href="#expedientes"><span class="nav-icon">□</span>Expedientes</a>
-          <a class="nav-item" data-route="tareas" href="#tareas"><span class="nav-icon">✓</span>Tareas <span class="nav-count nav-count-muted">4</span></a>
+          <a class="nav-item" data-route="tareas" href="#tareas"><span class="nav-icon">✓</span>Tareas <span class="nav-count nav-count-muted" data-route-count="tareas">4</span></a>
           <a class="nav-item" data-route="empresa" href="#empresa"><span class="nav-icon">○</span>Mi empresa</a>
           <a class="nav-item" data-route="pruebas" href="#pruebas"><span class="nav-icon">✦</span>Notas de prueba</a>
           <a class="nav-item" data-route="ajustes" href="#ajustes"><span class="nav-icon">⚙</span>Ajustes</a>
@@ -146,7 +146,9 @@
           <label class="field">Organismo<input name="organization" required placeholder="Ayuntamiento, diputación…" /></label>
           <label class="field">Importe<input name="amount" placeholder="Ej. 48.000 €" /></label>
           <label class="field">Cierre o referencia<input name="deadline" placeholder="Ej. 12 días · Exp. 2026/14" /></label>
+          <label class="field">Fecha límite exacta<input name="deadlineDate" type="date" /></label>
           <label class="field">Sector<input name="sector" placeholder="Ej. Servicios, obras…" /></label>
+          <label class="field field-wide">Enlace oficial<input name="source" type="url" placeholder="https://contrataciondelestado.es/..." /></label>
         </div>
         <div class="modal-actions">
           <button class="button button-quiet" id="cancelAdd" type="button">Cancelar</button>

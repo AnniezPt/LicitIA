@@ -32,6 +32,7 @@ Los cambios de ejemplo se guardan en `localStorage` del navegador para que se pu
 - [Investigación de competidores y accesos de prueba](docs/INVESTIGACION_COMPETIDORES_ACCESO_2026-09-29.md)
 - [Método de benchmark de búsqueda y decisión](docs/METODO_BENCHMARK_BUSQUEDA_Y_DECISION_2026-09-30.md)
 - [Guía de Ajustes del MVP](docs/GUIA_AJUSTES_MVP_PLIEGO_CLARO_2026-09-30.md)
+- [Auditoría de apartados del MVP](docs/AUDITORIA_APARTADOS_MVP_2026-09-30.md)
 
 ## Diseño y trazabilidad
 

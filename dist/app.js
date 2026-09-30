@@ -1,11 +1,16 @@
 const STORAGE_KEY = "pliego-claro-mvp-opportunities-v3";
 const SETTINGS_KEY = "pliego-claro-mvp-settings-v1";
+const NOTES_KEY = "pliego-claro-mvp-benchmark-notes-v1";
 
 const defaultSettings = {
   workspaceName: "Mi empresa (ejemplo)",
   timezone: "Europe/Madrid",
   sectors: "",
   locations: "",
+  technicalSolvency: "",
+  economicSolvency: "",
+  collaborationNotes: "",
+  documentsAvailable: "",
   includeProximity: true,
   strictLCSP: true,
   defaultDecision: "REVISAR",
@@ -22,6 +27,7 @@ const seedOpportunities = [
     organization: "Administración pública · ejemplo editable",
     amount: "80.000 € aprox.",
     deadline: "Cierre en 12 días",
+    deadlineDate: "2026-10-12",
     sector: "Servicios digitales",
     decision: "REVISAR",
     fit: "Por comprobar",
@@ -31,6 +37,7 @@ const seedOpportunities = [
     why: ["El objeto se puede entender de un vistazo.", "Permite separar solvencia económica y técnica.", "Sirve para probar la relación entre requisito y evidencia."],
     nextStep: "Comprobar qué trabajos similares puede demostrar la empresa y asociar cada uno a su documento.",
     nextDate: "Primera revisión · 25 min",
+    nextStepDone: false,
     requirements: [
       { text: "Experiencia en trabajos similares", source: "Solvencia técnica · por comprobar", status: "pending" },
       { text: "Volumen anual de negocio suficiente", source: "Solvencia económica · por comprobar", status: "pending" },
@@ -44,6 +51,7 @@ const seedOpportunities = [
     organization: "Organismo público · ejemplo editable",
     amount: "41.180 € aprox.",
     deadline: "Cierre en 18 días",
+    deadlineDate: "2026-10-18",
     sector: "Formación",
     decision: "REVISAR",
     fit: "Por comprobar",
@@ -53,6 +61,7 @@ const seedOpportunities = [
     why: ["Permite trabajar con certificados y referencias.", "Pide separar personas, experiencia y medios.", "Ayuda a probar la revisión requisito por requisito."],
     nextStep: "Separar cada requisito de solvencia de la evidencia concreta que tendría que aportar la empresa.",
     nextDate: "Segunda prueba · después del primer ejemplo",
+    nextStepDone: false,
     requirements: [
       { text: "Trabajos similares y certificados de buena ejecución", source: "Solvencia técnica · por comprobar", status: "unknown" },
       { text: "Personal técnico y currículos", source: "Medios personales · por comprobar", status: "unknown" },
@@ -66,6 +75,7 @@ const seedOpportunities = [
     organization: "Entidad local · ejemplo editable",
     amount: "30.000 € aprox. / año",
     deadline: "Aparcado por ahora",
+    deadlineDate: null,
     sector: "Mantenimiento",
     decision: "NO-GO",
     fit: "Baja por ahora",
@@ -75,6 +85,7 @@ const seedOpportunities = [
     why: ["La proximidad puede ser parte central de la ejecución.", "Puede exigir personal cualificado y medios específicos.", "Tiene más carga técnica para una primera prueba."],
     nextStep: "No invertir tiempo hasta saber si las personas de prueba necesitan búsqueda por proximidad.",
     nextDate: "Aparcado hasta validar los primeros ejemplos",
+    nextStepDone: false,
     requirements: [
       { text: "Personal cualificado para las revisiones", source: "Requisito técnico · por comprobar", status: "unknown" },
       { text: "Materiales y medios para varias instalaciones", source: "Medios de ejecución · por comprobar", status: "unknown" },
@@ -83,10 +94,29 @@ const seedOpportunities = [
   }
 ];
 
+const seedNotes = [
+  {
+    id: "nota-regla-evidencia",
+    kind: "Regla",
+    text: "Separar siempre el hecho del pliego, la evidencia de la empresa y la duda pendiente.",
+    opportunityId: "",
+    createdAt: "2026-09-30T09:00:00.000Z"
+  },
+  {
+    id: "nota-conectar-casos",
+    kind: "Pendiente",
+    text: "Conectar casos reales y registrar falsos positivos, falsos negativos y requisitos que el primer MVP no encuentra.",
+    opportunityId: "",
+    createdAt: "2026-09-30T09:05:00.000Z"
+  }
+];
+
 let opportunities = loadOpportunities();
 let settings = loadSettings();
+let notes = loadNotes();
 let selectedId = opportunities[0]?.id;
 let activeFilter = "all";
+let activeExpedientFilter = "all";
 let activeDetailTab = "summary";
 let searchQuery = "";
 
@@ -100,7 +130,11 @@ const breadcrumbElement = document.querySelector(".breadcrumbs strong");
 function loadOpportunities() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    return Array.isArray(saved) && saved.length ? saved : structuredClone(seedOpportunities);
+    if (!Array.isArray(saved) || !saved.length) return structuredClone(seedOpportunities);
+    return saved.map((item) => {
+      const seed = seedOpportunities.find((entry) => entry.id === item.id);
+      return { ...(seed || {}), ...item, requirements: Array.isArray(item.requirements) ? item.requirements : structuredClone(seed?.requirements || []), deadlineDate: item.deadlineDate ?? seed?.deadlineDate ?? null, nextStepDone: item.nextStepDone ?? false };
+    });
   } catch (error) {
     return structuredClone(seedOpportunities);
   }
@@ -115,8 +149,22 @@ function loadSettings() {
   }
 }
 
+function loadNotes() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(NOTES_KEY));
+    return Array.isArray(saved) ? saved : structuredClone(seedNotes);
+  } catch (error) {
+    return structuredClone(seedNotes);
+  }
+}
+
 function persistSettings(message = "Ajustes guardados") {
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+  showToast(message);
+}
+
+function persistNotes(message = "Nota guardada") {
+  localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
   showToast(message);
 }
 
@@ -135,6 +183,131 @@ function showToast(message) {
   showToast.timer = window.setTimeout(() => toastElement.classList.remove("show"), 2800);
 }
 
+function recordHistory(item, label, detail) {
+  item.history = Array.isArray(item.history) ? item.history : [];
+  item.history.unshift({ label, detail, at: new Date().toISOString() });
+  item.history = item.history.slice(0, 20);
+}
+
+function getDeadlineDate(item) {
+  if (!item.deadlineDate) return null;
+  const date = new Date(`${item.deadlineDate}T23:59:59`);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function formatDate(date) {
+  if (!date) return "Fecha por confirmar";
+  return new Intl.DateTimeFormat("es-ES", { day: "numeric", month: "short" }).format(date).replace(".", "");
+}
+
+function daysUntil(date) {
+  if (!date) return null;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const target = new Date(date);
+  target.setHours(0, 0, 0, 0);
+  return Math.ceil((target - today) / 86400000);
+}
+
+function deadlineLabel(item) {
+  const date = getDeadlineDate(item);
+  const days = daysUntil(date);
+  if (!date) return item.deadline || "Fecha por confirmar";
+  if (days < 0) return `Cerró el ${formatDate(date)}`;
+  if (days === 0) return `Cierra hoy · ${formatDate(date)}`;
+  return `Cierra el ${formatDate(date)} · ${days} días`;
+}
+
+function upcomingOpportunities() {
+  return opportunities
+    .filter((item) => getDeadlineDate(item) && daysUntil(getDeadlineDate(item)) >= 0)
+    .sort((a, b) => getDeadlineDate(a) - getDeadlineDate(b));
+}
+
+function taskItems(item) {
+  const tasks = [{
+    id: `next-${item.id}`,
+    opportunityId: item.id,
+    title: item.nextStep || "Definir el siguiente paso",
+    detail: item.nextDate || "Fecha por confirmar",
+    status: item.nextStepDone ? "completed" : item.decision === "NO-GO" ? "blocked" : "in_progress",
+    kind: "next"
+  }];
+  (item.requirements || []).forEach((requirement, requirementIndex) => {
+    if (requirement.status === "confirmed") return;
+    tasks.push({
+      id: `requirement-${item.id}-${requirementIndex}`,
+      opportunityId: item.id,
+      title: `Comprobar: ${requirement.text}`,
+      detail: requirement.source || "Fuente por asociar",
+      status: "pending",
+      kind: "requirement",
+      requirementIndex
+    });
+  });
+  return tasks;
+}
+
+function allTasks() {
+  return opportunities.flatMap((item) => taskItems(item));
+}
+
+function taskStatusLabel(status) {
+  return { completed: "Completada", in_progress: "En curso", pending: "Pendiente", blocked: "Aparcada" }[status] || "Pendiente";
+}
+
+function compactCount(value) {
+  return value > 9 ? "9+" : String(value);
+}
+
+function taskStateClass(status) {
+  return { completed: "task-state-completed", in_progress: "task-state-review", pending: "task-state-pending", blocked: "task-state-blocked" }[status] || "task-state-pending";
+}
+
+function profileBlocks() {
+  return [
+    ["Servicios y sectores", settings.sectors],
+    ["Zonas de ejecución", settings.locations],
+    ["Solvencia técnica", settings.technicalSolvency],
+    ["Solvencia económica", settings.economicSolvency],
+    ["Medios propios, externos o asociación", settings.collaborationNotes],
+    ["Documentación disponible", settings.documentsAvailable]
+  ];
+}
+
+function profileCompletion() {
+  const blocks = profileBlocks();
+  const completed = blocks.filter(([, value]) => String(value || "").trim()).length;
+  return { blocks, completed, total: blocks.length, percentage: Math.round((completed / blocks.length) * 100) };
+}
+
+function taskRowMarkup(task, showOpportunity = true) {
+  const item = opportunities.find((entry) => entry.id === task.opportunityId);
+  const completed = task.status === "completed";
+  return `<div class="task-board-row ${completed ? "task-board-row-completed" : ""}">
+    <button class="task-check-button ${taskStateClass(task.status)}" data-task-complete="${escapeAttribute(task.id)}" type="button" aria-label="${completed ? "Reabrir" : "Completar"} tarea">${completed ? "✓" : "○"}</button>
+    <div class="task-board-copy"><strong>${escapeHtml(task.title)}</strong><span>${escapeHtml(task.detail)}${showOpportunity && item ? ` · ${escapeHtml(item.title)}` : ""}</span></div>
+    <span class="task-state ${taskStateClass(task.status)}">${taskStatusLabel(task.status)}</span>
+    ${item ? `<button class="route-row-action" data-open-opportunity="${escapeAttribute(item.id)}" type="button">Abrir →</button>` : ""}
+  </div>`;
+}
+
+function completeTask(taskId) {
+  const task = allTasks().find((entry) => entry.id === taskId);
+  const item = task && opportunities.find((entry) => entry.id === task.opportunityId);
+  if (!task || !item) return;
+  if (task.kind === "requirement") {
+    const requirement = item.requirements[task.requirementIndex];
+    requirement.status = task.status === "completed" ? "pending" : "confirmed";
+    recordHistory(item, requirement.status === "confirmed" ? `Tarea completada: ${requirement.text}` : `Tarea reabierta: ${requirement.text}`, "Estado de evidencia actualizado desde Tareas.");
+  } else {
+    item.nextStepDone = !item.nextStepDone;
+    recordHistory(item, item.nextStepDone ? "Siguiente acción completada" : "Siguiente acción reabierta", item.nextStep);
+  }
+  persist(item.nextStepDone ? "Tarea completada" : "Tarea actualizada");
+  render();
+}
+
 function decisionClass(decision) {
   return decision.toLowerCase().replace("-", "-");
 }
@@ -143,20 +316,25 @@ function visibleOpportunities() {
   let visible = opportunities;
   if (activeFilter === "review") visible = visible.filter((item) => item.decision === "REVISAR");
   if (activeFilter === "go") visible = visible.filter((item) => item.decision === "GO");
-  if (activeFilter === "soon") visible = visible.filter((item) => item.deadline !== "Caso aparcado");
+  if (activeFilter === "soon") visible = visible.filter((item) => getDeadlineDate(item) && daysUntil(getDeadlineDate(item)) >= 0).sort((a, b) => getDeadlineDate(a) - getDeadlineDate(b));
   if (searchQuery) {
     const query = searchQuery.toLocaleLowerCase();
-    visible = visible.filter((item) => [item.title, item.organization, item.sector, item.amount].join(" ").toLocaleLowerCase().includes(query));
+    visible = visible.filter((item) => [item.title, item.organization, item.sector, item.amount, item.summary, item.nextStep, ...(item.requirements || []).map((requirement) => requirement.text)].join(" ").toLocaleLowerCase().includes(query));
   }
   return visible;
 }
 
 function renderMetrics() {
+  const openTasks = allTasks().filter((task) => task.status === "pending" || task.status === "in_progress");
+  const upcoming = upcomingOpportunities();
   document.querySelector("#metricReview").textContent = opportunities.filter((item) => item.decision === "REVISAR").length;
   document.querySelector("#metricGo").textContent = opportunities.filter((item) => item.decision === "GO").length;
   document.querySelector("#metricNoGo").textContent = opportunities.filter((item) => item.decision === "NO-GO").length;
-  document.querySelector("#metricNext").textContent = opportunities.some((item) => item.deadline !== "Caso aparcado") ? "2 casos" : "—";
+  document.querySelector("#metricNext").textContent = upcoming.length ? `${upcoming.length} · ${formatDate(getDeadlineDate(upcoming[0]))}` : "—";
   document.querySelector("#opportunityCount").textContent = `${opportunities.length} ${opportunities.length === 1 ? "caso" : "casos"}`;
+  document.querySelector('[data-route-count="hoy"]')?.replaceChildren(document.createTextNode(compactCount(openTasks.length)));
+  document.querySelector('[data-route-count="tareas"]')?.replaceChildren(document.createTextNode(compactCount(openTasks.length)));
+  document.documentElement.dataset.density = settings.density;
 }
 
 function renderList() {
@@ -166,7 +344,7 @@ function renderList() {
       <div class="card-topline"><span class="card-sector">${escapeHtml(item.sector)}</span><span class="decision-pill ${decisionClass(item.decision)}">${escapeHtml(item.decision)}</span></div>
       <h3>${escapeHtml(item.title)}</h3>
       <p class="card-organization">${escapeHtml(item.organization)}</p>
-      <div class="card-meta"><span>Importe <strong>${escapeHtml(item.amount)}</strong></span><span>Cierre <strong>${escapeHtml(item.deadline)}</strong></span></div>
+      <div class="card-meta"><span>Importe <strong>${escapeHtml(item.amount)}</strong></span><span>Cierre <strong>${escapeHtml(deadlineLabel(item))}</strong></span></div>
     </article>
   `).join("") : `<div class="empty-list"><strong>No hay casos con este filtro.</strong><span>Prueba otra vista o añade una oportunidad.</span></div>`;
 
@@ -196,7 +374,7 @@ function renderDetail() {
             <div class="requirement">
               <button class="requirement-check ${req.status}" data-requirement="${index}" type="button" aria-label="Cambiar estado de ${escapeHtml(req.text)}">${req.status === "confirmed" ? "✓" : req.status === "pending" ? "!" : "?"}</button>
               <div class="requirement-copy"><strong>${escapeHtml(req.text)}</strong><span class="requirement-source">${escapeHtml(req.source)}</span><span class="requirement-status status-${req.status}">${statusLabels[req.status]}</span></div>
-              <span class="requirement-action">Ver fuente</span>
+              ${item.source ? `<a class="requirement-action" href="${escapeAttribute(item.source)}" target="_blank" rel="noreferrer">Ver fuente ↗</a>` : `<span class="requirement-action requirement-action-muted">Fuente pendiente</span>`}
             </div>`).join("")}
           </div>
           <a class="source-link" href="${escapeAttribute(item.source)}" target="_blank" rel="noreferrer">Abrir ${escapeHtml(item.sourceLabel)} ↗</a>
@@ -210,7 +388,7 @@ function renderDetail() {
         <div class="summary-cell summary-wide"><span>Qué se compra</span><strong>${escapeHtml(item.summary)}</strong></div>
         <div class="summary-cell"><span>Quién lo compra</span><strong>${escapeHtml(item.organization)}</strong></div>
         <div class="summary-cell"><span>Importe orientativo</span><strong>${escapeHtml(item.amount)}</strong></div>
-        <div class="summary-cell"><span>Fecha límite</span><strong>${escapeHtml(item.deadline)}</strong></div>
+        <div class="summary-cell"><span>Fecha límite</span><strong>${escapeHtml(deadlineLabel(item))}</strong></div>
         <div class="summary-cell"><span>Sector</span><strong>${escapeHtml(item.sector)}</strong></div>
         <div class="summary-cell summary-wide"><span>Qué falta comprobar</span><strong>${escapeHtml(item.nextStep)}</strong></div>
       </div>
@@ -219,7 +397,7 @@ function renderDetail() {
   const documentsView = `
     <div class="documents-view"><div class="view-heading"><div><p class="detail-section-title">Documentación</p><h3>Fuentes del expediente</h3></div><span class="example-label">No sincronizado</span></div>
       <p class="view-intro">Esta lista es estructural: hasta conectar una fuente oficial, no afirma que los documentos estén descargados o verificados.</p>
-      <div class="document-list">${["PCAP · Pliego de cláusulas administrativas", "PPT · Prescripciones técnicas", "Anexos · Modelos y declaraciones"].map((name, index) => `<div class="document-row"><span class="document-icon">${index === 0 ? "PDF" : index === 1 ? "DOC" : "ZIP"}</span><div><strong>${name}</strong><span>Fuente pendiente de asociar · ejemplo editable</span></div><a class="document-action" href="${escapeAttribute(item.source)}" target="_blank" rel="noreferrer">Ver fuente ↗</a></div>`).join("")}</div>
+      <div class="document-list">${["PCAP · Pliego de cláusulas administrativas", "PPT · Prescripciones técnicas", "Anexos · Modelos y declaraciones"].map((name, index) => `<div class="document-row"><span class="document-icon">${index === 0 ? "PDF" : index === 1 ? "DOC" : "ZIP"}</span><div><strong>${name}</strong><span>Fuente pendiente de asociar · ejemplo editable</span></div>${item.source ? `<a class="document-action" href="${escapeAttribute(item.source)}" target="_blank" rel="noreferrer">Ver fuente ↗</a>` : `<span class="document-action document-action-muted">Pendiente</span>`}</div>`).join("")}</div>
     </div>`;
   const decisionView = `
     <div class="decision-view"><div class="view-heading"><div><p class="detail-section-title">Matriz de decisión</p><h3>¿Merece invertir tiempo?</h3></div><span class="decision-pill ${decisionClass(item.decision)}">${escapeHtml(item.decision)}</span></div>
@@ -228,19 +406,20 @@ function renderDetail() {
       <button class="button button-dark confirm-decision" data-decision-confirm type="button">Confirmar decisión provisional</button>
     </div>`;
   const tasksView = `
-    <div class="tasks-view"><div class="view-heading"><div><p class="detail-section-title">Acciones vinculadas</p><h3>Tareas del expediente</h3></div><button class="button button-outline" type="button" data-task-add>+ Crear tarea</button></div>
-      <div class="task-list"><div class="task-row"><span class="task-state task-state-review">En curso</span><div><strong>${escapeHtml(item.nextStep)}</strong><span>Responsable: por asignar · ${escapeHtml(item.nextDate)}</span></div></div><div class="task-row"><span class="task-state task-state-pending">Pendiente</span><div><strong>Asociar evidencia a cada requisito decisivo</strong><span>Responsable: por asignar · Fecha por confirmar</span></div></div></div>
+    <div class="tasks-view"><div class="view-heading"><div><p class="detail-section-title">Acciones vinculadas</p><h3>Tareas del expediente</h3></div><span class="example-label">Derivadas de la revisión</span></div>
+      <p class="view-intro">Cada duda pendiente se convierte en una tarea concreta. Al completar una comprobación, la evidencia pasa a confirmado.</p>
+      <div class="task-list">${taskItems(item).map((task) => taskRowMarkup(task, false)).join("")}</div>
     </div>`;
   const historyView = `
     <div class="history-view"><div class="view-heading"><div><p class="detail-section-title">Trazabilidad</p><h3>Historial de prueba</h3></div><span class="example-label">Datos locales</span></div>
-      <div class="timeline"><div class="timeline-item"><span>Ahora</span><div><strong>Expediente abierto en el MVP</strong><p>La información se mantiene en este navegador.</p></div></div><div class="timeline-item"><span>Inicio</span><div><strong>Oportunidad añadida como ejemplo</strong><p>La fuente oficial todavía debe contrastarse.</p></div></div></div>
+      <div class="timeline">${(item.history || [{ label: "Oportunidad añadida como ejemplo", detail: "La fuente oficial todavía debe contrastarse.", at: new Date().toISOString() }]).map((event) => `<div class="timeline-item"><span>${escapeHtml(formatDate(new Date(event.at)))}</span><div><strong>${escapeHtml(event.label)}</strong><p>${escapeHtml(event.detail)}</p></div></div>`).join("")}</div>
     </div>`;
   const tabViews = { summary: summaryView, requirements: requirementsView, documents: documentsView, decision: decisionView, tasks: tasksView, history: historyView };
   detailElement.innerHTML = `
     <div class="detail-content">
       <div class="detail-topline"><div><span class="detail-eyebrow">Ficha de decisión · ${escapeHtml(item.fit)} encaje</span><h2>${escapeHtml(item.title)}</h2><p class="detail-organization">${escapeHtml(item.organization)} · ${escapeHtml(item.sector)} · <span class="mono">${escapeHtml(item.amount)}</span></p></div><span class="decision-pill ${decisionClass(item.decision)}">${escapeHtml(item.decision)}</span></div>
       <div class="detail-summary"><div><span>Presupuesto</span><strong>${escapeHtml(item.amount)}</strong></div><div><span>Plazo / estado</span><strong>${escapeHtml(item.deadline)}</strong></div><div><span>Evidencias</span><strong>${confirmedCount}/${item.requirements.length} claras</strong></div></div>
-      <nav class="detail-tabs" aria-label="Secciones del expediente">${[["summary","Resumen"],["requirements","Requisitos y evidencias"],["documents","Documentos"],["decision","Decisión"],["tasks","Tareas"],["history","Historial"]].map(([id,label]) => `<button class="detail-tab ${activeDetailTab === id ? "active" : ""}" data-tab="${id}" type="button">${label}${id === "requirements" ? `<small>${item.requirements.length}</small>` : id === "tasks" ? `<small>2</small>` : ""}</button>`).join("")}</nav>
+      <nav class="detail-tabs" aria-label="Secciones del expediente">${[["summary","Resumen"],["requirements","Requisitos y evidencias"],["documents","Documentos"],["decision","Decisión"],["tasks","Tareas"],["history","Historial"]].map(([id,label]) => `<button class="detail-tab ${activeDetailTab === id ? "active" : ""}" data-tab="${id}" type="button">${label}${id === "requirements" ? `<small>${item.requirements.length}</small>` : id === "tasks" ? `<small>${taskItems(item).length}</small>` : ""}</button>`).join("")}</nav>
       <div class="detail-tab-panel">${tabViews[activeDetailTab]}</div>
       <p class="detail-note">La información de esta ficha debe contrastarse siempre con el expediente oficial. Los datos visibles están rotulados como ejemplo cuando aún no existe conexión documental.</p>
     </div>`;
@@ -250,7 +429,12 @@ function renderDetail() {
     renderDetail();
   }));
   detailElement.querySelectorAll("[data-decision]").forEach((button) => button.addEventListener("click", () => {
+    if (button.dataset.decision === "GO" && settings.strictLCSP && item.requirements.some((requirement) => requirement.status !== "confirmed")) {
+      showToast("Modo estricto: faltan requisitos decisivos por confirmar.");
+      return;
+    }
     item.decision = button.dataset.decision;
+    recordHistory(item, `Decisión provisional: ${item.decision}`, settings.strictLCSP ? "Aplicada con control de requisitos activo." : "Aplicada durante la prueba.");
     persist("Decisión guardada");
     render();
     showToast(`Decisión actualizada: ${item.decision}`);
@@ -259,10 +443,11 @@ function renderDetail() {
   detailElement.querySelectorAll("[data-requirement]").forEach((button) => button.addEventListener("click", () => {
     const requirement = item.requirements[Number(button.dataset.requirement)];
     requirement.status = requirement.status === "unknown" ? "pending" : requirement.status === "pending" ? "confirmed" : "unknown";
+    recordHistory(item, `Estado actualizado: ${requirement.text}`, statusLabels[requirement.status]);
     persist("Evidencia guardada");
     render();
   }));
-  detailElement.querySelector("[data-task-add]")?.addEventListener("click", () => showToast("La creación de tareas queda preparada para la siguiente iteración."));
+  detailElement.querySelectorAll("[data-task-complete]").forEach((button) => button.addEventListener("click", () => completeTask(button.dataset.taskComplete)));
 }
 
 function render() {
@@ -317,6 +502,10 @@ function renderSettingsMarkup() {
           <div class="settings-field-grid">
             <label class="settings-field settings-field-wide"><span>Sectores, servicios o palabras clave propias</span><textarea data-setting="sectors" rows="3" placeholder="Ej. mantenimiento preventivo, digitalización, formación…">${escapeHtml(settings.sectors)}</textarea><small>Se utilizarán para mejorar filtros y búsquedas; no sustituyen la lectura del pliego.</small></label>
             <label class="settings-field settings-field-wide"><span>Zonas en las que puedes ejecutar</span><textarea data-setting="locations" rows="2" placeholder="Ej. Madrid, Guadalajara, remoto…">${escapeHtml(settings.locations)}</textarea><small>La proximidad será una señal de encaje, no una garantía de adjudicación.</small></label>
+            <label class="settings-field settings-field-wide"><span>Experiencia y solvencia técnica</span><textarea data-setting="technicalSolvency" rows="3" placeholder="Trabajos similares, años de experiencia, certificados…">${escapeHtml(settings.technicalSolvency)}</textarea><small>Resume lo que puedes demostrar; después habrá que asociar cada afirmación a una evidencia.</small></label>
+            <label class="settings-field settings-field-wide"><span>Solvencia económica</span><textarea data-setting="economicSolvency" rows="2" placeholder="Volumen de negocio, seguros, límites que debamos comprobar…">${escapeHtml(settings.economicSolvency)}</textarea><small>No se verifica automáticamente y no sustituye la documentación del expediente.</small></label>
+            <label class="settings-field settings-field-wide"><span>Medios externos, asociación o colaboración</span><textarea data-setting="collaborationNotes" rows="2" placeholder="UTE, medios externos, subcontratación o colaboradores que podrían completar capacidades…">${escapeHtml(settings.collaborationNotes)}</textarea><small>Sirve para recordar cuándo una oportunidad puede requerir colaboración, no para afirmar que ya existe.</small></label>
+            <label class="settings-field settings-field-wide"><span>Documentación disponible</span><textarea data-setting="documentsAvailable" rows="2" placeholder="Referencias, certificados, cuentas, seguros, currículos…">${escapeHtml(settings.documentsAvailable)}</textarea><small>Lista de documentos disponibles para la prueba; todavía no se suben ni se sincronizan.</small></label>
           </div>
         </section>
 
@@ -378,36 +567,42 @@ function renderRoute() {
   if (route === "oportunidades") return;
 
   const selected = opportunities.find((item) => item.id === selectedId) || opportunities[0];
+  const openTasks = allTasks().filter((task) => task.status === "pending" || task.status === "in_progress");
+  const parkedTasks = allTasks().filter((task) => task.status === "blocked");
+  const completedTasks = allTasks().filter((task) => task.status === "completed");
+  const upcoming = upcomingOpportunities();
+  const profile = profileCompletion();
+  const filteredExpedients = opportunities.filter((item) => activeExpedientFilter === "all" || item.decision === activeExpedientFilter);
   const routeData = {
     hoy: {
       eyebrow: "Espacio de trabajo · Hoy",
       title: "Lo que necesita tu atención",
       intro: "Una vista breve para empezar por lo que puede cambiar una decisión hoy.",
-      body: `<div class="route-grid"><article class="route-card route-card-accent"><span>REVISAR PRIMERO</span><strong>${escapeHtml(selected?.title || "Sin oportunidades")}</strong><p>${escapeHtml(selected?.nextStep || "Añade una oportunidad para empezar.")}</p><a href="#oportunidades">Abrir ficha →</a></article><article class="route-card"><span>RESUMEN</span><strong>${opportunities.filter((item) => item.decision === "REVISAR").length} oportunidades por revisar</strong><p>Empieza por las que tienen requisitos o evidencias pendientes.</p><a href="#oportunidades">Ver oportunidades →</a></article></div>`
+      body: `<div class="route-summary-strip"><article class="route-card route-card-accent"><span>PRÓXIMA FECHA</span><strong>${upcoming[0] ? escapeHtml(deadlineLabel(upcoming[0])) : "Sin fecha confirmada"}</strong><p>${upcoming[0] ? escapeHtml(upcoming[0].title) : "Añade una fecha exacta para priorizar mejor."}</p>${upcoming[0] ? `<button class="route-inline-action" data-open-opportunity="${escapeAttribute(upcoming[0].id)}" type="button">Abrir ficha →</button>` : ""}</article><article class="route-card"><span>TRABAJO ABIERTO</span><strong>${openTasks.length} tareas pendientes</strong><p>Una tarea es una duda que debe cerrarse antes de decidir.</p><a href="#tareas">Ver tareas →</a></article><article class="route-card"><span>REVISIÓN</span><strong>${opportunities.filter((item) => item.decision === "REVISAR").length} oportunidades</strong><p>Empieza por requisitos con evidencia pendiente.</p><a href="#oportunidades">Ver oportunidades →</a></article></div><section class="route-section"><div class="route-section-heading"><div><p class="eyebrow eyebrow-muted">PRIORIDAD</p><h2>Lo que puedes cerrar ahora</h2></div><span class="count-label">${Math.min(openTasks.length, 4)} visibles</span></div><div class="task-board">${openTasks.length ? openTasks.slice(0, 4).map((task) => taskRowMarkup(task)).join("") : `<div class="empty-list"><strong>No hay tareas abiertas.</strong><span>La bandeja está despejada por ahora.</span></div>`}</div></section>`
     },
     expedientes: {
       eyebrow: "Espacio de trabajo · Expedientes",
       title: "Expedientes de prueba",
       intro: "Casos locales que estamos usando para comprobar la búsqueda y la decisión.",
-      body: `<div class="route-list">${opportunities.map((item) => `<button class="route-list-row" data-open-opportunity="${escapeAttribute(item.id)}" type="button"><span class="route-list-status decision-pill ${decisionClass(item.decision)}">${escapeHtml(item.decision)}</span><span><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml(item.organization)} · ${escapeHtml(item.amount)}</small></span><span class="route-arrow">→</span></button>`).join("")}</div>`
+      body: `<div class="route-toolbar"><div class="filters" role="toolbar" aria-label="Filtrar expedientes"><button class="filter ${activeExpedientFilter === "all" ? "active" : ""}" data-expedient-filter="all" type="button">Todos</button><button class="filter ${activeExpedientFilter === "REVISAR" ? "active" : ""}" data-expedient-filter="REVISAR" type="button">Revisar</button><button class="filter ${activeExpedientFilter === "GO" ? "active" : ""}" data-expedient-filter="GO" type="button">GO</button><button class="filter ${activeExpedientFilter === "NO-GO" ? "active" : ""}" data-expedient-filter="NO-GO" type="button">NO-GO</button></div><span class="count-label">${filteredExpedients.length} de ${opportunities.length}</span></div><div class="route-list">${filteredExpedients.length ? filteredExpedients.map((item) => `<button class="route-list-row route-list-row-rich" data-open-opportunity="${escapeAttribute(item.id)}" type="button"><span class="route-list-status decision-pill ${decisionClass(item.decision)}">${escapeHtml(item.decision)}</span><span><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml(item.organization)} · ${escapeHtml(item.amount)} · ${escapeHtml(deadlineLabel(item))}</small><small>${item.requirements.filter((requirement) => requirement.status === "confirmed").length}/${item.requirements.length} evidencias claras · ${escapeHtml(item.nextStep)}</small></span><span class="route-arrow">→</span></button>`).join("") : `<div class="empty-list"><strong>No hay expedientes en esta vista.</strong><span>Prueba otro estado.</span></div>`}</div>`
     },
     tareas: {
       eyebrow: "Espacio de trabajo · Tareas",
       title: "Tareas pendientes",
       intro: "Acciones que deben cerrar una duda antes de convertir REVISAR en GO o NO-GO.",
-      body: `<div class="route-list"><div class="route-list-row task-route-row"><span class="task-state task-state-review">En curso</span><span><strong>${escapeHtml(selected?.nextStep || "Seleccionar una oportunidad")}</strong><small>${escapeHtml(selected?.nextDate || "Fecha por confirmar")}</small></span></div><div class="route-list-row task-route-row"><span class="task-state task-state-pending">Pendiente</span><span><strong>Asociar evidencia a cada requisito decisivo</strong><small>Responsable por asignar · Fecha por confirmar</small></span></div></div>`
+      body: `<div class="route-summary-strip"><article class="route-card"><span>ABIERTAS</span><strong>${openTasks.length}</strong><p>Se generan desde la siguiente acción y los requisitos no confirmados.</p></article><article class="route-card"><span>COMPLETADAS</span><strong>${completedTasks.length}</strong><p>Las comprobaciones confirmadas dejan de bloquear la decisión.</p></article><article class="route-card"><span>APARCADAS</span><strong>${parkedTasks.length}</strong><p>Quedan fuera del trabajo activo hasta que cambie el contexto.</p></article></div><section class="route-section"><div class="route-section-heading"><div><p class="eyebrow eyebrow-muted">LISTA DE TRABAJO</p><h2>Qué toca hacer</h2></div><span class="count-label">Guardado local</span></div><div class="task-board">${openTasks.length ? openTasks.map((task) => taskRowMarkup(task)).join("") : `<div class="empty-list"><strong>No hay tareas pendientes.</strong><span>Cuando aparezca una duda, la encontrarás aquí.</span></div>`}</div></section>`
     },
     empresa: {
       eyebrow: "Espacio de trabajo · Mi empresa",
       title: "Perfil de empresa",
       intro: "La ficha que permitirá contrastar una oportunidad con capacidades, solvencia y proximidad.",
-      body: `<div class="route-grid"><article class="route-card"><span>ESTADO DEL PERFIL</span><strong>84% preparado · ejemplo local</strong><div class="route-progress"><i></i></div><p>Aún no se conecta ninguna cuenta ni documento real.</p></article><article class="route-card"><span>PRÓXIMO PASO</span><strong>Definir capacidades y evidencias</strong><p>En la siguiente iteración añadiremos sectores, experiencia, medios, solvencia económica y área geográfica.</p></article></div>`
+      body: `<div class="route-grid"><article class="route-card route-card-accent"><span>ESTADO DEL PERFIL</span><strong>${profile.percentage}% preparado · ${profile.completed}/${profile.total} bloques</strong><div class="route-progress"><i style="width:${profile.percentage}%"></i></div><p>Datos locales y editables. No se ha conectado ninguna cuenta ni documento real.</p><a href="#ajustes">Completar perfil →</a></article><article class="route-card"><span>QUÉ CAMBIA LA DECISIÓN</span><strong>Solvencia, medios y asociación</strong><p>El perfil debe ayudarte a saber qué puedes demostrar, qué te falta y cuándo necesitas colaborar con otra empresa.</p><a href="#ajustes">Editar datos de encaje →</a></article></div><section class="route-section"><div class="route-section-heading"><div><p class="eyebrow eyebrow-muted">CONTROL DEL PERFIL</p><h2>Bloques pendientes</h2></div><span class="count-label">${profile.total - profile.completed} por completar</span></div><div class="profile-checklist">${profile.blocks.map(([label, value]) => `<div class="profile-check-row"><span class="profile-check ${String(value || "").trim() ? "profile-check-done" : ""}">${String(value || "").trim() ? "✓" : "○"}</span><span><strong>${escapeHtml(label)}</strong><small>${String(value || "").trim() ? "Añadido en el perfil local" : "Pendiente de validar"}</small></span></div>`).join("")}</div></section>`
     },
     pruebas: {
       eyebrow: "Espacio de trabajo · Notas de prueba",
       title: "Notas del benchmark",
       intro: "Lugar para registrar qué hemos probado, qué ha fallado y qué debe cambiar.",
-      body: `<div class="route-note"><span>NOTA ACTIVA</span><h3>La decisión debe poder explicarse</h3><p>Separar siempre el hecho del pliego, la evidencia de la empresa y la duda pendiente. Esta regla guía la búsqueda y las pestañas del expediente.</p><small>Guardado local · No se publica ni se envía a ningún servidor.</small></div><div class="route-note"><span>PENDIENTE</span><h3>Conectar casos reales</h3><p>Usar el benchmark de búsqueda para comparar resultados, falsos positivos y requisitos que el primer MVP no encuentra.</p></div>`
+      body: `<section class="route-note note-composer"><div class="route-section-heading"><div><span>REGISTRAR APRENDIZAJE</span><h2>Añadir una nota de benchmark</h2></div><span class="example-label">Solo en este navegador</span></div><form data-note-form class="note-form"><label class="field"><span>Tipo</span><select name="kind"><option>Hallazgo</option><option>Problema</option><option>Decisión</option><option>Pregunta</option><option>Regla</option></select></label><label class="field field-wide"><span>Qué hemos aprendido</span><textarea name="text" rows="3" required placeholder="Ej. La persona buscó la fecha de presentación antes que el importe…"></textarea></label><label class="field"><span>Oportunidad relacionada</span><select name="opportunityId"><option value="">General</option>${opportunities.map((item) => `<option value="${escapeAttribute(item.id)}">${escapeHtml(item.title)}</option>`).join("")}</select></label><div class="modal-actions"><button class="button button-dark" type="submit">Guardar nota</button></div></form></section><section class="route-section"><div class="route-section-heading"><div><p class="eyebrow eyebrow-muted">DIARIO DEL MVP</p><h2>Lo que sabemos hasta ahora</h2></div><span class="count-label">${notes.length} notas</span></div><div class="notes-board">${notes.length ? notes.map((note) => `<article class="route-note note-entry"><div class="note-entry-top"><span>${escapeHtml(note.kind || "Nota")}</span><time>${escapeHtml(formatDate(new Date(note.createdAt)))}</time></div><p>${escapeHtml(note.text)}</p>${note.opportunityId ? `<small>Relacionado con: ${escapeHtml(opportunities.find((item) => item.id === note.opportunityId)?.title || "oportunidad")}</small>` : `<small>Nota general del producto</small>`}<button class="text-button note-delete" data-note-delete="${escapeAttribute(note.id)}" type="button">Eliminar</button></article>`).join("") : `<div class="empty-list"><strong>Todavía no hay notas.</strong><span>Registra la primera observación de una prueba.</span></div>`}</div></section>`
     },
     ajustes: {
       eyebrow: "Espacio de trabajo · Ajustes",
@@ -422,10 +617,30 @@ function renderRoute() {
     activeDetailTab = "summary";
     window.location.hash = "oportunidades";
   }));
+  routeElement.querySelectorAll("[data-task-complete]").forEach((button) => button.addEventListener("click", () => completeTask(button.dataset.taskComplete)));
+  routeElement.querySelectorAll("[data-expedient-filter]").forEach((button) => button.addEventListener("click", () => {
+    activeExpedientFilter = button.dataset.expedientFilter;
+    renderRoute();
+  }));
+  routeElement.querySelector("[data-note-form]")?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const text = String(formData.get("text") || "").trim();
+    if (!text) return;
+    notes.unshift({ id: `note-${Date.now()}`, kind: String(formData.get("kind") || "Nota"), text, opportunityId: String(formData.get("opportunityId") || ""), createdAt: new Date().toISOString() });
+    persistNotes();
+    renderRoute();
+  });
+  routeElement.querySelectorAll("[data-note-delete]").forEach((button) => button.addEventListener("click", () => {
+    notes = notes.filter((note) => note.id !== button.dataset.noteDelete);
+    persistNotes("Nota eliminada");
+    renderRoute();
+  }));
   routeElement.querySelector("[data-route-reset]")?.addEventListener("click", () => document.querySelector("#resetDemo").click());
   routeElement.querySelectorAll("[data-setting]").forEach((control) => control.addEventListener("change", () => {
     settings[control.dataset.setting] = control.type === "checkbox" ? control.checked : control.value;
     persistSettings();
+    document.documentElement.dataset.density = settings.density;
   }));
   routeElement.querySelector("[data-settings-defaults]")?.addEventListener("click", () => {
     settings = { ...defaultSettings };
@@ -532,15 +747,17 @@ document.querySelector("#addForm").addEventListener("submit", (event) => {
     organization: String(formData.get("organization") || "Sin organismo").trim(),
     amount: String(formData.get("amount") || "Por confirmar").trim(),
     deadline: String(formData.get("deadline") || "Por confirmar").trim(),
+    deadlineDate: String(formData.get("deadlineDate") || "").trim() || null,
     sector: String(formData.get("sector") || "Sin clasificar").trim(),
-    decision: "REVISAR",
+    decision: settings.defaultDecision === "GO" && settings.strictLCSP ? "REVISAR" : settings.defaultDecision,
     fit: "Por comprobar",
-    source: "https://contrataciondelestado.es/",
-    sourceLabel: "Plataforma oficial",
+    source: String(formData.get("source") || "").trim(),
+    sourceLabel: String(formData.get("source") || "").trim() ? "Fuente aportada" : "Fuente pendiente",
     summary: "Caso añadido durante una prueba. Completa los requisitos y la fuente después de revisar el expediente.",
     why: ["Todavía no se ha revisado con la ficha.", "Es una oportunidad aportada durante una conversación."],
     nextStep: "Añadir los tres requisitos que más pueden cambiar la decisión.",
     nextDate: "Primera revisión pendiente",
+    nextStepDone: false,
     requirements: [
       { text: "Requisito decisivo por identificar", source: "Pendiente de leer el expediente", status: "unknown" },
       { text: "Evidencia de la empresa por comprobar", source: "Pendiente de asociar documento", status: "unknown" }
