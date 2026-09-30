@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary-container": "#d6ee71", "on-secondary": "#ffffff", "on-primary-container": "#a0cfbe", "error": "#ba1a1a", "surface-container-lowest": "#ffffff", "inverse-surface": "#233431", "background": "#eafefa", "surface-container": "#def2ee", "surface": "#eafefa", "on-error-container": "#93000a", "primary-container": "#2d5a4c", "tertiary-container": "#035d4a", "error-container": "#ffdad6", "surface-container-low": "#e4f8f4", "tertiary-fixed-dim": "#8bd5bc", "on-primary-fixed": "#002118", "surface-dim": "#cbdeda", "primary": "#134235", "inverse-on-surface": "#e1f5f1", "inverse-primary": "#a1d1bf", "surface-container-highest": "#d3e7e3", "secondary-fixed-dim": "#bad158", "outline": "#717975", "outline-variant": "#c0c8c3", "surface-tint": "#3a6758", "primary-fixed-dim": "#a1d1bf", "secondary-fixed": "#d6ee71", "tertiary": "#004335", "surface-variant": "#d3e7e3", "on-secondary-container": "#5a6b00", "on-tertiary": "#ffffff", "on-secondary-fixed": "#181e00", "on-tertiary-fixed-variant": "#005140", "on-surface": "#0d1e1d", "on-secondary-fixed-variant": "#3f4c00", "on-tertiary-container": "#8ad3bb", "surface-bright": "#eafefa", "primary-fixed": "#bcedda", "on-primary-fixed-variant": "#214f41", "surface-container-high": "#d9ece9", "on-error": "#ffffff", "on-primary": "#ffffff", "tertiary-fixed": "#a7f1d8", "on-background": "#0d1e1d", "secondary": "#556500", "on-surface-variant": "#404945", "on-tertiary-fixed": "#002018" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-base": "1rem", "gutter": "1rem", "margin": "1rem", "space-sm": "0.5rem", "gutter-desktop": "1.5rem", "space-xs": "0.25rem", "space-lg": "1.25rem", "space-xl": "1.5rem", "space-2xl": "2rem", "space-2xs": "0.125rem", "margin-desktop": "2rem", "space-md": "0.75rem" }, "fontFamily": { "body-sm": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-xl": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "code-sm": ["JetBrains Mono"], "headline-sm": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"] }, "fontSize": { "body-sm": ["0.8125rem", { "lineHeight": "1.25rem", "fontWeight": "400" }], "body-md": ["0.875rem", { "lineHeight": "1.375rem", "fontWeight": "400" }], "headline-xl": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-md": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.01em", "fontWeight": "600" }], "headline-lg": ["1.375rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.015em", "fontWeight": "600" }], "body-lg": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "400" }], "headline-md": ["1.125rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-lg": ["0.875rem", { "lineHeight": "1.25rem", "fontWeight": "600" }], "code-sm": ["0.75rem", { "lineHeight": "1rem", "fontWeight": "500" }], "headline-sm": ["1rem", { "lineHeight": "1.375rem", "fontWeight": "600" }], "label-sm": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.04em", "fontWeight": "700" }] } } } }</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen"><aside class="fixed left-0 top-0 h-full w-[240px] bg-surface-container-lowest z-50 flex flex-col justify-between border-r border-outline-variant"><div class="flex flex-col"><div class="h-14 px-space-base flex items-center gap-space-sm border-b border-outline-variant"><img alt="Pliego Claro Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Wvfx8mKmZDZIpg7vKU5nV3L7_q7UxugpCq5ctjCj_9fOo4kFScDaAQUgmWGD14Xf6I3BkM1jEQAKRsZO6mQzQwj0OF7yQExPs-uK5zHAYxNL-tWOxd68BSu8aLZ9JYu2-d2aEZ2b7NXk0T6UHbPNlJ3Xo4Mv76aU-c0WeMev1F9c8vuKES_u8NU0ZDan9t78rbbjrh-UpBTHtBYDOQcw88tUxEVHBZuofTKwMRrLYD2pl2gxsKCAqT-XCc"/><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-on-surface truncate leading-tight">Pliego Claro</span><span class="font-label-sm text-label-sm text-on-surface-variant truncate uppercase tracking-wider">Licitación Ágil</span></div></div><div class="px-space-sm pt-space-md"><span class="px-space-sm font-label-sm text-label-sm uppercase tracking-wider text-outline block mb-space-xs">Espacio de Trabajo</span><nav class="flex flex-col gap-space-2xs" data-active-classes="bg-surface-container text-primary font-label-lg font-bold border-l-[3px] border-primary"><a class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="hoy" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">calendar_today</span><span class="font-body-md text-body-md">Hoy</span></div><span class="px-1.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-bold">3</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="oportunidades" href="#"><span class="material-symbols-outlined text-[18px]">radar</span><span class="font-body-md text-body-md">Oportunidades</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="expedientes" href="#"><span class="material-symbols-outlined text-[18px]">folder_open</span><span class="font-body-md text-body-md">Expedientes</span></a><a class="flex items-center justify-between px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="tareas" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">task_alt</span><span class="font-body-md text-body-md">Tareas</span></div><span class="px-1.5 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-bold">4</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="mi-empresa" href="#"><span class="material-symbols-outlined text-[18px]">business</span><span class="font-body-md text-body-md">Mi empresa</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="notas-de-prueba" href="#"><span class="material-symbols-outlined text-[18px]">edit_note</span><span class="font-body-md text-body-md">Notas de prueba</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="ajustes" href="#"><span class="material-symbols-outlined text-[18px]">settings</span><span class="font-body-md text-body-md">Ajustes</span></a></nav></div></div><div class="p-space-base border-t border-outline-variant bg-surface-container-lowest flex flex-col gap-space-sm"><div class="flex flex-col min-w-0"><span class="font-label-lg text-label-lg text-on-surface font-semibold truncate">Mi empresa (ejemplo)</span><div class="flex items-center gap-1.5 mt-space-2xs"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span><span class="font-label-sm text-label-sm text-on-surface-variant">Entorno de prueba · Datos locales</span></div></div><div class="flex flex-col gap-1"><div class="flex justify-between items-center"><span class="font-label-sm text-label-sm text-outline">Capacidad del equipo</span><span class="font-code-sm text-code-sm font-bold text-on-surface">84%</span></div><div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden"><div class="h-full bg-primary-container rounded-full" style="width: 84%;"></div></div></div></div></aside><div class="pl-[240px]"><header class="fixed top-0 left-[240px] right-0 h-14 bg-surface-container-lowest/90 backdrop-blur-md z-40 border-b border-outline-variant flex items-center justify-between px-gutter-desktop"><div class="flex items-center gap-space-md"><nav class="flex items-center gap-space-xs font-label-md text-label-md"><span class="text-outline">Pliego Claro</span><span class="text-outline-variant">/</span><span class="text-on-surface font-semibold">Hoy</span></nav><span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">MVP · nombre de trabajo</span></div><div class="flex items-center gap-space-md"><div class="relative flex items-center w-80"><span class="material-symbols-outlined absolute left-2.5 text-outline text-[18px]">search</span><input class="w-full pl-8 pr-12 py-1.5 bg-surface-container-low border border-outline-variant rounded-lg font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:bg-surface-container-lowest" placeholder="Buscar oportunidades, organismos o expedientes..." type="text"/><span class="absolute right-2 px-1.5 py-0.5 bg-surface-container-highest border border-outline-variant rounded font-code-sm text-code-sm text-outline">⌘K</span></div><div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-low border border-outline-variant"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface-variant">Guardado local</span></div><button class="flex items-center gap-1.5 px-3 py-1.5 bg-primary text-on-primary font-label-md text-label-md rounded-lg hover:bg-primary-container transition-colors shadow-[0_1px_4px_rgba(20,37,35,0.08)]" type="button"><span class="material-symbols-outlined text-[16px]">add</span><span class="">Añadir oportunidad</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-14 px-gutter-desktop min-h-[calc(100vh-3.5rem)] bg-surface"><div class="flex flex-col w-full">
+<div class="w-full max-w-7xl mx-auto pb-space-2xl flex flex-col gap-space-lg">
+<!-- 1. Cabecera de la sección -->
+<header class="flex flex-col gap-space-sm pt-space-base">
+<div class="flex items-center gap-space-xs font-label-md text-label-md">
+<span class="text-outline">Pliego Claro</span>
+<span class="text-outline-variant">/</span>
+<span class="text-on-surface font-semibold">Oportunidades</span>
+</div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-base">
+<div class="flex flex-col gap-space-2xs min-w-0">
+<div class="flex flex-wrap items-center gap-space-sm">
+<h1 class="font-headline-xl text-headline-xl text-primary font-bold tracking-tight">Oportunidades</h1>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>24 encontradas · 12 requieren triaje · Datos de ejemplo · editable</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Encuentra, filtra y decide qué pliego merece convertirse en expediente con razones auditables.
+          </p>
+</div>
+<div class="flex items-center gap-space-sm self-start lg:self-auto shrink-0">
+<button class="flex items-center gap-1.5 px-3.5 py-2 bg-surface-container-lowest text-on-surface font-label-md text-label-md rounded-lg shadow-sm hover:bg-surface-container-low transition-colors" id="btn-save-alerts" type="button">
+<span class="material-symbols-outlined text-[18px] text-outline">notifications_active</span>
+<span>Guardar vista / alertas</span>
+</button>
+<button class="flex items-center gap-1.5 px-4 py-2 bg-primary text-on-primary font-label-md text-label-md rounded-lg shadow-md hover:bg-primary-container transition-all" id="btn-add-opportunity" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Importar o añadir oportunidad</span>
+</button>
+</div>
+</div>
+</header>
+<!-- 2. Búsqueda y barra de estado de triaje rápido -->
+<section class="flex flex-col gap-space-md p-space-base bg-surface-container-lowest rounded-xl shadow-sm">
+<div class="flex flex-col lg:flex-row items-stretch lg:items-center gap-space-md">
+<!-- Buscador principal -->
+<div class="relative flex-1 flex items-center">
+<span class="material-symbols-outlined absolute left-3.5 text-outline text-[20px]">search</span>
+<input class="w-full pl-10 pr-20 py-2.5 bg-surface-container-low rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline focus:outline-none focus:bg-surface-container-lowest shadow-sm transition-all" id="search-input" placeholder="Buscar por título, objeto, organismo o CPV (ej: 79995100-6, archivo, digitalización...)" type="text"/>
+<div class="absolute right-3 flex items-center gap-1 px-1.5 py-0.5 bg-surface-container-highest rounded font-code-sm text-code-sm text-outline">
+<span>⌘</span><span>K</span>
+</div>
+</div>
+<!-- Selector de ordenación y botón de panel filtros -->
+<div class="flex items-center gap-space-sm shrink-0">
+<div class="flex items-center gap-2 px-3 py-2 bg-surface-container-low rounded-lg shadow-sm">
+<span class="font-label-sm text-label-sm uppercase text-outline">Ordenar por:</span>
+<select class="bg-transparent font-label-md text-label-md text-on-surface focus:outline-none cursor-pointer">
+<option>Fecha límite más próxima</option>
+<option>Relevancia y encaje</option>
+<option>Importe de mayor a menor</option>
+<option>Estado de triaje</option>
+</select>
+</div>
+<button class="flex items-center gap-1.5 px-3 py-2 bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-md text-label-md rounded-lg transition-colors" id="toggle-filter-panel-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+<span>Más filtros</span>
+<span class="px-1.5 py-0.2 rounded-full bg-primary-container text-on-primary-container font-code-sm text-code-sm font-bold">3</span>
+</button>
+</div>
+</div>
+<!-- Fila de Chips de filtro rápido por estado -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex flex-wrap items-center gap-space-xs" id="status-chips-group">
+<button class="filter-chip px-3 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md font-semibold transition-all" data-filter="all">
+            Todas <span class="ml-1 opacity-80">(24)</span>
+</button>
+<button class="filter-chip px-3 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest font-label-md text-label-md transition-all" data-filter="new">
+            Nuevas <span class="ml-1 px-1.5 py-0.2 rounded bg-surface-container-highest font-code-sm text-code-sm">6</span>
+</button>
+<button class="filter-chip flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest font-label-md text-label-md transition-all" data-filter="revisar">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+            Revisar <span class="px-1.5 py-0.2 rounded bg-secondary-container text-on-secondary-container font-code-sm text-code-sm font-bold">12</span>
+</button>
+<button class="filter-chip flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest font-label-md text-label-md transition-all" data-filter="go">
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+            En seguimiento / GO <span class="px-1.5 py-0.2 rounded bg-surface-container text-primary font-code-sm text-code-sm font-bold">4</span>
+</button>
+<button class="filter-chip flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest font-label-md text-label-md transition-all" data-filter="urgent">
+<span class="material-symbols-outlined text-[16px] text-error">hourglass_top</span>
+            Más próximas (&lt; 7 días) <span class="px-1.5 py-0.2 rounded bg-error-container text-on-error-container font-code-sm text-code-sm font-bold">3</span>
+</button>
+</div>
+<!-- Toggle interactivo de estados de pantalla (Demo / Showcase) -->
+<div class="flex items-center gap-1 p-1 bg-surface-container-low rounded-lg">
+<button class="px-2.5 py-1 rounded font-label-sm text-label-sm bg-surface-container-lowest text-primary font-bold shadow-sm transition-colors" id="view-normal-btn">
+            Vista principal (5)
+          </button>
+<button class="px-2.5 py-1 rounded font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" id="view-skeleton-btn">
+            Carga (Skeleton)
+          </button>
+<button class="px-2.5 py-1 rounded font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors" id="view-empty-btn">
+            Vacío
+          </button>
+</div>
+</div>
+</section>
+<!-- 3. Barra de filtros estructurados visibles -->
+<div class="flex flex-wrap items-center gap-space-sm p-space-sm bg-surface-container-low rounded-lg" id="filter-bar">
+<span class="font-label-sm text-label-sm uppercase text-outline px-1">Filtros activos:</span>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm cursor-pointer hover:bg-surface-bright">
+<span class="text-outline">Sector:</span>
+<span class="font-semibold">Servicios archivísticos y TI</span>
+<span class="material-symbols-outlined text-[14px] text-outline">expand_more</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm cursor-pointer hover:bg-surface-bright">
+<span class="text-outline">Organismo:</span>
+<span class="font-semibold">Todos los organismos</span>
+<span class="material-symbols-outlined text-[14px] text-outline">expand_more</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm cursor-pointer hover:bg-surface-bright">
+<span class="text-outline">Territorio:</span>
+<span class="font-semibold">Comunidad de Madrid y limítrofes</span>
+<span class="material-symbols-outlined text-[14px] text-outline">expand_more</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm cursor-pointer hover:bg-surface-bright">
+<span class="text-outline">Rango:</span>
+<span class="font-semibold">30.000 € – 350.000 €</span>
+<span class="material-symbols-outlined text-[14px] text-outline">expand_more</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm cursor-pointer hover:bg-surface-bright">
+<span class="text-outline">Tipo:</span>
+<span class="font-semibold">Servicios</span>
+<span class="material-symbols-outlined text-[14px] text-outline">expand_more</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-sm cursor-pointer hover:bg-surface-bright">
+<span class="text-outline">Procedimiento:</span>
+<span class="font-semibold">Abierto / Abierto simplif.</span>
+<span class="material-symbols-outlined text-[14px] text-outline">expand_more</span>
+</div>
+<button class="ml-auto font-label-sm text-label-sm text-outline hover:text-error transition-colors px-2 py-1 underline underline-offset-4" id="reset-filters-btn" type="button">
+        Limpiar filtros
+      </button>
+</div>
+<!-- 4. Contenedor de Vistas: Resultados / Skeleton / Vacío -->
+<!-- A. LISTA DE RESULTADOS NORMAL -->
+<div class="flex flex-col gap-space-md" id="results-container">
+<!-- Oportunidad 1: Prioritaria / En foco -->
+<article class="flex flex-col gap-space-sm p-space-base bg-surface-container-lowest rounded-xl shadow-md transition-all hover:shadow-lg">
+<div class="flex flex-col lg:flex-row lg:items-start justify-between gap-space-base">
+<div class="flex flex-col gap-space-2xs max-w-4xl">
+<div class="flex flex-wrap items-center gap-space-sm">
+<span class="px-2 py-0.5 rounded bg-primary-fixed text-on-primary-fixed font-code-sm text-code-sm font-semibold">EXP-MAD-2024-089</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Ayuntamiento de San Fernando de Henares (Madrid)</span>
+<span class="flex items-center gap-1 font-label-sm text-label-sm text-outline">
+<span class="material-symbols-outlined text-[14px]">link</span> Plataforma de Contratación (PLACSP)
+              </span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold hover:text-primary transition-colors cursor-pointer">
+              Digitalización y catalogación de un archivo municipal histórico y administrativo
+            </h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Servicio de limpieza física de legajos, digitalización certificada a 300 ppp TIFF/PDF-A y descripción archivística en software libre AtoM (14.500 unidades documentales).
+            </p>
+</div>
+<div class="flex lg:flex-col items-end lg:items-end justify-between lg:justify-start gap-space-xs shrink-0 bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex flex-col items-start lg:items-end">
+<span class="font-label-sm text-label-sm uppercase text-outline">PBL (Sin IVA)</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">80.000 €</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">VEC: 96.000 €</span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-1 rounded bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>Cierre en 12 días · 14:00h</span>
+</div>
+</div>
+</div>
+<!-- Diagnóstico metódico de evidencias y solvencias -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-base pt-space-xs mt-space-xs bg-surface-container-low/60 p-space-sm rounded-lg">
+<div class="md:col-span-4 flex flex-col gap-1.5 justify-center">
+<div class="flex justify-between items-center font-label-sm text-label-sm">
+<span class="text-outline font-semibold">Evidencias comprobadas</span>
+<span class="font-code-sm text-code-sm font-bold text-on-surface">2 de 5 requisitos</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 40%;"></div>
+</div>
+<div class="flex items-center gap-2 font-code-sm text-code-sm text-on-surface-variant">
+<span class="text-secondary font-bold">Técnica: Pendiente</span>
+<span>·</span>
+<span class="text-tertiary">Económica: Cumple</span>
+<span>·</span>
+<span class="text-outline">Fianza: No</span>
+</div>
+</div>
+<!-- Dictamen y Motivo explícito -->
+<div class="md:col-span-5 flex items-start gap-space-sm">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md font-bold shrink-0">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+<span>REVISAR</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm font-bold text-on-surface">Motivo del triaje:</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">
+                Falta acreditar 16.000 € en segundo certificado de ejecución análoga (Ley Contratos Art. 90).
+              </p>
+<span class="font-label-sm text-label-sm text-primary font-semibold mt-0.5">
+                Próxima acción: Solicitar certificado al Archivo de Alcalá
+              </span>
+</div>
+</div>
+<!-- Botones de acción directa -->
+<div class="md:col-span-3 flex items-center justify-end gap-space-sm">
+<button class="px-3 py-1.5 bg-surface-container-lowest text-on-surface font-label-md text-label-md rounded-lg shadow-sm hover:bg-surface-container-high transition-colors" type="button">
+              Seguir / GO
+            </button>
+<button class="px-3.5 py-1.5 bg-primary text-on-primary font-label-md text-label-md font-semibold rounded-lg shadow-sm hover:bg-primary-container transition-colors" type="button">
+              Abrir expediente
+            </button>
+</div>
+</div>
+</article>
+<!-- Oportunidad 2: En marcha / GO -->
+<article class="flex flex-col gap-space-sm p-space-base bg-surface-container-lowest rounded-xl shadow-sm transition-all hover:shadow-md">
+<div class="flex flex-col lg:flex-row lg:items-start justify-between gap-space-base">
+<div class="flex flex-col gap-space-2xs max-w-4xl">
+<div class="flex flex-wrap items-center gap-space-sm">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-code-sm text-code-sm font-semibold">DIP-GU-2024-411</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Diputación Provincial de Guadalajara</span>
+<span class="flex items-center gap-1 font-label-sm text-label-sm text-outline">
+<span class="material-symbols-outlined text-[14px]">link</span> Perfil del contratante Diputación
+              </span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold hover:text-primary transition-colors cursor-pointer">
+              Servicio de custodia y digitalización bajo demanda de expedientes de urbanismo
+            </h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Transporte seguro, custodia en nave climatizada, digitalización bajo petición en &lt; 4 horas y volcado a gestor documental corporativo.
+            </p>
+</div>
+<div class="flex lg:flex-col items-end lg:items-end justify-between lg:justify-start gap-space-xs shrink-0 bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex flex-col items-start lg:items-end">
+<span class="font-label-sm text-label-sm uppercase text-outline">PBL (Sin IVA)</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">145.000 €</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Duración: 24 meses</span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-outline">calendar_month</span>
+<span>Cierre en 19 días naturales</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-base pt-space-xs mt-space-xs bg-surface-container-low/60 p-space-sm rounded-lg">
+<div class="md:col-span-4 flex flex-col gap-1.5 justify-center">
+<div class="flex justify-between items-center font-label-sm text-label-sm">
+<span class="text-outline font-semibold">Evidencias comprobadas</span>
+<span class="font-code-sm text-code-sm font-bold text-tertiary">4 de 4 (100%)</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 100%;"></div>
+</div>
+<div class="flex items-center gap-2 font-code-sm text-code-sm text-tertiary font-medium">
+<span>Solvencia técnica: Sí</span>
+<span>·</span>
+<span>Fondo nave: Validado</span>
+</div>
+</div>
+<div class="md:col-span-5 flex items-start gap-space-sm">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-primary-fixed text-on-primary-fixed font-label-md text-label-md font-bold shrink-0">
+<span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+<span>GO (En marcha)</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm font-bold text-on-surface">Motivo del dictamen:</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">
+                Encaje pleno en solvencia técnica y capacidad logística disponible sin subcontratar.
+              </p>
+<span class="font-label-sm text-label-sm text-primary font-semibold mt-0.5">
+                Próxima acción: Elaborar índice de anexos técnicos del pliego
+              </span>
+</div>
+</div>
+<div class="md:col-span-3 flex items-center justify-end gap-space-sm">
+<button class="px-2.5 py-1.5 bg-surface-container-lowest text-tertiary rounded-lg shadow-sm hover:bg-surface-container-high transition-colors" title="Verificado" type="button">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</button>
+<button class="px-3.5 py-1.5 bg-primary text-on-primary font-label-md text-label-md font-semibold rounded-lg shadow-sm hover:bg-primary-container transition-colors" type="button">
+              Abrir expediente
+            </button>
+</div>
+</div>
+</article>
+<!-- Oportunidad 3: NO-GO / Descartada con causa -->
+<article class="flex flex-col gap-space-sm p-space-base bg-surface-container-lowest/80 rounded-xl shadow-sm opacity-90 transition-all hover:opacity-100">
+<div class="flex flex-col lg:flex-row lg:items-start justify-between gap-space-base">
+<div class="flex flex-col gap-space-2xs max-w-4xl">
+<div class="flex flex-wrap items-center gap-space-sm">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-code-sm text-code-sm font-semibold">MANC-AST-2024-01</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Mancomunidad Municipios Bajo Nalón (Asturias)</span>
+<span class="flex items-center gap-1 font-label-sm text-label-sm text-outline">
+<span class="material-symbols-outlined text-[14px]">link</span> PLACSP
+              </span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold line-through text-outline cursor-pointer">
+              Implantación de sede electrónica y gestor de expedientes interoperable ENS
+            </h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Migración de plataforma legacy a suite interoperable ENS nivel medio con formación a personal municipal de tres consistorios.
+            </p>
+</div>
+<div class="flex lg:flex-col items-end lg:items-end justify-between lg:justify-start gap-space-xs shrink-0 bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex flex-col items-start lg:items-end">
+<span class="font-label-sm text-label-sm uppercase text-outline">PBL (Sin IVA)</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">320.000 €</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">VEC: 384.000 €</span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-1 rounded bg-error-container text-on-error-container font-label-sm text-label-sm font-bold">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+<span>Cierre en 5 días (Urgente)</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-base pt-space-xs mt-space-xs bg-surface-container-low/60 p-space-sm rounded-lg">
+<div class="md:col-span-4 flex flex-col gap-1.5 justify-center">
+<div class="flex justify-between items-center font-label-sm text-label-sm">
+<span class="text-outline font-semibold">Evidencias de solvencia</span>
+<span class="font-code-sm text-code-sm font-bold text-error">0 de 3 clave</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-error rounded-full" style="width: 15%;"></div>
+</div>
+<div class="font-code-sm text-code-sm text-error">
+              Exige certificación CMMI-Dev nivel 3
+            </div>
+</div>
+<div class="md:col-span-5 flex items-start gap-space-sm">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-error-container text-on-error-container font-label-md text-label-md font-bold shrink-0">
+<span class="material-symbols-outlined text-[16px]">cancel</span>
+<span>NO-GO</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm font-bold text-on-surface">Barrera insubsanable:</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">
+                Barrera excluyente: la empresa no dispone de CMMI ni socio tecnológico con sede regional.
+              </p>
+<span class="font-label-sm text-label-sm text-outline mt-0.5">
+                Archivada automáticamente sin consumir horas técnicas
+              </span>
+</div>
+</div>
+<div class="md:col-span-3 flex items-center justify-end gap-space-sm">
+<button class="px-3 py-1.5 bg-surface-container-lowest text-on-surface font-label-md text-label-md rounded-lg shadow-sm hover:bg-surface-container-high transition-colors" type="button">
+              Reabrir evaluación
+            </button>
+<button class="px-3 py-1.5 bg-surface-container-highest text-on-surface-variant font-label-md text-label-md rounded-lg hover:bg-surface-container transition-colors" type="button">
+              Ver detalle
+            </button>
+</div>
+</div>
+</article>
+<!-- Oportunidad 4: Revisar dudas técnicas -->
+<article class="flex flex-col gap-space-sm p-space-base bg-surface-container-lowest rounded-xl shadow-sm transition-all hover:shadow-md">
+<div class="flex flex-col lg:flex-row lg:items-start justify-between gap-space-base">
+<div class="flex flex-col gap-space-2xs max-w-4xl">
+<div class="flex flex-wrap items-center gap-space-sm">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-code-sm text-code-sm font-semibold">JUST-AST-2024-19</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Consejería de Justicia del Principado de Asturias</span>
+<span class="flex items-center gap-1 font-label-sm text-label-sm text-outline">
+<span class="material-symbols-outlined text-[14px]">link</span> Boletín Oficial del Principado
+              </span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold hover:text-primary transition-colors cursor-pointer">
+              Asistencia técnica para la auditoría y depuración de metadatos del archivo judicial territorial
+            </h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Normalización de metadatos ISAD(G) sobre 45.000 registros de sentencias y expedientes civiles en plataforma Atlante.
+            </p>
+</div>
+<div class="flex lg:flex-col items-end lg:items-end justify-between lg:justify-start gap-space-xs shrink-0 bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex flex-col items-start lg:items-end">
+<span class="font-label-sm text-label-sm uppercase text-outline">PBL (Sin IVA)</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">64.000 €</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Lote único</span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-outline">event</span>
+<span>Cierre en 22 días</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-base pt-space-xs mt-space-xs bg-surface-container-low/60 p-space-sm rounded-lg">
+<div class="md:col-span-4 flex flex-col gap-1.5 justify-center">
+<div class="flex justify-between items-center font-label-sm text-label-sm">
+<span class="text-outline font-semibold">Evidencias comprobadas</span>
+<span class="font-code-sm text-code-sm font-bold text-on-surface">1 de 4 verificadas</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 25%;"></div>
+</div>
+<div class="flex items-center gap-2 font-code-sm text-code-sm text-on-surface-variant">
+<span>Metadatos: OK</span>
+<span>·</span>
+<span class="text-secondary font-semibold">Titulación: Duda</span>
+</div>
+</div>
+<div class="md:col-span-5 flex items-start gap-space-sm">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md font-bold shrink-0">
+<span class="material-symbols-outlined text-[16px]">help</span>
+<span>REVISAR</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm font-bold text-on-surface">Duda interpretativa PPT:</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">
+                Duda sobre necesidad de titulación oficial en Derecho para el coordinador técnico de equipo.
+              </p>
+<span class="font-label-sm text-label-sm text-primary font-semibold mt-0.5">
+                Próxima acción: Consultar aclaración en plataforma antes de límite
+              </span>
+</div>
+</div>
+<div class="md:col-span-3 flex items-center justify-end gap-space-sm">
+<button class="px-3 py-1.5 bg-surface-container-lowest text-on-surface font-label-md text-label-md rounded-lg shadow-sm hover:bg-surface-container-high transition-colors" type="button">
+              Seguir
+            </button>
+<button class="px-3.5 py-1.5 bg-primary text-on-primary font-label-md text-label-md font-semibold rounded-lg shadow-sm hover:bg-primary-container transition-colors" type="button">
+              Abrir expediente
+            </button>
+</div>
+</div>
+</article>
+<!-- Oportunidad 5: Patrimonio Nacional / GO -->
+<article class="flex flex-col gap-space-sm p-space-base bg-surface-container-lowest rounded-xl shadow-sm transition-all hover:shadow-md">
+<div class="flex flex-col lg:flex-row lg:items-start justify-between gap-space-base">
+<div class="flex flex-col gap-space-2xs max-w-4xl">
+<div class="flex flex-wrap items-center gap-space-sm">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-code-sm text-code-sm font-semibold">PAT-ARAN-2024-05</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Patrimonio Nacional - Real Sitio de Aranjuez</span>
+<span class="flex items-center gap-1 font-label-sm text-label-sm text-outline">
+<span class="material-symbols-outlined text-[14px]">link</span> PLACSP
+              </span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold hover:text-primary transition-colors cursor-pointer">
+              Servicio de inventario y digitalización de fondo fotográfico patrimonial (siglos XIX y XX)
+            </h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Catalogación descriptiva y captura digital de negativos de vidrio y placas de gelatinobromuro con escáner cenital de alta resolución.
+            </p>
+</div>
+<div class="flex lg:flex-col items-end lg:items-end justify-between lg:justify-start gap-space-xs shrink-0 bg-surface-container-low p-space-sm rounded-lg">
+<div class="flex flex-col items-start lg:items-end">
+<span class="font-label-sm text-label-sm uppercase text-outline">PBL (Sin IVA)</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">48.500 €</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Contrato menor</span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-outline">calendar_today</span>
+<span>Cierre en 28 días</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-base pt-space-xs mt-space-xs bg-surface-container-low/60 p-space-sm rounded-lg">
+<div class="md:col-span-4 flex flex-col gap-1.5 justify-center">
+<div class="flex justify-between items-center font-label-sm text-label-sm">
+<span class="text-outline font-semibold">Evidencias comprobadas</span>
+<span class="font-code-sm text-code-sm font-bold text-tertiary">3 de 3 (100%)</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 100%;"></div>
+</div>
+<div class="flex items-center gap-2 font-code-sm text-code-sm text-tertiary font-medium">
+<span>Escáner Bookeye: Disponible</span>
+<span>·</span>
+<span>Técnico: Acreditado</span>
+</div>
+</div>
+<div class="md:col-span-5 flex items-start gap-space-sm">
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-primary-fixed text-on-primary-fixed font-label-md text-label-md font-bold shrink-0">
+<span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+<span>GO</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm font-bold text-on-surface">Dictamen operativo:</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">
+                Equipamiento especializado disponible y solvencia técnica idónea para adjudicación.
+              </p>
+<span class="font-label-sm text-label-sm text-primary font-semibold mt-0.5">
+                Próxima acción: Asignar responsable de propuesta técnica
+              </span>
+</div>
+</div>
+<div class="md:col-span-3 flex items-center justify-end gap-space-sm">
+<button class="px-3 py-1.5 bg-surface-container-lowest text-on-surface font-label-md text-label-md rounded-lg shadow-sm hover:bg-surface-container-high transition-colors" type="button">
+              Seguir
+            </button>
+<button class="px-3.5 py-1.5 bg-primary text-on-primary font-label-md text-label-md font-semibold rounded-lg shadow-sm hover:bg-primary-container transition-colors" type="button">
+              Abrir expediente
+            </button>
+</div>
+</div>
+</article>
+</div>
+<!-- B. ESTADO DE CARGA SIMULADO (Skeleton) -->
+<div class="hidden flex flex-col gap-space-md" id="skeleton-container">
+<div class="p-space-base bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-space-base animate-pulse">
+<div class="flex justify-between items-start">
+<div class="flex flex-col gap-2 w-2/3">
+<div class="h-4 bg-surface-container-highest rounded w-1/4"></div>
+<div class="h-6 bg-surface-container-highest rounded w-3/4"></div>
+<div class="h-4 bg-surface-container-highest rounded w-full"></div>
+</div>
+<div class="w-32 h-14 bg-surface-container-high rounded-lg"></div>
+</div>
+<div class="h-12 bg-surface-container-low rounded-lg w-full"></div>
+</div>
+<div class="p-space-base bg-surface-container-lowest rounded-xl shadow-sm flex flex-col gap-space-base animate-pulse">
+<div class="flex justify-between items-start">
+<div class="flex flex-col gap-2 w-2/3">
+<div class="h-4 bg-surface-container-highest rounded w-1/3"></div>
+<div class="h-6 bg-surface-container-highest rounded w-2/3"></div>
+<div class="h-4 bg-surface-container-highest rounded w-5/6"></div>
+</div>
+<div class="w-32 h-14 bg-surface-container-high rounded-lg"></div>
+</div>
+<div class="h-12 bg-surface-container-low rounded-lg w-full"></div>
+</div>
+</div>
+<!-- C. ESTADO VACÍO ILUSTRADO (Sin coincidencias) -->
+<div class="hidden flex flex-col items-center justify-center text-center p-space-2xl bg-surface-container-lowest rounded-xl shadow-sm" id="empty-state-card">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mb-space-base text-outline">
+<span class="material-symbols-outlined text-[32px]">manage_search</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold">Ninguna oportunidad coincide con los filtros</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg mt-1 mb-space-base">
+        Has acotado por un CPV o rango de fechas sin licitaciones activas en este momento. Ajusta los criterios o limpia los filtros para volver a ver el listado general.
+      </p>
+<div class="flex items-center gap-space-sm">
+<button class="px-4 py-2 bg-primary text-on-primary font-label-md text-label-md font-semibold rounded-lg shadow-sm hover:bg-primary-container transition-colors" id="empty-reset-btn" type="button">
+          Restablecer todos los filtros
+        </button>
+<button class="px-4 py-2 bg-surface-container-high text-on-surface font-label-md text-label-md rounded-lg hover:bg-surface-container transition-colors" id="empty-create-alert-btn" type="button">
+          Crear alerta para esta búsqueda
+        </button>
+</div>
+</div>
+<!-- 5. Panel Auxiliar Plegable: Filtros Detallados (Modal / Disclosure) -->
+<div class="hidden p-space-base bg-surface-container-low rounded-xl shadow-inner flex flex-col gap-space-base" id="expanded-filter-drawer">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">filter_list</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-bold">Criterios de búsqueda y exclusión estricta</h4>
+</div>
+<button class="text-outline hover:text-on-surface text-label-sm font-semibold" id="close-filter-drawer">Cerrar</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-base">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm uppercase text-outline">Tipo de tramitación</label>
+<div class="flex flex-col gap-1 font-body-sm text-body-sm text-on-surface">
+<label class="flex items-center gap-2"><input checked="" class="rounded" type="checkbox"/> Ordinaria</label>
+<label class="flex items-center gap-2"><input checked="" class="rounded" type="checkbox"/> Urgente (reducción de plazos)</label>
+<label class="flex items-center gap-2"><input class="rounded" type="checkbox"/> Emergencia</label>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm uppercase text-outline">Garantías exigidas</label>
+<div class="flex flex-col gap-1 font-body-sm text-body-sm text-on-surface">
+<label class="flex items-center gap-2"><input checked="" class="rounded" type="checkbox"/> Sin fianza provisional</label>
+<label class="flex items-center gap-2"><input class="rounded" type="checkbox"/> Solo definitiva (5%)</label>
+<label class="flex items-center gap-2"><input class="rounded" type="checkbox"/> Incluir exigencias especiales</label>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm uppercase text-outline">Criterios de adjudicación</label>
+<div class="flex flex-col gap-1 font-body-sm text-body-sm text-on-surface">
+<label class="flex items-center gap-2"><input checked="" class="rounded" type="checkbox"/> Con juicio de valor / memoria técnica</label>
+<label class="flex items-center gap-2"><input class="rounded" type="checkbox"/> Solo fórmula matemática directa</label>
+</div>
+</div>
+</div>
+</div>
+<!-- 6. Paginación y pie de página de datos -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-sm pt-space-xs text-on-surface-variant font-label-md text-label-md">
+<div class="flex items-center gap-space-xs font-code-sm text-code-sm">
+<span>Mostrando 1 a 5 de 24 licitaciones analizadas</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="px-2.5 py-1.5 rounded-lg bg-surface-container-high text-outline cursor-not-allowed text-label-sm" disabled="">Anterior</button>
+<button class="px-3 py-1.5 rounded-lg bg-primary text-on-primary font-bold text-label-sm">1</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-high text-label-sm">2</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-high text-label-sm">3</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-high text-label-sm">4</button>
+<button class="px-2.5 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface hover:bg-surface-container-high text-label-sm">Siguiente</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    // Referencias principales del DOM
+    const viewNormalBtn = document.getElementById('view-normal-btn');
+    const viewSkeletonBtn = document.getElementById('view-skeleton-btn');
+    const viewEmptyBtn = document.getElementById('view-empty-btn');
+
+    const resultsContainer = document.getElementById('results-container');
+    const skeletonContainer = document.getElementById('skeleton-container');
+    const emptyStateCard = document.getElementById('empty-state-card');
+
+    const filterChips = document.querySelectorAll('#status-chips-group .filter-chip');
+    const toggleFilterPanelBtn = document.getElementById('toggle-filter-panel-btn');
+    const expandedFilterDrawer = document.getElementById('expanded-filter-drawer');
+    const closeFilterDrawer = document.getElementById('close-filter-drawer');
+    const resetFiltersBtn = document.getElementById('reset-filters-btn');
+    const emptyResetBtn = document.getElementById('empty-reset-btn');
+
+    // Función para cambiar vista activa
+    function setView(mode) {
+      // Reset botones de tab
+      [viewNormalBtn, viewSkeletonBtn, viewEmptyBtn].forEach(btn => {
+        btn.classList.remove('bg-surface-container-lowest', 'text-primary', 'font-bold', 'shadow-sm');
+        btn.classList.add('text-on-surface-variant');
+      });
+
+      // Ocultar todo
+      resultsContainer.classList.add('hidden');
+      skeletonContainer.classList.add('hidden');
+      emptyStateCard.classList.add('hidden');
+
+      if (mode === 'normal') {
+        resultsContainer.classList.remove('hidden');
+        viewNormalBtn.classList.add('bg-surface-container-lowest', 'text-primary', 'font-bold', 'shadow-sm');
+        viewNormalBtn.classList.remove('text-on-surface-variant');
+      } else if (mode === 'skeleton') {
+        skeletonContainer.classList.remove('hidden');
+        viewSkeletonBtn.classList.add('bg-surface-container-lowest', 'text-primary', 'font-bold', 'shadow-sm');
+        viewSkeletonBtn.classList.remove('text-on-surface-variant');
+      } else if (mode === 'empty') {
+        emptyStateCard.classList.remove('hidden');
+        viewEmptyBtn.classList.add('bg-surface-container-lowest', 'text-primary', 'font-bold', 'shadow-sm');
+        viewEmptyBtn.classList.remove('text-on-surface-variant');
+      }
+    }
+
+    viewNormalBtn.addEventListener('click', () => setView('normal'));
+    viewSkeletonBtn.addEventListener('click', () => setView('skeleton'));
+    viewEmptyBtn.addEventListener('click', () => setView('empty'));
+
+    // Alternar drawer de filtros adicionales
+    toggleFilterPanelBtn.addEventListener('click', () => {
+      expandedFilterDrawer.classList.toggle('hidden');
+    });
+    if (closeFilterDrawer) {
+      closeFilterDrawer.addEventListener('click', () => {
+        expandedFilterDrawer.classList.add('hidden');
+      });
+    }
+
+    // Interacción con los chips de filtro
+    filterChips.forEach(chip => {
+      chip.addEventListener('click', function() {
+        filterChips.forEach(c => {
+          c.classList.remove('bg-primary', 'text-on-primary', 'font-semibold');
+          c.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+        });
+        this.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+        this.classList.add('bg-primary', 'text-on-primary', 'font-semibold');
+        
+        // Simulación sutil: si el usuario pulsa urgent muestra el estado normal pero filtrado
+        setView('normal');
+      });
+    });
+
+    // Resetear filtros
+    function resetAll() {
+      setView('normal');
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) searchInput.value = '';
+      if (expandedFilterDrawer) expandedFilterDrawer.classList.add('hidden');
+      if (filterChips[0]) filterChips[0].click();
+    }
+
+    if (resetFiltersBtn) resetFiltersBtn.addEventListener('click', resetAll);
+    if (emptyResetBtn) emptyResetBtn.addEventListener('click', resetAll);
+
+    // Atajo de teclado ⌘K / Ctrl+K
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        const searchInput = document.getElementById('search-input');
+        if (searchInput) {
+          searchInput.focus();
+          searchInput.select();
+        }
+      }
+    });
+
+  })();
+</script></main></div>
+</body></html>

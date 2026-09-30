@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"inverse-primary":"#a1d1bf","primary-container":"#2d5a4c","on-error-container":"#93000a","surface-tint":"#3a6758","on-secondary-fixed":"#181e00","on-tertiary-fixed":"#002018","on-primary-container":"#a0cfbe","on-tertiary-container":"#8ad3bb","on-primary":"#ffffff","surface-container":"#def2ee","secondary":"#556500","surface-variant":"#d3e7e3","on-surface":"#0d1e1d","secondary-container":"#d6ee71","surface":"#eafefa","surface-bright":"#eafefa","surface-container-highest":"#d3e7e3","outline-variant":"#c0c8c3","on-error":"#ffffff","on-secondary-container":"#5a6b00","primary":"#134235","on-tertiary-fixed-variant":"#005140","on-primary-fixed":"#002118","tertiary-fixed":"#a7f1d8","inverse-on-surface":"#e1f5f1","surface-container-high":"#d9ece9","background":"#eafefa","outline":"#717975","primary-fixed":"#bcedda","on-secondary":"#ffffff","on-tertiary":"#ffffff","on-surface-variant":"#404945","on-background":"#0d1e1d","surface-container-lowest":"#ffffff","error":"#ba1a1a","on-secondary-fixed-variant":"#3f4c00","secondary-fixed":"#d6ee71","secondary-fixed-dim":"#bad158","tertiary-container":"#035d4a","tertiary":"#004335","inverse-surface":"#233431","primary-fixed-dim":"#a1d1bf","tertiary-fixed-dim":"#8bd5bc","on-primary-fixed-variant":"#214f41","error-container":"#ffdad6","surface-dim":"#cbdeda","surface-container-low":"#e4f8f4"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xs":"0.25rem","space-lg":"1.25rem","margin":"1rem","margin-desktop":"2rem","space-2xs":"0.125rem","space-xl":"1.5rem","gutter-desktop":"1.5rem","gutter":"1rem","space-md":"0.75rem","space-base":"1rem","space-2xl":"2rem","space-sm":"0.5rem"},"fontFamily":{"headline-lg":["Plus Jakarta Sans"],"label-sm":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"code-sm":["JetBrains Mono"],"label-md":["Plus Jakarta Sans"],"headline-xl":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"]},"fontSize":{"headline-lg":["1.375rem",{"lineHeight":"1.75rem","letterSpacing":"-0.015em","fontWeight":"600"}],"label-sm":["0.6875rem",{"lineHeight":"0.875rem","letterSpacing":"0.04em","fontWeight":"700"}],"label-lg":["0.875rem",{"lineHeight":"1.25rem","fontWeight":"600"}],"body-sm":["0.8125rem",{"lineHeight":"1.25rem","fontWeight":"400"}],"headline-md":["1.125rem",{"lineHeight":"1.5rem","letterSpacing":"-0.01em","fontWeight":"600"}],"body-lg":["1rem",{"lineHeight":"1.5rem","fontWeight":"400"}],"body-md":["0.875rem",{"lineHeight":"1.375rem","fontWeight":"400"}],"code-sm":["0.75rem",{"lineHeight":"1rem","fontWeight":"500"}],"label-md":["0.75rem",{"lineHeight":"1rem","letterSpacing":"0.01em","fontWeight":"600"}],"headline-xl":["1.75rem",{"lineHeight":"2.25rem","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-sm":["1rem",{"lineHeight":"1.375rem","fontWeight":"600"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-[240px] bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between"><div class="flex flex-col"><div class="h-16 px-space-base flex items-center gap-space-sm"><div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary font-headline-sm text-headline-sm">P</div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary leading-none">Pliego Claro</span><span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Licitación Ágil</span></div></div><nav class="flex flex-col px-space-xs gap-space-2xs mt-space-sm" data-active-classes="bg-surface-container text-primary font-label-lg font-bold border-l-[3px] border-primary"><a class="flex items-center justify-between px-space-sm py-space-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="hoy" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">calendar_today</span><span>Hoy</span></div><span class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">3</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="oportunidades" href="#"><span class="material-symbols-outlined text-[18px]">radar</span><span>Oportunidades</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="expedientes" href="#"><span class="material-symbols-outlined text-[18px]">folder_open</span><span>Expedientes</span></a><a aria-current="page" class="flex items-center justify-between px-space-sm py-space-xs rounded transition-colors bg-surface-container text-primary font-label-lg font-bold border-l-[3px] border-primary" data-path="tareas" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">task_alt</span><span>Tareas</span></div><span class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">4</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="mi-empresa" href="#"><span class="material-symbols-outlined text-[18px]">business</span><span>Mi empresa</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="notas-de-prueba" href="#"><span class="material-symbols-outlined text-[18px]">edit_note</span><span>Notas de prueba</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors font-body-md text-body-md" data-path="ajustes" href="#"><span class="material-symbols-outlined text-[18px]">settings</span><span>Ajustes</span></a></nav></div><div class="p-space-base m-space-xs rounded-lg bg-surface-container-low flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-md text-label-md text-on-surface">Mi empresa (ejemplo)</span><span class="w-2 h-2 rounded-full bg-secondary"></span></div><span class="font-label-sm text-label-sm text-on-surface-variant">Entorno de prueba · Datos locales</span><div class="mt-space-2xs"><div class="flex justify-between items-center mb-space-2xs"><span class="font-label-sm text-label-sm text-on-surface-variant">Capacidad del equipo</span><span class="font-label-sm text-label-sm text-on-surface font-bold">84%</span></div><div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden"><div class="h-full bg-primary rounded-full w-[84%]"></div></div></div></div></aside><div class="pl-[240px]"><header class="fixed top-0 left-[240px] right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 px-space-margin-desktop flex items-center justify-between"><div class="flex items-center gap-space-base"><div class="flex items-center gap-space-xs font-body-sm text-body-sm"><span class="text-on-surface-variant">Pliego Claro</span><span class="text-outline-variant">/</span><span class="text-on-surface font-label-md text-label-md">Tareas</span></div><span class="px-space-xs py-0.5 rounded bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">MVP · nombre de trabajo</span></div><div class="flex items-center gap-space-base"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left- space-sm text-[18px] text-on-surface-variant">search</span><input class="w-64 pl-8 pr-12 py-space-xs rounded bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-sm text-body-sm shadow-[0_1px_4px_rgba(0,0,0,0.04)] focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Buscar o filtrar criterios..." type="text"/><kbd class="absolute right-space-sm font-code-sm text-code-sm text-on-surface-variant bg-surface-container px-1 py-0.5 rounded">⌘K</kbd></div><div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-primary"></span><span>Guardado local</span></div><button class="flex items-center gap-space-xs px-space-base py-space-xs rounded bg-primary text-on-primary hover:bg-primary-container hover:text-on-primary transition-colors font-label-md text-label-md" type="button"><span class="material-symbols-outlined text-[16px]">add</span><span>Crear tarea</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 bg-surface"><div class="max-w-7xl mx-auto px-space-margin-desktop py-space-lg"><div class="flex flex-col w-full pb-space-2xl">
+<!-- Sub-header & Global Status Overview -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-base mb-space-xl">
+<div class="flex flex-col gap-space-2xs max-w-3xl">
+<div class="flex items-center gap-space-sm mb-space-2xs">
+<span class="px-space-sm py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm uppercase tracking-wider flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+          Datos de ejemplo · editable
+        </span>
+<span class="text-outline-variant font-code-sm text-code-sm">/</span>
+<span class="text-on-surface-variant font-label-md text-label-md">Entorno Operativo Pyme</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Tareas</h1>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+        ¿Qué tengo que hacer ahora? Acciones directas vinculadas a requisitos de pliegos, expedientes de licitación pública (LCSP) y plazos críticos de presentación.
+      </p>
+</div>
+<!-- Live Metrics Pill -->
+<div class="flex items-center gap-space-sm bg-surface-container-lowest p-space-sm rounded-xl shadow-sm self-start md:self-auto">
+<div class="flex items-center gap-2 px-space-sm py-space-2xs rounded bg-surface-container text-primary">
+<span class="material-symbols-outlined text-[18px]">rule</span>
+<span class="font-label-md text-label-md"><strong>9</strong> tareas activas</span>
+</div>
+<div class="flex items-center gap-2 px-space-sm py-space-2xs rounded bg-error-container text-on-error-container">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+<span class="font-label-md text-label-md"><strong>2</strong> bloquean decisión</span>
+</div>
+</div>
+</div>
+<!-- Main View Container: Master List (8 cols) + Impact Sidebar (4 cols) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- LEFT COLUMN: Operational Workbench & Task List -->
+<div class="lg:col-span-8 flex flex-col gap-space-base">
+<!-- Toolbar: Search + Quick Action + Filters -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-base flex flex-col gap-space-md">
+<!-- Search & New Button -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<div class="relative w-full sm:flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full pl-10 pr-space-base py-2 rounded bg-surface-container-low text-on-surface placeholder:text-outline font-body-sm text-body-sm focus:outline-none focus:bg-surface-container" id="task-search-input" placeholder="Buscar por tarea, expediente (EXP/DIP) o requisito..." type="text"/>
+</div>
+<button class="w-full sm:w-auto flex items-center justify-center gap-space-xs px-space-lg py-2 rounded bg-primary text-on-primary hover:bg-primary-container transition-all font-label-md text-label-md shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>+ Crear tarea</span>
+</button>
+</div>
+<!-- Filter Dropdowns Row -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-sm pt-space-xs">
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Responsable</label>
+<select class="w-full py-1.5 px-space-sm bg-surface-container-low rounded text-on-surface font-body-sm text-body-sm focus:outline-none">
+<option value="todos">Todos los miembros</option>
+<option value="carlos">Carlos R. (5)</option>
+<option value="laura">Laura M. (4)</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Expediente</label>
+<select class="w-full py-1.5 px-space-sm bg-surface-container-low rounded text-on-surface font-body-sm text-body-sm focus:outline-none">
+<option value="todos">Todos los expedientes</option>
+<option value="exp1">EXP-MAD-2024-089 (Madrid)</option>
+<option value="exp2">DIP-GU-2024-411 (Guadalajara)</option>
+<option value="exp3">SAS-2024-C92 (Andalucía)</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Prioridad</label>
+<select class="w-full py-1.5 px-space-sm bg-surface-container-low rounded text-on-surface font-body-sm text-body-sm focus:outline-none">
+<option value="todas">Todas</option>
+<option value="alta">Alta</option>
+<option value="media">Media</option>
+<option value="normal">Normal</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant uppercase">Fecha límite</label>
+<select class="w-full py-1.5 px-space-sm bg-surface-container-low rounded text-on-surface font-body-sm text-body-sm focus:outline-none">
+<option value="todas">Cualquier fecha</option>
+<option value="hoy">Vence hoy (&lt;24h)</option>
+<option value="7d">Próximos 7 días</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Main Navigation Tabs / Section Filters -->
+<div class="flex items-center justify-between gap-space-sm overflow-x-auto pb-space-2xs">
+<div class="flex items-center gap-space-xs p-1 bg-surface-container rounded-xl">
+<button class="tab-btn active-tab flex items-center gap-2 px-space-base py-1.5 rounded-lg bg-surface-container-lowest text-primary shadow-sm font-label-md text-label-md transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">notification_important</span>
+<span>Hoy</span>
+<span class="px-1.5 py-0.2 rounded-full bg-error-container text-on-error-container font-code-sm text-code-sm">3</span>
+</button>
+<button class="tab-btn flex items-center gap-2 px-space-base py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">calendar_view_week</span>
+<span>Próximas</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-on-surface font-code-sm text-code-sm">4</span>
+</button>
+<button class="tab-btn flex items-center gap-2 px-space-base py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">lock_clock</span>
+<span>Bloqueadas</span>
+<span class="px-1.5 py-0.2 rounded-full bg-secondary-container text-on-secondary-container font-code-sm text-code-sm">2</span>
+</button>
+<button class="tab-btn flex items-center gap-2 px-space-base py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Completadas</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-on-surface-variant font-code-sm text-code-sm">14</span>
+</button>
+</div>
+<!-- Quick Status Filter Pills -->
+<div class="hidden sm:flex items-center gap-space-2xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="px-space-xs py-1 rounded bg-surface-container-low text-on-surface font-medium cursor-pointer">Todas</span>
+<span class="px-space-xs py-1 rounded hover:bg-surface-container-low cursor-pointer">En curso</span>
+<span class="px-space-xs py-1 rounded hover:bg-surface-container-low cursor-pointer">Pendientes</span>
+</div>
+</div>
+<!-- TASK LIST CARDS -->
+<div class="flex flex-col gap-space-sm" id="tasks-container">
+<!-- TASK 1: Critical Decision Blocker (Alcalá Certificate) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-base shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-error"></div>
+<div class="flex items-start justify-between gap-space-sm pl-space-xs">
+<div class="flex items-start gap-space-sm flex-1">
+<button class="mt-0.5 w-5 h-5 rounded bg-surface-container-high hover:bg-primary-container text-transparent hover:text-on-primary flex items-center justify-center transition-colors" title="Marcar como verificada" type="button">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</button>
+<div class="flex flex-col gap-1.5 flex-1">
+<div class="flex items-center flex-wrap gap-space-xs">
+<span class="px-2 py-0.5 rounded bg-error-container text-on-error-container font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">gavel</span>
+                    BLOQUEA DECISIÓN: REVISAR → GO
+                  </span>
+<span class="px-2 py-0.5 rounded bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
+                    Alta
+                  </span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+                    Bloqueada
+                  </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-snug">
+                  Solicitar certificado de buena ejecución al Archivo de Alcalá por 24.500 €
+                </h3>
+<!-- Expediente + Requisito Badges -->
+<div class="flex flex-wrap items-center gap-y-1 gap-x-space-sm text-on-surface-variant font-body-sm text-body-sm pt-1">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[16px]">folder</span>
+<span class="font-medium">EXP-MAD-2024-089</span>
+<span class="text-on-surface-variant font-normal">· Digitalización archivo municipal</span>
+</div>
+<span class="text-outline-variant">•</span>
+<div class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[16px]">description</span>
+<span class="font-code-sm text-code-sm">Req. 1.1 Solvencia técnica (Art. 90 LCSP) - Pág. 14 PCAP</span>
+</div>
+</div>
+<!-- Explicit Blocking Reason Box -->
+<div class="mt-2 p-space-sm rounded-lg bg-surface-container-low flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-error mt-0.5">report_problem</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Motivo del bloqueo administrativo:</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">El Archivo Central de Alcalá exige solicitud formal firmada por registro electrónico general (SIR) con firma de apoderado. Plazo de respuesta estimado: 48h.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Due Date & Assignee -->
+<div class="flex flex-col items-end gap-space-xs shrink-0 pl-space-xs">
+<span class="px-2 py-1 rounded bg-error-container text-on-error-container font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">alarm</span>
+                Hoy antes de 18:00h
+              </span>
+<div class="flex items-center gap-1.5 pt-1">
+<div class="w-6 h-6 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center justify-center font-bold">
+                  CR
+                </div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Carlos R.</span>
+</div>
+</div>
+</div>
+<!-- Bottom Direct Action Strip -->
+<div class="flex items-center justify-between pt-space-sm mt-space-sm bg-surface-container-low/50 px-space-sm py-1.5 rounded-lg">
+<div class="flex items-center gap-space-md">
+<button class="text-primary hover:text-primary-container font-label-sm text-label-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+                Abrir expediente
+              </button>
+<button class="text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[14px]">find_in_page</span>
+                Ver extracto de pliego
+              </button>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-2 py-1 rounded text-on-surface-variant hover:bg-surface-container font-label-sm text-label-sm" type="button">Reasignar</button>
+<button class="px-2 py-1 rounded text-on-surface-variant hover:bg-surface-container font-label-sm text-label-sm" type="button">Editar</button>
+</div>
+</div>
+</div>
+<!-- TASK 2: Critical Technical Requirement (Scanner Bookeye UNE-EN) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-base shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-error"></div>
+<div class="flex items-start justify-between gap-space-sm pl-space-xs">
+<div class="flex items-start gap-space-sm flex-1">
+<button class="mt-0.5 w-5 h-5 rounded bg-surface-container-high hover:bg-primary-container text-transparent hover:text-on-primary flex items-center justify-center transition-colors" title="Marcar como verificada" type="button">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</button>
+<div class="flex flex-col gap-1.5 flex-1">
+<div class="flex items-center flex-wrap gap-space-xs">
+<span class="px-2 py-0.5 rounded bg-error-container text-on-error-container font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">rule</span>
+                    DECISIVO: PPT CRITERIO EXCLUYENTE
+                  </span>
+<span class="px-2 py-0.5 rounded bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
+                    Alta
+                  </span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-primary font-label-sm text-label-sm font-semibold">
+                    En curso
+                  </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-snug">
+                  Comprobar si el escáner Bookeye cumple la norma UNE-EN ISO 19264-1 exigida en PPT
+                </h3>
+<!-- Expediente + Requisito Badges -->
+<div class="flex flex-wrap items-center gap-y-1 gap-x-space-sm text-on-surface-variant font-body-sm text-body-sm pt-1">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[16px]">folder</span>
+<span class="font-medium">DIP-GU-2024-411</span>
+<span class="text-on-surface-variant font-normal">· Suministro y digitalización planimetría</span>
+</div>
+<span class="text-outline-variant">•</span>
+<div class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[16px]">description</span>
+<span class="font-code-sm text-code-sm">PPT Cap. 3.2 Calidad de Imagen Metamorfoze / ISO</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                  Verificar con la ficha técnica oficial del fabricante si el modelo disponible en almacén cuenta con la calibración nivel B o superior. Si no cumple, el expediente pasará de inmediato a <strong>NO-GO</strong> para evitar costes de oferta.
+                </p>
+</div>
+</div>
+<!-- Due Date & Assignee -->
+<div class="flex flex-col items-end gap-space-xs shrink-0 pl-space-xs">
+<span class="px-2 py-1 rounded bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                Hoy 19:30h
+              </span>
+<div class="flex items-center gap-1.5 pt-1">
+<div class="w-6 h-6 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm flex items-center justify-center font-bold">
+                  LM
+                </div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Laura M.</span>
+</div>
+</div>
+</div>
+<!-- Bottom Direct Action Strip -->
+<div class="flex items-center justify-between pt-space-sm mt-space-sm bg-surface-container-low/50 px-space-sm py-1.5 rounded-lg">
+<div class="flex items-center gap-space-md">
+<button class="text-primary hover:text-primary-container font-label-sm text-label-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+                Abrir expediente
+              </button>
+<button class="text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[14px]">find_in_page</span>
+                Ver PPT Cláusula 3.2
+              </button>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-2 py-1 rounded text-on-surface-variant hover:bg-surface-container font-label-sm text-label-sm" type="button">Reasignar</button>
+<button class="px-2 py-1 rounded text-on-surface-variant hover:bg-surface-container font-label-sm text-label-sm" type="button">Editar</button>
+</div>
+</div>
+</div>
+<!-- TASK 3: Platform Clarification Request (Coordinador Titulación) -->
+<div class="bg-surface-container-lowest rounded-xl p-space-base shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-secondary"></div>
+<div class="flex items-start justify-between gap-space-sm pl-space-xs">
+<div class="flex items-start gap-space-sm flex-1">
+<button class="mt-0.5 w-5 h-5 rounded bg-surface-container-high hover:bg-primary-container text-transparent hover:text-on-primary flex items-center justify-center transition-colors" title="Marcar como verificada" type="button">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</button>
+<div class="flex flex-col gap-1.5 flex-1">
+<div class="flex items-center flex-wrap gap-space-xs">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold">
+                    Media
+                  </span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-label-sm text-label-sm">
+                    Pendiente envío
+                  </span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">
+                    PLCSP · Consultas
+                  </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-snug">
+                  Consultar aclaración en plataforma sobre titulación requerida para el coordinador técnico
+                </h3>
+<!-- Expediente + Requisito Badges -->
+<div class="flex flex-wrap items-center gap-y-1 gap-x-space-sm text-on-surface-variant font-body-sm text-body-sm pt-1">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[16px]">folder</span>
+<span class="font-medium">SAS-2024-C92</span>
+<span class="text-on-surface-variant font-normal">· Mantenimiento de historias clínicas</span>
+</div>
+<span class="text-outline-variant">•</span>
+<div class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[16px]">description</span>
+<span class="font-code-sm text-code-sm">PCAP Cláusula 12.3 Adscripción de Medios</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                  Preguntar si se admite Grado en Información y Documentación además de Licenciatura en Historia según los criterios de solvencia profesional. El plazo límite de consultas finaliza mañana a las 14:00h.
+                </p>
+</div>
+</div>
+<!-- Due Date & Assignee -->
+<div class="flex flex-col items-end gap-space-xs shrink-0 pl-space-xs">
+<span class="px-2 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">event</span>
+                Mañana 12:00h
+              </span>
+<div class="flex items-center gap-1.5 pt-1">
+<div class="w-6 h-6 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center justify-center font-bold">
+                  CR
+                </div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Carlos R.</span>
+</div>
+</div>
+</div>
+<!-- Bottom Direct Action Strip -->
+<div class="flex items-center justify-between pt-space-sm mt-space-sm bg-surface-container-low/50 px-space-sm py-1.5 rounded-lg">
+<div class="flex items-center gap-space-md">
+<button class="text-primary hover:text-primary-container font-label-sm text-label-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+                Abrir expediente
+              </button>
+<button class="text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[14px]">link</span>
+                Ir al enlace de Plataforma (PLACSP)
+              </button>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-2 py-1 rounded text-on-surface-variant hover:bg-surface-container font-label-sm text-label-sm" type="button">Reasignar</button>
+<button class="px-2 py-1 rounded text-on-surface-variant hover:bg-surface-container font-label-sm text-label-sm" type="button">Editar</button>
+</div>
+</div>
+</div>
+<!-- TASK 4: DEUC / UTE Verification -->
+<div class="bg-surface-container-lowest rounded-xl p-space-base shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-outline-variant"></div>
+<div class="flex items-start justify-between gap-space-sm pl-space-xs">
+<div class="flex items-start gap-space-sm flex-1">
+<button class="mt-0.5 w-5 h-5 rounded bg-surface-container-high hover:bg-primary-container text-transparent hover:text-on-primary flex items-center justify-center transition-colors" title="Marcar como verificada" type="button">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</button>
+<div class="flex flex-col gap-1.5 flex-1">
+<div class="flex items-center flex-wrap gap-space-xs">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold">
+                    Normal
+                  </span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-label-sm text-label-sm">
+                    En curso
+                  </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold leading-snug">
+                  Completar formulario DEUC electrónico con el compromiso de solvencia externa
+                </h3>
+<div class="flex flex-wrap items-center gap-y-1 gap-x-space-sm text-on-surface-variant font-body-sm text-body-sm pt-1">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[16px]">folder</span>
+<span class="font-medium">EXP-MAD-2024-089</span>
+<span class="text-on-surface-variant font-normal">· Digitalización archivo municipal</span>
+</div>
+<span class="text-outline-variant">•</span>
+<div class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[16px]">description</span>
+<span class="font-code-sm text-code-sm">Sobre A · Declaración Responsable DEUC</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Due Date & Assignee -->
+<div class="flex flex-col items-end gap-space-xs shrink-0 pl-space-xs">
+<span class="px-2 py-1 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">event</span>
+                En 3 días
+              </span>
+<div class="flex items-center gap-1.5 pt-1">
+<div class="w-6 h-6 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm flex items-center justify-center font-bold">
+                  LM
+                </div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Laura M.</span>
+</div>
+</div>
+</div>
+<!-- Bottom Direct Action Strip -->
+<div class="flex items-center justify-between pt-space-sm mt-space-sm bg-surface-container-low/50 px-space-sm py-1.5 rounded-lg">
+<div class="flex items-center gap-space-md">
+<button class="text-primary hover:text-primary-container font-label-sm text-label-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[14px]">open_in_new</span>
+                Abrir expediente
+              </button>
+<button class="text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[14px]">download</span>
+                Descargar XML DEUC
+              </button>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-2 py-1 rounded text-on-surface-variant hover:bg-surface-container font-label-sm text-label-sm" type="button">Reasignar</button>
+<button class="px-2 py-1 rounded text-on-surface-variant hover:bg-surface-container font-label-sm text-label-sm" type="button">Editar</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Productivity Shortcut Footnote -->
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">info</span>
+          Al completar una tarea que bloquea un requisito excluyente, el expediente actualizará su estado global automáticamente.
+        </span>
+<span class="font-code-sm text-code-sm">Shift + Space para marcar rápida</span>
+</div>
+</div>
+<!-- RIGHT COLUMN: Impact Analysis & Team Capacity Sidebar -->
+<div class="lg:col-span-4 flex flex-col gap-space-base">
+<!-- Panel 1: Decision Bottlenecks (Bloqueos de Decisión en Expedientes) -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-base flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">account_tree</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Bloqueos de decisión</h2>
+</div>
+<span class="px-2 py-0.5 rounded bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
+            2 Críticos
+          </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Impacto directo en el dictamen del pliego. Resolver estas tareas evita invertir horas en memorias de ofertas que podrían ser descartadas:
+        </p>
+<!-- Bottleneck Item 1 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-primary font-bold">EXP-MAD-2024-089</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-secondary">hourglass_empty</span>
+              En REVISAR
+            </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium leading-tight">
+            Falta Certificado Buena Ejecución Archivo de Alcalá
+          </span>
+<div class="flex items-center justify-between pt-space-xs font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Si se valida certificado:</span>
+<span class="text-primary font-bold flex items-center gap-0.5">
+              Pasa a GO (+38.000 €)
+              <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</span>
+</div>
+</div>
+<!-- Bottleneck Item 2 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-primary font-bold">DIP-GU-2024-411</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-secondary">hourglass_empty</span>
+              En REVISAR
+            </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium leading-tight">
+            Verificación técnica escáner ISO 19264-1
+          </span>
+<div class="flex items-center justify-between pt-space-xs font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Si no cumple norma PPT:</span>
+<span class="text-error font-bold flex items-center gap-0.5">
+              Descarte directo NO-GO
+              <span class="material-symbols-outlined text-[14px]">cancel</span>
+</span>
+</div>
+</div>
+<div class="p-space-sm rounded bg-surface-container text-on-surface font-body-sm text-body-sm flex items-start gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">verified_user</span>
+<span><strong>Regla de oro LCSP:</strong> Nunca comiences la redacción de la propuesta técnica sin haber despejado todos los requisitos de solvencia y habilitación.</span>
+</div>
+</div>
+<!-- Panel 2: Team Capacity & Workload Allocation -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-base flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">group</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Capacidad del equipo</h2>
+</div>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Semana 42</span>
+</div>
+<!-- Workload Graph Visual (Bar / Meter) -->
+<div class="flex flex-col gap-space-sm">
+<!-- Member 1: Carlos R. -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<span class="flex items-center gap-2 text-on-surface">
+<span class="w-5 h-5 rounded-full bg-primary text-on-primary font-label-sm text-label-sm flex items-center justify-center font-bold">CR</span>
+                Carlos R. (Licitador Legal)
+              </span>
+<span class="text-on-surface font-bold">5 tareas · 88%</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 88%"></div>
+</div>
+<span class="font-label-sm text-label-sm text-error">Al límite de capacidad para el cierre del viernes</span>
+</div>
+<!-- Member 2: Laura M. -->
+<div class="flex flex-col gap-1 pt-space-xs">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<span class="flex items-center gap-2 text-on-surface">
+<span class="w-5 h-5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm flex items-center justify-center font-bold">LM</span>
+                Laura M. (Técnico Redactor)
+              </span>
+<span class="text-on-surface font-bold">4 tareas · 60%</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 60%"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Capacidad disponible para redacción técnica</span>
+</div>
+</div>
+<!-- Micro summary breakdown -->
+<div class="pt-space-xs grid grid-cols-2 gap-space-xs text-center">
+<div class="p-space-xs rounded bg-surface-container-low flex flex-col">
+<span class="font-headline-md text-headline-md text-primary font-bold">7</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Admin &amp; DEUC</span>
+</div>
+<div class="p-space-xs rounded bg-surface-container-low flex flex-col">
+<span class="font-headline-md text-headline-md text-primary font-bold">2</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Solvencia PPT</span>
+</div>
+</div>
+</div>
+<!-- Panel 3: Recent Activity / Quick Audit Trail -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-space-base flex flex-col gap-space-sm">
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">history</span>
+          Historial de verificación reciente
+        </h3>
+<div class="flex flex-col gap-space-sm divide-y divide-transparent">
+<div class="flex items-start gap-space-xs pt-1">
+<span class="material-symbols-outlined text-[16px] text-primary mt-0.5">check_circle</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium leading-tight">Certificado ROLECE actualizado verificado</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Hoy 11:20h · Carlos R.</span>
+</div>
+</div>
+<div class="flex items-start gap-space-xs pt-2">
+<span class="material-symbols-outlined text-[16px] text-primary mt-0.5">check_circle</span>
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm text-on-surface font-medium leading-tight">Comprobada fianza provisional en Caja de Depósitos</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Ayer 17:45h · Laura M.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Quick micro-interactions for tab switching and search demonstration
+  document.querySelectorAll('.tab-btn').forEach(button => {
+    button.addEventListener('click', function() {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-sm');
+        btn.classList.add('text-on-surface-variant');
+      });
+      this.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-sm');
+      this.classList.remove('text-on-surface-variant');
+    });
+  });
+
+  // Client-side quick filter simulation
+  const searchInput = document.getElementById('task-search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', function(e) {
+      const term = e.target.value.toLowerCase();
+      const taskCards = document.querySelectorAll('#tasks-container > div');
+      taskCards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(term)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  }
+</script></div></main></div></body></html>

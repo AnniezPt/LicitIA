@@ -1,0 +1,581 @@
+<!DOCTYPE html><html class="h-full" lang="es"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "secondary-container": "#d6ee71", "on-secondary": "#ffffff", "on-primary-container": "#a0cfbe", "error": "#ba1a1a", "surface-container-lowest": "#ffffff", "inverse-surface": "#233431", "background": "#eafefa", "surface-container": "#def2ee", "surface": "#eafefa", "on-error-container": "#93000a", "primary-container": "#2d5a4c", "tertiary-container": "#035d4a", "error-container": "#ffdad6", "surface-container-low": "#e4f8f4", "tertiary-fixed-dim": "#8bd5bc", "on-primary-fixed": "#002118", "surface-dim": "#cbdeda", "primary": "#134235", "inverse-on-surface": "#e1f5f1", "inverse-primary": "#a1d1bf", "surface-container-highest": "#d3e7e3", "secondary-fixed-dim": "#bad158", "outline": "#717975", "outline-variant": "#c0c8c3", "surface-tint": "#3a6758", "primary-fixed-dim": "#a1d1bf", "secondary-fixed": "#d6ee71", "tertiary": "#004335", "surface-variant": "#d3e7e3", "on-secondary-container": "#5a6b00", "on-tertiary": "#ffffff", "on-secondary-fixed": "#181e00", "on-tertiary-fixed-variant": "#005140", "on-surface": "#0d1e1d", "on-secondary-fixed-variant": "#3f4c00", "on-tertiary-container": "#8ad3bb", "surface-bright": "#eafefa", "primary-fixed": "#bcedda", "on-primary-fixed-variant": "#214f41", "surface-container-high": "#d9ece9", "on-error": "#ffffff", "on-primary": "#ffffff", "tertiary-fixed": "#a7f1d8", "on-background": "#0d1e1d", "secondary": "#556500", "on-surface-variant": "#404945", "on-tertiary-fixed": "#002018" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-base": "1rem", "gutter": "1rem", "margin": "1rem", "space-sm": "0.5rem", "gutter-desktop": "1.5rem", "space-xs": "0.25rem", "space-lg": "1.25rem", "space-xl": "1.5rem", "space-2xl": "2rem", "space-2xs": "0.125rem", "margin-desktop": "2rem", "space-md": "0.75rem" }, "fontFamily": { "body-sm": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "headline-xl": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "code-sm": ["JetBrains Mono"], "headline-sm": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"] }, "fontSize": { "body-sm": ["0.8125rem", { "lineHeight": "1.25rem", "fontWeight": "400" }], "body-md": ["0.875rem", { "lineHeight": "1.375rem", "fontWeight": "400" }], "headline-xl": ["1.75rem", { "lineHeight": "2.25rem", "letterSpacing": "-0.02em", "fontWeight": "700" }], "label-md": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.01em", "fontWeight": "600" }], "headline-lg": ["1.375rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.015em", "fontWeight": "600" }], "body-lg": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "400" }], "headline-md": ["1.125rem", { "lineHeight": "1.5rem", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-lg": ["0.875rem", { "lineHeight": "1.25rem", "fontWeight": "600" }], "code-sm": ["0.75rem", { "lineHeight": "1rem", "fontWeight": "500" }], "headline-sm": ["1rem", { "lineHeight": "1.375rem", "fontWeight": "600" }], "label-sm": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.04em", "fontWeight": "700" }] } } } }</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen"><aside class="fixed left-0 top-0 h-full w-[240px] bg-surface-container-lowest z-50 flex flex-col justify-between border-r border-outline-variant"><div class="flex flex-col"><div class="h-14 px-space-base flex items-center gap-space-sm border-b border-outline-variant"><img alt="Pliego Claro Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Wvfx8mKmZDZIpg7vKU5nV3L7_q7UxugpCq5ctjCj_9fOo4kFScDaAQUgmWGD14Xf6I3BkM1jEQAKRsZO6mQzQwj0OF7yQExPs-uK5zHAYxNL-tWOxd68BSu8aLZ9JYu2-d2aEZ2b7NXk0T6UHbPNlJ3Xo4Mv76aU-c0WeMev1F9c8vuKES_u8NU0ZDan9t78rbbjrh-UpBTHtBYDOQcw88tUxEVHBZuofTKwMRrLYD2pl2gxsKCAqT-XCc"><div class="flex flex-col min-w-0"><span class="font-headline-sm text-headline-sm text-on-surface truncate leading-tight">Pliego Claro</span><span class="font-label-sm text-label-sm text-on-surface-variant truncate uppercase tracking-wider">Licitación Ágil</span></div></div><div class="px-space-sm pt-space-md"><span class="px-space-sm font-label-sm text-label-sm uppercase tracking-wider text-outline block mb-space-xs">Espacio de Trabajo</span><nav class="flex flex-col gap-space-2xs" data-active-classes="bg-surface-container text-primary font-label-lg font-bold border-l-[3px] border-primary"><a class="flex items-center justify-between px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="hoy" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">calendar_today</span><span class="font-body-md text-body-md">Hoy</span></div><span class="px-1.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-bold">3</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="oportunidades" href="#"><span class="material-symbols-outlined text-[18px]">radar</span><span class="font-body-md text-body-md">Oportunidades</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg transition-colors bg-surface-container text-primary font-label-lg font-bold border-l-[3px] border-primary" data-path="expedientes" href="#"><span class="material-symbols-outlined text-[18px]">folder_open</span><span class="font-body-md text-body-md">Expedientes</span></a><a class="flex items-center justify-between px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="tareas" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[18px]">task_alt</span><span class="font-body-md text-body-md">Tareas</span></div><span class="px-1.5 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-bold">4</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="mi-empresa" href="#"><span class="material-symbols-outlined text-[18px]">business</span><span class="font-body-md text-body-md">Mi empresa</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="notas-de-prueba" href="#"><span class="material-symbols-outlined text-[18px]">edit_note</span><span class="font-body-md text-body-md">Notas de prueba</span></a><a class="flex items-center gap-space-sm px-space-sm py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors" data-path="ajustes" href="#"><span class="material-symbols-outlined text-[18px]">settings</span><span class="font-body-md text-body-md">Ajustes</span></a></nav></div></div><div class="p-space-base border-t border-outline-variant bg-surface-container-lowest flex flex-col gap-space-sm"><div class="flex flex-col min-w-0"><span class="font-label-lg text-label-lg text-on-surface font-semibold truncate">Mi empresa (ejemplo)</span><div class="flex items-center gap-1.5 mt-space-2xs"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span><span class="font-label-sm text-label-sm text-on-surface-variant">Entorno de prueba · Datos locales</span></div></div><div class="flex flex-col gap-1"><div class="flex justify-between items-center"><span class="font-label-sm text-label-sm text-outline">Entorno de prueba · Datos locales</span><span class="font-code-sm text-code-sm font-bold text-on-surface">84%</span></div><div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden"><div class="h-full bg-primary-container rounded-full" style="width: 84%;"></div></div></div></div></aside><div class="pl-[240px]"><header class="fixed top-0 left-[240px] right-0 h-14 bg-surface-container-lowest/90 backdrop-blur-md z-40 border-b border-outline-variant flex items-center justify-between px-gutter-desktop"><div class="flex items-center gap-space-md"><nav class="flex items-center gap-space-xs font-label-md text-label-md"><span class="text-outline">Pliego Claro</span><span class="text-outline-variant">/</span><span class="text-on-surface font-semibold">Hoy</span></nav><span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">MVP · nombre de trabajo</span></div><div class="flex items-center gap-space-md"><div class="relative flex items-center w-80"><span class="material-symbols-outlined absolute left-2.5 text-outline text-[18px]">search</span><input class="w-full pl-8 pr-12 py-1.5 bg-surface-container-low border border-outline-variant rounded-lg font-body-sm text-body-sm text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:bg-surface-container-lowest" placeholder="Buscar oportunidades, organismos o expedientes..." type="text"><span class="absolute right-2 px-1.5 py-0.5 bg-surface-container-highest border border-outline-variant rounded font-code-sm text-code-sm text-outline">⌘K</span></div><div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-low border border-outline-variant"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface-variant">Guardado local</span></div><button class="flex items-center gap-1.5 px-3 py-1.5 bg-primary text-on-primary font-label-md text-label-md rounded-lg hover:bg-primary-container transition-colors shadow-[0_1px_4px_rgba(20,37,35,0.08)]" type="button"><span class="material-symbols-outlined text-[16px]">add</span><span class="">Añadir oportunidad</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-14 px-gutter-desktop min-h-[calc(100vh-3.5rem)] bg-surface"><div class="flex flex-col w-full pb-space-2xl">
+<!-- Sticky Context Header -->
+<section class="sticky top-14 z-30 -mx-gutter-desktop px-gutter-desktop py-space-md bg-surface/95 backdrop-blur-md shadow-sm">
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md bg-surface-container-lowest p-space-lg rounded-xl shadow-sm">
+<div class="flex flex-col gap-space-2xs min-w-0 max-w-4xl">
+<div class="flex flex-wrap items-center gap-space-sm mb-space-2xs">
+<span class="inline-flex items-center gap-1.5 px-space-sm py-1 rounded bg-[#FEF6E7] text-[#9A6208] font-label-md text-label-md font-bold tracking-wide uppercase">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+            ESTADO ACTUAL: REVISAR
+          </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#9A6208]"></span>
+            Falta comprobar solvencia acumulada
+          </span>
+<span class="text-outline-variant font-code-sm text-code-sm">·</span>
+<span class="font-code-sm text-code-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface">PCAP + PPT cargados (ejemplo borrador)</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight leading-snug">
+          Digitalización y catalogación de un archivo municipal histórico y administrativo
+        </h1>
+<div class="flex flex-wrap items-center gap-x-space-md gap-y-1 mt-1 font-body-sm text-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1 font-semibold text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-outline">account_balance</span>
+            Ayuntamiento de San Fernando de Henares
+          </span>
+<span class="text-outline-variant">·</span>
+<span class="font-code-sm text-code-sm bg-surface-container px-1.5 py-0.5 rounded text-on-surface">Exp. EXP-0912-A (ejemplo)</span>
+<span class="text-outline-variant">·</span>
+<span class="font-semibold text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">euro</span>
+            80.000 € aprox. <span class="font-normal text-outline text-label-sm">(IVA excluido)</span>
+</span>
+<span class="text-outline-variant">·</span>
+<span class="inline-flex items-center gap-1 font-semibold text-[#9C2A2A] bg-[#FDEEEE] px-2 py-0.5 rounded"><span class="material-symbols-outlined text-[15px]">schedule</span>
+            Cierre en 12 días (plazo de ejemplo)</span>
+</div>
+</div>
+<!-- Action Button Triage Strip -->
+<div class="flex flex-wrap items-center gap-space-sm pt-space-xs xl:pt-0 shrink-0">
+<div class="inline-flex items-center p-1 rounded-xl bg-surface-container-low">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-lowest font-label-md text-label-md transition-colors" title="Marcar decisión favorable" type="button">
+<span class="material-symbols-outlined text-[16px] text-[#1B6A56]">check_circle</span>
+<span class="">Marcar GO</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FEF6E7] text-[#9A6208] shadow-sm font-label-md text-label-md font-bold transition-all" title="Estado activo" type="button">
+<span class="material-symbols-outlined text-[16px]">hourglass_top</span>
+<span class="">Mantener REVISAR</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-[#9C2A2A] hover:bg-surface-container-lowest font-label-md text-label-md transition-colors" title="Descartar licitación" type="button">
+<span class="material-symbols-outlined text-[16px] text-[#9C2A2A]">cancel</span>
+<span class="">Marcar NO-GO</span>
+</button>
+</div>
+<button class="flex items-center gap-2 px-3.5 py-2 bg-primary text-on-primary font-label-md text-label-md rounded-lg hover:bg-primary-container transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+<span class="">Descargar informe de decisión (PDF)</span>
+</button>
+</div>
+</div>
+<!-- Workspace Tabs Bar -->
+<div class="flex items-center gap-space-xs mt-space-md bg-surface-container-lowest p-1 rounded-xl shadow-sm overflow-x-auto">
+<button class="px-space-md py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors whitespace-nowrap" type="button">
+        Resumen
+      </button>
+<button class="flex items-center gap-2 px-space-md py-2 rounded-lg bg-surface-container text-primary font-label-md text-label-md font-bold shadow-sm whitespace-nowrap" type="button">
+<span class="">Requisitos y evidencias</span>
+<span class="px-2 py-0.5 rounded-full bg-[#FEF6E7] text-[#9A6208] font-label-sm text-label-sm">5 reqs · 2 pendientes</span>
+</button>
+<button class="flex items-center gap-1.5 px-space-md py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors whitespace-nowrap" type="button">
+<span class="">Documentos</span>
+<span class="px-1.5 py-0.2 bg-surface-container-highest text-on-surface-variant rounded font-code-sm text-code-sm">3 pliegos</span>
+</button>
+<button class="px-space-md py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors whitespace-nowrap" type="button">
+        Decisión (Matriz de factores)
+      </button>
+<button class="flex items-center gap-1.5 px-space-md py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors whitespace-nowrap" type="button">
+<span class="">Tareas</span>
+<span class="w-5 h-5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-code-sm text-code-sm flex items-center justify-center font-bold">2</span>
+</button>
+<button class="px-space-md py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-colors whitespace-nowrap" type="button">
+        Auditoría
+      </button>
+</div>
+</section>
+<!-- Main Content Grid -->
+<div class="mt-space-lg grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- Left Column: Core Dossier & Evidence (7 Cols) -->
+<div class="xl:col-span-7 flex flex-col gap-space-xl">
+<!-- Panel Superior: Resumen Ejecutivo de Decisión -->
+<section class="bg-surface-container-lowest p-space-xl rounded-xl shadow-sm">
+<div class="flex items-center justify-between pb-space-sm mb-space-base bg-surface-container-low -mx-space-xl -mt-space-xl p-space-md rounded-t-xl">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">assignment_turned_in</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Resumen Ejecutivo del Expediente</h2>
+</div>
+<span class="font-code-sm text-code-sm text-outline">ID Referencia: EXP-DEMO-0912 (ejemplo)</span>
+</div>
+<!-- Metric Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-base">
+<!-- Item 1: Qué se compra -->
+<div class="sm:col-span-2 p-space-md bg-surface-container-low rounded-xl flex flex-col gap-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">1. Qué se compra</span>
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+              Servicio integral de limpieza física de legajos, digitalización certificada a 300 ppp TIFF/PDF-A y catalogación en software libre AtoM para 14.500 unidades documentales del fondo municipal (siglos XVIII al XX).
+            </p>
+</div>
+<!-- Item 2: Quién lo compra -->
+<div class="p-space-md bg-surface-container-low rounded-xl flex flex-col gap-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">2. Quién lo compra</span>
+<p class="font-body-md text-body-md text-on-surface font-semibold">
+              Concejalía de Régimen Interior y Patrimonio Cultural
+            </p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Ayuntamiento de San Fernando de Henares (Madrid)</span>
+</div>
+<!-- Item 3: Cuánto vale -->
+<div class="p-space-md bg-surface-container-low rounded-xl flex flex-col gap-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">3. Cuánto vale</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">80.000,00 €</span>
+<span class="font-label-sm text-label-sm text-outline">Sin IVA</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">VEC: 96.000 € (incluye eventual prórroga técnica de 3 meses)</span>
+</div>
+<!-- Item 4: Cuándo termina -->
+<div class="p-space-md bg-surface-container-low rounded-xl flex flex-col gap-1"><span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">4. Cuándo termina</span>
+<p class="font-body-md text-body-md text-on-surface font-semibold flex items-center gap-1.5 text-[#9C2A2A]">
+<span class="material-symbols-outlined text-[16px]">alarm</span>
+              En 12 días a las 14:00h
+            </p>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Presentación telemática (plazo editable)</span></div>
+<!-- Item 5: Qué falta comprobar -->
+<div class="p-space-md bg-[#FEF6E7] rounded-xl flex flex-col gap-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-[#9A6208]">5. Qué falta comprobar</span>
+<p class="font-body-md text-body-md text-[#9A6208] font-medium">
+              Acreditación de solvencia técnica mediante certificados de buena ejecución que sumen &gt; 50.000 € en servicios análogos.
+            </p>
+</div>
+</div>
+<!-- Siguiente paso destacado -->
+<div class="mt-space-base p-space-md bg-primary-container text-on-primary rounded-xl flex items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="w-8 h-8 rounded-lg bg-surface-container-lowest/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary-fixed text-[20px]">flag</span>
+</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary-fixed font-bold">Siguiente paso inmediato</span>
+<span class="font-body-md text-body-md text-on-primary truncate">Confirmar si la referencia del Consorcio Metropolitano tiene certificado sellado antes del viernes.</span>
+</div>
+</div>
+<button class="shrink-0 px-3 py-1.5 bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md rounded-lg font-bold hover:bg-secondary-fixed-dim transition-colors" type="button">
+            Gestionar
+          </button>
+</div>
+</section>
+<!-- Sección Detallada: Requisitos y Evidencias -->
+<section class="bg-surface-container-lowest p-space-xl rounded-xl shadow-sm flex flex-col gap-space-lg">
+<div class="flex items-center justify-between pb-space-sm">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Requisitos y Evidencias Acreditadas</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Control normativo estricto del PCAP y PPT según Ley 9/2017 (LCSP)</p>
+</div>
+<!-- Progress bar mini -->
+<div class="flex items-center gap-space-sm bg-surface-container-low px-3 py-1.5 rounded-lg">
+<div class="flex flex-col items-end">
+<span class="font-label-sm text-label-sm font-bold text-on-surface">3 de 5 verificados</span>
+<span class="font-code-sm text-code-sm text-outline">60% de solvencia lista</span>
+</div>
+<div class="w-16 h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 60%;"></div>
+</div>
+</div>
+</div>
+<!-- BLOQUE 1: Solvencia Técnica -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between py-1 px-space-xs bg-surface-container-low rounded">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-bold text-primary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+              Bloque 1: Solvencia Técnica (Art. 90 LCSP)
+            </span>
+<span class="font-label-sm text-label-sm text-[#9A6208] bg-[#FEF6E7] px-2 py-0.5 rounded font-bold">1 Pendiente</span>
+</div>
+<!-- Req 1.1 -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-code-sm px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface font-semibold">Req. 1.1</span>
+<span class="font-label-sm text-label-sm text-outline">PCAP Cláusula 7.2 (Página 14)</span>
+</div>
+<p class="font-body-md text-body-md font-semibold text-on-surface">
+                  Relación de los principales servicios de catalogación o digitalización similares realizados en los últimos 3 años, por importe acumulado mínimo de 50.000 €.
+                </p>
+</div>
+<span class="shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded bg-[#FEF6E7] text-[#9A6208] font-label-md text-label-md font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[14px]">pending</span>
+                Pendiente
+              </span>
+</div>
+<!-- Evidencia asociada context -->
+<div class="p-space-sm bg-surface-container-lowest rounded-lg flex items-start gap-2">
+<span class="material-symbols-outlined text-[#9A6208] text-[18px] shrink-0 mt-0.5">help</span>
+<div class="flex flex-col gap-0.5">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Ref. Contrato previo análogo (ejemplo editable) vinculada.</span>
+<span class="font-body-sm text-body-sm text-error font-medium">Falta completar 16.000 € adicionales con segundo certificado oficial.</span>
+</div>
+</div>
+<!-- Acciones -->
+<div class="flex items-center gap-space-sm pt-1">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold hover:bg-primary-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">add_link</span>
+                Añadir evidencia
+              </button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-container-highest transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">menu_book</span>
+                Ver fuente (PCAP p.14)
+              </button>
+</div>
+</div>
+<!-- Req 1.2 -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-code-sm px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface font-semibold">Req. 1.2</span>
+<span class="font-label-sm text-label-sm text-outline">PPT Cláusula 4.1 (Página 8)</span>
+</div>
+<p class="font-body-md text-body-md font-semibold text-on-surface">
+                  Disponibilidad de escáner cenital de conservación para formato hasta A2 con iluminación fría que no dañe documentos históricos.
+                </p>
+</div>
+<span class="shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded bg-[#E8F5F0] text-[#1B6A56] font-label-md text-label-md font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                Confirmado
+              </span>
+</div>
+<div class="p-space-sm bg-surface-container-lowest rounded-lg flex items-start gap-2">
+<span class="material-symbols-outlined text-[#1B6A56] text-[18px] shrink-0 mt-0.5">task_alt</span>
+<p class="font-body-sm text-body-sm text-on-surface">
+                Ficha técnica y factura de compra Bookeye 4 V2 instalada en taller central lista para auditar.
+              </p>
+</div>
+<div class="flex items-center gap-space-sm pt-1">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-container-highest transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+                Ver documento asociado
+              </button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-container-highest transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">menu_book</span>
+                Ver fuente
+              </button>
+</div>
+</div>
+</div>
+<!-- BLOQUE 2: Solvencia Económica -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between py-1 px-space-xs bg-surface-container-low rounded">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-bold text-primary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">payments</span>
+              Bloque 2: Solvencia Económica y Financiera (Art. 87 LCSP)
+            </span>
+<span class="font-label-sm text-label-sm text-[#1B6A56] bg-[#E8F5F0] px-2 py-0.5 rounded font-bold">Completado</span>
+</div>
+<!-- Req 2.1 -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-code-sm px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface font-semibold">Req. 2.1</span>
+<span class="font-label-sm text-label-sm text-outline">PCAP Cláusula 7.1</span>
+</div>
+<p class="font-body-md text-body-md font-semibold text-on-surface">
+                  Volumen anual de negocios referido al mejor ejercicio de los 3 últimos disponibles por valor mínimo de 120.000 €.
+                </p>
+</div>
+<span class="shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded bg-[#E8F5F0] text-[#1B6A56] font-label-md text-label-md font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                Confirmado
+              </span>
+</div>
+<div class="p-space-sm bg-surface-container-lowest rounded-lg flex items-start gap-2">
+<span class="material-symbols-outlined text-[#1B6A56] text-[18px] shrink-0 mt-0.5">verified_user</span>
+<p class="font-body-sm text-body-sm text-on-surface">Cuentas del ejercicio anterior registradas en borrador (Facturación declarada: ejemplo editable).</p>
+</div>
+<div class="flex items-center gap-space-sm pt-1">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-container-highest transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">description</span>
+                Ver Cuentas 2023
+              </button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold hover:bg-surface-container-highest transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">menu_book</span>
+                Ver fuente
+              </button>
+</div>
+</div>
+</div>
+<!-- BLOQUE 3: Medios Personales -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between py-1 px-space-xs bg-surface-container-low rounded">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-bold text-primary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">badge</span>
+              Bloque 3: Medios Personales y Equipo de Trabajo
+            </span>
+<span class="font-label-sm text-label-sm text-[#9A6208] bg-[#FEF6E7] px-2 py-0.5 rounded font-bold">1 Pendiente</span>
+</div>
+<!-- Req 3.1 -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-code-sm px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface font-semibold">Req. 3.1</span>
+<span class="font-label-sm text-label-sm text-outline">PPT Cláusula 5.2</span>
+</div>
+<p class="font-body-md text-body-md font-semibold text-on-surface">
+                  1 Responsable técnico con titulación universitaria en Información y Documentación o Historia, con mínimo 3 años de experiencia en archivos públicos.
+                </p>
+</div>
+<span class="shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded bg-[#E8F5F0] text-[#1B6A56] font-label-md text-label-md font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                Confirmado
+              </span>
+</div>
+<div class="p-space-sm bg-surface-container-lowest rounded-lg flex items-start gap-2">
+<span class="material-symbols-outlined text-[#1B6A56] text-[18px] shrink-0 mt-0.5">account_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">Ref. Contrato previo análogo (ejemplo editable) vinculada.</span>
+</div>
+</div>
+<!-- Req 3.2 -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="font-code-sm text-code-sm px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface font-semibold">Req. 3.2</span>
+<span class="font-label-sm text-label-sm text-outline">PPT Cláusula 5.3</span>
+</div>
+<p class="font-body-md text-body-md font-semibold text-on-surface">
+                  2 Técnicos auxiliares de digitalización con al menos 120h de formación específica acreditada.
+                </p>
+</div>
+<span class="shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded bg-[#FEF6E7] text-[#9A6208] font-label-md text-label-md font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[14px]">pending</span>
+                Pendiente
+              </span>
+</div>
+<div class="p-space-sm bg-surface-container-lowest rounded-lg flex items-start gap-2">
+<span class="material-symbols-outlined text-[#9A6208] text-[18px] shrink-0 mt-0.5">warning</span>
+<span class="font-body-sm text-body-sm text-on-surface">Un técnico cumple; el segundo operador de cámara propuesto no tiene el certificado de formación archivística a mano.</span>
+</div>
+</div>
+</div>
+<!-- BLOQUE 4: Documentación Administrativa -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between py-1 px-space-xs bg-surface-container-low rounded">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-bold text-primary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">folder_special</span>
+              Bloque 4: Documentación Administrativa y Garantías
+            </span>
+<span class="font-label-sm text-label-sm text-[#1B6A56] bg-[#E8F5F0] px-2 py-0.5 rounded font-bold">Cumplido</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+<div class="p-space-sm bg-surface-container-low rounded-lg flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Req. 4.1 Garantía provisional</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">No se exige (art. 106 LCSP)</span>
+</div>
+<span class="material-symbols-outlined text-[#1B6A56] text-[20px]">check_box</span>
+</div>
+<div class="p-space-sm bg-surface-container-low rounded-lg flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Req. 4.2 Declaración DEUC</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Plantilla lista en Mi Empresa</span>
+</div>
+<span class="material-symbols-outlined text-[#1B6A56] text-[20px]">check_box</span>
+</div>
+</div>
+</div>
+<!-- BLOQUE 5: Condiciones Especiales -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between py-1 px-space-xs bg-surface-container-low rounded">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-bold text-primary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">location_city</span>
+              Bloque 5: Condiciones Especiales de Ejecución
+            </span>
+<span class="font-label-sm text-label-sm text-[#1B6A56] bg-[#E8F5F0] px-2 py-0.5 rounded font-bold">Compatible</span>
+</div>
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Req. 5.1 Ejecución in-situ en dependencias del archivo municipal</span>
+<span class="font-code-sm text-code-sm text-outline">PPT Cláusula 3</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">No se permite salida de documentación patrimonial protegida. Conforme y asumible con los medios propios de la empresa.</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Decision Matrix & Action Checklist (5 Cols) -->
+<div class="xl:col-span-5 flex flex-col gap-space-xl">
+<!-- Sección: Decisión y Justificación -->
+<section class="bg-surface-container-lowest p-space-xl rounded-xl shadow-sm flex flex-col gap-space-lg">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-md text-headline-md text-on-surface">Matriz de Decisión</h2>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Evaluación ponderada</span>
+</div>
+<!-- Three Large Selectable State Cards -->
+<div class="grid grid-cols-3 gap-space-xs">
+<!-- GO Card -->
+<div class="flex flex-col items-center justify-center p-space-sm rounded-lg bg-surface-container-low text-center cursor-pointer hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[#1B6A56] text-[24px]">check_circle</span>
+<span class="font-label-md text-label-md font-bold text-on-surface mt-1">GO</span>
+<span class="font-code-sm text-code-sm text-outline">Presentar</span>
+</div>
+<!-- REVISAR Card (Selected) -->
+<div class="flex flex-col items-center justify-center p-space-sm rounded-lg bg-[#FEF6E7] text-center shadow-sm relative">
+<span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#9A6208]"></span>
+<span class="material-symbols-outlined text-[#9A6208] text-[24px]">hourglass_top</span>
+<span class="font-label-md text-label-md font-bold text-[#9A6208] mt-1">REVISAR</span>
+<span class="font-code-sm text-code-sm text-[#9A6208]/80">Activo (Hoy)</span>
+</div>
+<!-- NO-GO Card -->
+<div class="flex flex-col items-center justify-center p-space-sm rounded-lg bg-surface-container-low text-center cursor-pointer hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[#9C2A2A] text-[24px]">cancel</span>
+<span class="font-label-md text-label-md font-bold text-on-surface mt-1">NO-GO</span>
+<span class="font-code-sm text-code-sm text-outline">Descartar</span>
+</div>
+</div>
+<!-- Desglose transparente de factores explicados -->
+<div class="flex flex-col gap-space-sm">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Factores clave contrastados</span>
+<!-- Factor 1: Encaje -->
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">psychology</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Encaje con capacidades</span>
+</div>
+<span class="font-label-sm text-label-sm font-bold text-[#1B6A56] bg-[#E8F5F0] px-2 py-0.5 rounded">ALTO · Core Business</span>
+</div>
+<!-- Factor 2: Rentabilidad -->
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">trending_up</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Rentabilidad estimada</span>
+</div>
+<span class="font-label-sm text-label-sm font-bold text-primary bg-surface-container px-2 py-0.5 rounded">Por estimar en plantilla interna</span>
+</div>
+<!-- Factor 3: Plazo -->
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">calendar_month</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Plazo de preparación</span>
+</div>
+<span class="font-label-sm text-label-sm font-bold text-[#1B6A56] bg-[#E8F5F0] px-2 py-0.5 rounded">HOLGADO (12 días)</span>
+</div>
+<!-- Factor 4: Riesgo de solvencia técnica -->
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#9A6208] text-[18px]">gavel</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Riesgo de solvencia</span>
+</div>
+<span class="font-label-sm text-label-sm font-bold text-[#9A6208] bg-[#FEF6E7] px-2 py-0.5 rounded">MEDIO (Certificado)</span>
+</div>
+<!-- Factor 5: Riesgo contractual -->
+<div class="flex items-center justify-between p-2 rounded bg-surface-container-low">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">shield</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Riesgo contractual</span>
+</div>
+<span class="font-label-sm text-label-sm font-bold text-[#1B6A56] bg-[#E8F5F0] px-2 py-0.5 rounded">BAJO (Estándar LCSP)</span>
+</div>
+</div>
+<!-- Argumentación de Decisión Por qué sube / Por qué baja -->
+<div class="grid grid-cols-1 gap-space-sm pt-space-xs">
+<!-- Por qué sube -->
+<div class="p-space-sm bg-surface-container-low rounded-lg flex flex-col gap-1">
+<span class="font-label-sm text-label-sm font-bold text-[#1B6A56] flex items-center gap-1 uppercase">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+              Por qué sube (Ventajas competitivas)
+            </span>
+<p class="font-body-sm text-body-sm text-on-surface">
+              Capacidad técnica probada, cercanía geográfica al municipio (ahorro radical en logística y desplazamientos) y equipo técnico disponible sin solapes.
+            </p>
+</div>
+<!-- Por qué baja -->
+<div class="p-space-sm bg-surface-container-low rounded-lg flex flex-col gap-1">
+<span class="font-label-sm text-label-sm font-bold text-[#9C2A2A] flex items-center gap-1 uppercase">
+<span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+              Por qué baja (Incertidumbre)
+            </span>
+<p class="font-body-sm text-body-sm text-on-surface">
+              El órgano de contratación municipal exige firma de certificados oficiales de buena ejecución en plantilla rígida sin admitir facturas solas.
+            </p>
+</div>
+</div>
+<!-- Qué falta para decidir -->
+<div class="p-space-md bg-surface-container rounded-xl flex flex-col gap-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">Condición crítica para el GO:</span>
+<p class="font-body-sm text-body-sm text-on-surface">Respuesta de la secretaría del Archivo de Alcalá confirmando si pueden expedir el certificado de 24.000 € antes del plazo de cierre.</p>
+</div>
+<button class="w-full py-2.5 px-space-md bg-primary text-on-primary font-label-md text-label-md rounded-lg hover:bg-primary-container transition-all flex items-center justify-center gap-2 shadow-sm font-semibold" type="button">
+<span class="material-symbols-outlined text-[18px]">published_with_changes</span>
+          Confirmar cambio de estado de decisión
+        </button>
+</section>
+<!-- Sección: Tareas asignadas a este pliego -->
+<section class="bg-surface-container-lowest p-space-xl rounded-xl shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">task</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Tareas del Pliego</h2>
+</div>
+<button class="flex items-center gap-1 text-primary hover:text-primary-container font-label-sm text-label-sm font-bold" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+            Crear tarea
+          </button>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Tarea 1 -->
+<div class="p-space-md bg-surface-container-low rounded-xl flex flex-col gap-2">
+<div class="flex items-start justify-between gap-2">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface leading-snug">
+                Solicitar certificado de buena ejecución al Archivo Histórico de Alcalá por importe de 24.500 €
+              </span>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-primary font-code-sm text-code-sm font-bold whitespace-nowrap">
+                En curso
+              </span>
+</div>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant pt-1">
+<span class="flex items-center gap-1.5 font-medium text-on-surface">
+<span class="w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center text-[10px] font-bold">CR</span>
+                Carlos R.
+              </span>
+<span class="flex items-center gap-1 text-[#9C2A2A] font-medium">
+<span class="material-symbols-outlined text-[14px]">event</span>
+                Límite: 20 nov (48h)
+              </span>
+</div>
+</div>
+<!-- Tarea 2 -->
+<div class="p-space-md bg-surface-container-low rounded-xl flex flex-col gap-2">
+<div class="flex items-start justify-between gap-2">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface leading-snug">
+                Comprobar si el modelo de escáner Bookeye cumple la normativa UNE-EN ISO 19264-1 exigida en PPT
+              </span>
+<span class="px-2 py-0.5 rounded bg-[#FEF6E7] text-[#9A6208] font-code-sm text-code-sm font-bold whitespace-nowrap">
+                Pendiente
+              </span>
+</div>
+<div class="flex items-center justify-between font-label-sm text-label-sm text-on-surface-variant pt-1">
+<span class="flex items-center gap-1.5 font-medium text-on-surface">
+<span class="w-5 h-5 rounded-full bg-primary-container text-on-primary flex items-center justify-center text-[10px] font-bold">LM</span>
+                Laura M.
+              </span>
+<span class="flex items-center gap-1 text-[#9A6208] font-medium">
+<span class="material-symbols-outlined text-[14px]">event</span>
+                Límite: Mañana (12:00h)
+              </span>
+</div>
+</div>
+</div>
+<!-- Botón rápido pliegos vinculados -->
+<div class="pt-space-xs flex items-center justify-between text-outline">
+<span class="font-code-sm text-code-sm flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">folder_zip</span>
+            Pliego_Prescripciones_Tecnicas_ejemplo.pdf (2.4 MB)</span>
+<a class="font-label-sm text-label-sm text-primary hover:underline" href="#">Abrir visor</a>
+</div>
+</section>
+<!-- Mini Card Documentación Oficial Disponible -->
+<section class="bg-surface-container-lowest p-space-md rounded-xl shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="material-symbols-outlined text-outline text-[24px]">verified</span>
+<div class="flex flex-col min-w-0"><span class="font-label-md text-label-md text-on-surface font-semibold truncate">3 Pliegos adjuntos (archivos de ejemplo)</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant">Hash SHA-256 verificado</span></div>
+</div>
+<button class="px-2.5 py-1 rounded bg-surface-container-low hover:bg-surface-container text-on-surface font-label-sm text-label-sm transition-colors" type="button">
+          Consultar
+        </button>
+</section>
+</div>
+</div>
+</div></main></div>
+
+</body></html>

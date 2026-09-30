@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#142523" />
+    <meta name="description" content="Pliego Claro: una mesa de decisión para saber qué licitaciones merecen tu tiempo." />
+    <title>Pliego Claro · Mesa de decisión</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Navegación principal">
+        <div class="brand-block">
+          <a class="brand" href="#top" aria-label="Pliego Claro, inicio">
+            <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+            <span>Pliego<br /><em>Claro</em></span>
+          </a>
+          <span class="beta-pill">MVP · nombre temporal</span>
+        </div>
+
+        <nav class="nav-list">
+          <a class="nav-item active" href="#oportunidades"><span class="nav-icon">◈</span>Oportunidades</a>
+          <a class="nav-item" href="#empresa"><span class="nav-icon">○</span>Mi empresa <span class="nav-soon">pronto</span></a>
+          <a class="nav-item" href="#pruebas"><span class="nav-icon">✦</span>Notas de prueba</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="sidebar-note">
+            <span class="note-dot"></span>
+            <div>
+              <strong>Prototipo editable</strong>
+              <p>Los cambios se quedan en este navegador.</p>
+            </div>
+          </div>
+          <button class="text-button" id="resetDemo" type="button">Restaurar ejemplos</button>
+        </div>
+      </aside>
+
+      <main class="main-content" id="top">
+        <header class="topbar">
+          <div class="breadcrumbs"><span>Pliego Claro</span><span>/</span><strong>Oportunidades</strong></div>
+          <div class="topbar-actions">
+            <span class="save-status" id="saveStatus">Guardado local</span>
+            <button class="button button-dark" id="openAdd" type="button"><span aria-hidden="true">+</span> Añadir oportunidad</button>
+          </div>
+        </header>
+
+        <section class="intro-section" aria-labelledby="pageTitle">
+          <div>
+            <p class="eyebrow">Mesa de decisión <span class="eyebrow-line"></span> 29 septiembre 2026</p>
+            <h1 id="pageTitle">Decidir antes de preparar.</h1>
+            <p class="intro-copy">Las oportunidades que merecen una mirada, con lo que sabemos, lo que falta y el siguiente paso.</p>
+          </div>
+          <div class="intro-aside">
+            <span class="intro-aside-label">Esta beta prueba</span>
+            <strong>¿Merece la pena invertir tiempo?</strong>
+            <span>La respuesta siempre debe poder explicarse.</span>
+          </div>
+        </section>
+
+        <section class="metrics" aria-label="Resumen de oportunidades">
+          <article class="metric-card metric-primary">
+            <span class="metric-label">Para revisar</span>
+            <strong id="metricReview">0</strong>
+            <span class="metric-foot">con información pendiente</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-label">En seguimiento</span>
+            <strong id="metricGo">0</strong>
+            <span class="metric-foot">con siguiente acción</span>
+          </article>
+          <article class="metric-card">
+            <span class="metric-label">No encajan</span>
+            <strong id="metricNoGo">0</strong>
+            <span class="metric-foot">decisiones aparcadas</span>
+          </article>
+          <article class="metric-card metric-date">
+            <span class="metric-label">Próximo cierre</span>
+            <strong id="metricNext">—</strong>
+            <span class="metric-foot">ordenado por urgencia</span>
+          </article>
+        </section>
+
+        <section class="workspace" id="oportunidades">
+          <div class="list-column">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow eyebrow-muted">Tu bandeja</p>
+                <h2>Oportunidades</h2>
+              </div>
+              <span class="count-label" id="opportunityCount">0 casos</span>
+            </div>
+            <div class="filters" role="toolbar" aria-label="Filtrar oportunidades">
+              <button class="filter active" data-filter="all" type="button">Todas</button>
+              <button class="filter" data-filter="review" type="button">Revisar</button>
+              <button class="filter" data-filter="go" type="button">En seguimiento</button>
+              <button class="filter" data-filter="soon" type="button">Más próximas</button>
+            </div>
+            <div class="opportunity-list" id="opportunityList" aria-live="polite"></div>
+          </div>
+
+          <article class="detail-panel" id="detailPanel" aria-live="polite">
+            <div class="detail-empty">
+              <span class="empty-mark">◈</span>
+              <h2>Elige una oportunidad</h2>
+              <p>Aquí veremos sus requisitos, evidencias y la decisión que toca tomar.</p>
+            </div>
+          </article>
+        </section>
+
+        <footer class="app-footer">
+          <span><strong>Pliego Claro</strong> es un prototipo de prueba.</span>
+          <span>No sustituye la revisión del expediente oficial ni el criterio profesional.</span>
+        </footer>
+      </main>
+    </div>
+
+    <div class="modal" id="addDialog" role="dialog" aria-modal="true" aria-labelledby="addTitle" hidden>
+      <form id="addForm">
+        <div class="modal-head">
+          <div>
+            <p class="eyebrow eyebrow-muted">Nuevo caso de prueba</p>
+            <h2 id="addTitle">Añadir oportunidad</h2>
+          </div>
+          <button class="close-button" id="closeAdd" type="button" aria-label="Cerrar">×</button>
+        </div>
+        <p class="modal-copy">Añade una licitación real para recorrerla durante una llamada. En esta versión no se envía nada a ningún servidor.</p>
+        <div class="form-grid">
+          <label class="field field-wide">Nombre de la oportunidad<input name="title" required placeholder="Ej. Servicio de mantenimiento…" /></label>
+          <label class="field">Organismo<input name="organization" required placeholder="Ayuntamiento, diputación…" /></label>
+          <label class="field">Importe<input name="amount" placeholder="Ej. 48.000 €" /></label>
+          <label class="field">Cierre o referencia<input name="deadline" placeholder="Ej. 12 días · Exp. 2026/14" /></label>
+          <label class="field">Sector<input name="sector" placeholder="Ej. Servicios, obras…" /></label>
+        </div>
+        <div class="modal-actions">
+          <button class="button button-quiet" id="cancelAdd" type="button">Cancelar</button>
+          <button class="button button-dark" type="submit">Guardar oportunidad</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>

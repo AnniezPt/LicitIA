@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="web_dashboard" name="shell-type"/>
+<title>Pliego Claro · Expediente 2024/0912-A</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#F5F6F1",
+            "background": "#F5F6F1",
+            "primary": "#142523",
+            "primary-container": "#2D5A4C",
+            "on-primary": "#ffffff",
+            "secondary-container": "#D7EF72",
+            "on-secondary-container": "#3F4C00",
+            "secondary-fixed": "#D7EF72",
+            "on-secondary-fixed": "#181E00",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#EEF1EC",
+            "surface-container": "#E3E7E1",
+            "surface-container-high": "#D8DED6",
+            "surface-container-highest": "#CCD4CA",
+            "outline": "#6F7975",
+            "outline-variant": "#D0D7CF",
+            "on-surface": "#142523",
+            "on-surface-variant": "#495551"
+          },
+          fontFamily: {
+            "body-sm": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "headline-xl": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"],
+            "code-sm": ["JetBrains Mono"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-[#F5F6F1] font-body-md text-on-surface antialiased min-h-screen">
+<!-- Lateral Navigation Sidebar -->
+<aside class="fixed left-0 top-0 h-full w-[240px] bg-white z-50 flex flex-col justify-between border-r border-[#D0D7CF]">
+<div class="flex flex-col">
+<div class="h-14 px-4 flex items-center gap-2.5 border-b border-[#D0D7CF]">
+<div class="w-8 h-8 rounded-lg overflow-hidden shrink-0 flex items-center justify-center">
+          https://lh3.googleusercontent.com/aida/AEtjO1XNwUOjqreNDdxd-VMgW0mGbdwpNOG2xeIOPh2iar__gRLTn2TV_ftLivmTro_lXIPov0q7UTQ_Zz4-g1LaUMGwwBf_NIqoSSlytwe-OzarXrt9TIpRfZ4J8KILcyaJ1g-LS_FFtq1jbakkx-c_HktEamgDb_rUZSXnNbNZPZ9t8DqhiQKqSWq3ZxkUM-weNNQSwOyIpsRQUtjU7bHW0gf72nv0A8hwetIk1klelJdwtp4KobDZKWj4p54a
+        </div>
+<div class="flex flex-col min-w-0">
+<span class="font-bold text-[15px] text-[#142523] truncate leading-tight tracking-tight">Pliego Claro</span>
+<span class="text-[10px] text-gray-500 font-semibold tracking-wider uppercase">Licitación Ágil</span>
+</div>
+</div>
+<div class="px-2 pt-3">
+<span class="px-2 text-[10px] uppercase tracking-wider text-gray-400 font-bold block mb-1">Espacio de Trabajo</span>
+<nav class="flex flex-col gap-0.5">
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded-md text-gray-600 hover:bg-[#EEF1EC] hover:text-[#142523] transition-colors text-sm" href="#">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span>Hoy</span>
+</div>
+<span class="px-1.5 py-0.2 rounded-full bg-[#D7EF72] text-[#181E00] text-xs font-bold">3</span>
+</a>
+<a class="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-gray-600 hover:bg-[#EEF1EC] hover:text-[#142523] transition-colors text-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">radar</span>
+<span>Oportunidades</span>
+</a>
+<a aria-current="page" class="flex items-center gap-2 px-2.5 py-1.5 rounded-md bg-[#EEF1EC] text-[#142523] font-bold text-sm border-l-[3px] border-[#2D5A4C]" href="#">
+<span class="material-symbols-outlined text-[18px] text-[#2D5A4C]">folder_open</span>
+<span>Expedientes</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded-md text-gray-600 hover:bg-[#EEF1EC] hover:text-[#142523] transition-colors text-sm" href="#">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">task_alt</span>
+<span>Tareas</span>
+</div>
+<span class="px-1.5 py-0.2 rounded-full bg-gray-100 text-gray-600 text-xs font-bold">4</span>
+</a>
+<a class="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-gray-600 hover:bg-[#EEF1EC] hover:text-[#142523] transition-colors text-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">business</span>
+<span>Mi empresa</span>
+</a>
+<a class="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-gray-600 hover:bg-[#EEF1EC] hover:text-[#142523] transition-colors text-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+<span>Ajustes</span>
+</a>
+</nav>
+</div>
+</div>
+<!-- User / Test Mode Footer -->
+<div class="p-3 border-t border-[#D0D7CF] bg-white flex flex-col gap-2">
+<div class="flex flex-col min-w-0">
+<span class="text-xs font-bold text-[#142523] truncate">Mi empresa (ejemplo)</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="w-1.5 h-1.5 rounded-full bg-[#2D5A4C]"></span>
+<span class="text-[11px] text-gray-500">Datos locales · Modo prueba</span>
+</div>
+</div>
+<div class="w-full h-1.5 bg-[#EEF1EC] rounded-full overflow-hidden">
+<div class="h-full bg-[#2D5A4C] rounded-full" style="width: 84%;"></div>
+</div>
+</div>
+</aside>
+<!-- Page Content Shell -->
+<div class="pl-[240px]">
+<!-- Top Global App Bar -->
+<header class="fixed top-0 left-[240px] right-0 h-14 bg-white/95 backdrop-blur-md z-40 border-b border-[#D0D7CF] flex items-center justify-between px-6">
+<div class="flex items-center gap-3">
+<nav class="flex items-center gap-1.5 text-xs text-gray-500">
+<span class="hover:text-gray-700">Expedientes</span>
+<span class="text-gray-300">/</span>
+<span class="text-[#142523] font-semibold">Exp. 2024/0912-A</span>
+</nav>
+<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-[#EEF1EC] text-gray-600 border border-[#D0D7CF]">Datos de ejemplo · editable</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative flex items-center w-72">
+<span class="material-symbols-outlined absolute left-2.5 text-gray-400 text-[17px]">search</span>
+<input class="w-full pl-8 pr-10 py-1 bg-[#EEF1EC] border border-[#D0D7CF] rounded text-xs text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-[#2D5A4C] focus:bg-white" placeholder="Buscar en este pliego..." type="text"/>
+<span class="absolute right-2 px-1 py-0.2 bg-white border border-[#D0D7CF] rounded font-mono text-[10px] text-gray-400">⌘K</span>
+</div>
+<button class="flex items-center gap-1 px-2.5 py-1 bg-[#2D5A4C] text-white text-xs font-semibold rounded hover:bg-[#1E3E34] transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>Nueva anotación</span>
+</button>
+<div class="w-7 h-7 rounded-full bg-[#142523] text-white flex items-center justify-center font-bold text-xs">
+          LM
+        </div>
+</div>
+</header>
+<!-- Main Container centered to 1280px -->
+<main class="w-full pt-14 px-6 min-h-[calc(100vh-3.5rem)] pb-12">
+<div class="max-w-[1280px] mx-auto flex flex-col gap-4 mt-4">
+<!-- 1. CABECERA FIJA Y COMPACTA DEL EXPEDIENTE -->
+<section class="bg-white rounded-xl border border-[#D0D7CF] shadow-sm p-4 sticky top-14 z-30">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+<!-- Left Info Cluster -->
+<div class="flex flex-col gap-1 min-w-0 max-w-4xl">
+<!-- Top Row Badges & Warnings -->
+<div class="flex flex-wrap items-center gap-2">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#FEF6E7] text-[#9A6208] text-[11px] font-bold uppercase tracking-wide border border-[#FDE6B8]">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                  ESTADO ACTUAL: REVISAR
+                </span>
+<span class="text-xs text-[#9A6208] font-medium flex items-center gap-1">
+                  • Pendiente comprobar solvencia técnica acumulada
+                </span>
+<span class="text-gray-300 text-xs">|</span>
+<span class="px-2 py-0.2 bg-[#F5F6F1] text-gray-600 rounded text-[11px] font-medium border border-[#D0D7CF]">
+                  Datos de ejemplo · editable
+                </span>
+</div>
+<!-- Main Title -->
+<h1 class="text-xl font-bold text-[#142523] tracking-tight leading-snug">
+                Digitalización y catalogación de un archivo municipal histórico y administrativo
+              </h1>
+<!-- Compact Metadata Row -->
+<div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-gray-600">
+<span class="flex items-center gap-1 font-semibold text-[#142523]">
+<span class="material-symbols-outlined text-[15px] text-gray-400">account_balance</span>
+                  Ayuntamiento de San Fernando de Henares (Madrid)
+                </span>
+<span class="text-gray-300">·</span>
+<span class="font-mono bg-[#EEF1EC] px-1.5 py-0.2 rounded text-gray-700 font-medium">Exp. 2024/0912-A (ejemplo)</span>
+<span class="text-gray-300">·</span>
+<span class="font-semibold text-[#142523] flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-[#2D5A4C]">euro</span>
+                  80.000 € sin IVA <span class="font-normal text-gray-500">(VEC: 96.000 €)</span>
+</span>
+<span class="text-gray-300">·</span>
+<span class="inline-flex items-center gap-1 font-semibold text-[#9C2A2A] bg-[#FDEEEE] px-2 py-0.2 rounded">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                  Cierre en 12 días (ejemplo editable)
+                </span>
+</div>
+</div>
+<!-- Right Action Buttons (Triage + Report) -->
+<div class="flex flex-wrap items-center gap-2 shrink-0">
+<div class="inline-flex items-center p-1 rounded-lg bg-[#EEF1EC] border border-[#D0D7CF]">
+<button class="flex items-center gap-1 px-2.5 py-1 rounded text-xs font-semibold text-gray-600 hover:text-[#1B6A56] hover:bg-white transition-colors" title="Marcar decisión favorable" type="button">
+<span class="material-symbols-outlined text-[15px] text-[#1B6A56]">check_circle</span>
+<span>✓ Marcar GO</span>
+</button>
+<button class="flex items-center gap-1 px-2.5 py-1 rounded bg-[#FEF6E7] text-[#9A6208] text-xs font-bold border border-[#FDE6B8] shadow-xs" title="Estado actual" type="button">
+<span class="material-symbols-outlined text-[15px]">balance</span>
+<span>⚖ Mantener REVISAR (Activo)</span>
+</button>
+<button class="flex items-center gap-1 px-2.5 py-1 rounded text-xs font-semibold text-gray-600 hover:text-[#9C2A2A] hover:bg-white transition-colors" title="Descartar licitación" type="button">
+<span class="material-symbols-outlined text-[15px] text-[#9C2A2A]">cancel</span>
+<span>✕ Marcar NO-GO</span>
+</button>
+</div>
+<button class="flex items-center gap-1.5 px-3 py-1.5 bg-[#142523] text-white text-xs font-semibold rounded-lg hover:bg-[#2D5A4C] transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+<span>Descargar informe resumen (PDF)</span>
+</button>
+</div>
+</div>
+<!-- 2. PESTAÑAS EXACTAS (Con JavaScript interactivo) -->
+<div class="flex items-center gap-1 mt-4 pt-2 border-t border-[#EEF1EC] overflow-x-auto text-xs" id="tabs-bar">
+<button class="tab-btn px-3 py-1.5 rounded-lg font-bold bg-[#142523] text-white flex items-center gap-1.5 transition-all" data-target="tab-resumen" type="button">
+<span>Resumen</span>
+</button>
+<button class="tab-btn px-3 py-1.5 rounded-lg font-medium text-gray-600 hover:text-[#142523] hover:bg-[#EEF1EC] flex items-center gap-1.5 transition-all" data-target="tab-requisitos" type="button">
+<span>Requisitos y evidencias</span>
+<span class="px-1.5 py-0.2 rounded-full bg-[#FEF6E7] text-[#9A6208] font-bold text-[10px]">5 requisitos · 2 pendientes</span>
+</button>
+<button class="tab-btn px-3 py-1.5 rounded-lg font-medium text-gray-600 hover:text-[#142523] hover:bg-[#EEF1EC] flex items-center gap-1.5 transition-all" data-target="tab-documentos" type="button">
+<span>Documentos</span>
+<span class="px-1.5 py-0.2 rounded bg-gray-100 text-gray-600 font-mono text-[10px]">3 pliegos</span>
+</button>
+<button class="tab-btn px-3 py-1.5 rounded-lg font-medium text-gray-600 hover:text-[#142523] hover:bg-[#EEF1EC] flex items-center gap-1.5 transition-all" data-target="tab-decision" type="button">
+<span>Decisión</span>
+<span class="px-1.5 py-0.2 rounded-full bg-[#FEF6E7] text-[#9A6208] text-[10px] font-semibold">Por decidir</span>
+</button>
+<button class="tab-btn px-3 py-1.5 rounded-lg font-medium text-gray-600 hover:text-[#142523] hover:bg-[#EEF1EC] flex items-center gap-1.5 transition-all" data-target="tab-tareas" type="button">
+<span>Tareas</span>
+<span class="w-4 h-4 rounded-full bg-[#D7EF72] text-[#181E00] font-bold text-[10px] flex items-center justify-center">2 activas</span>
+</button>
+<button class="tab-btn px-3 py-1.5 rounded-lg font-medium text-gray-600 hover:text-[#142523] hover:bg-[#EEF1EC] flex items-center gap-1.5 transition-all" data-target="tab-historial" type="button">
+<span>Historial</span>
+</button>
+</div>
+</section>
+<!-- CONTENEDOR DE PESTAÑAS -->
+<div class="w-full" id="tab-contents">
+<!-- 3. CONTENIDO DE LA PESTAÑA: RESUMEN -->
+<div class="tab-panel flex flex-col gap-4" id="tab-resumen">
+<div class="bg-white rounded-xl border border-[#D0D7CF] p-5 shadow-sm">
+<div class="flex items-center justify-between pb-3 border-b border-[#EEF1EC] mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#2D5A4C]">analytics</span>
+<h2 class="font-bold text-base text-[#142523]">Cuadrícula Ejecutiva del Expediente</h2>
+</div>
+<span class="text-xs text-gray-500 font-mono">Modo lectura rápida · Criterios LCSP</span>
+</div>
+<!-- Executive Grid: Clean 3 columns -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+<!-- 1. Qué se compra -->
+<div class="lg:col-span-2 p-3.5 bg-[#F5F6F1] rounded-lg border border-[#D0D7CF]/60 flex flex-col gap-1">
+<span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-[#2D5A4C]">shopping_bag</span>
+                    1. Qué se compra
+                  </span>
+<p class="text-xs text-[#142523] font-medium leading-relaxed mt-0.5">
+                    Servicio integral de limpieza física de legajos, digitalización certificada a 300 ppp TIFF/PDF-A y catalogación en software libre AtoM para 14.500 unidades documentales (siglos XVIII al XX).
+                  </p>
+</div>
+<!-- 2. Quién lo compra -->
+<div class="p-3.5 bg-[#F5F6F1] rounded-lg border border-[#D0D7CF]/60 flex flex-col gap-1">
+<span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-[#2D5A4C]">domain</span>
+                    2. Quién lo compra
+                  </span>
+<p class="text-xs text-[#142523] font-semibold mt-0.5">
+                    Concejalía de Régimen Interior y Patrimonio Cultural
+                  </p>
+<span class="text-[11px] text-gray-500">Ayto. San Fernando de Henares (Madrid)</span>
+</div>
+<!-- 3. Importe y valor -->
+<div class="p-3.5 bg-[#F5F6F1] rounded-lg border border-[#D0D7CF]/60 flex flex-col gap-1">
+<span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-[#2D5A4C]">payments</span>
+                    3. Importe y valor
+                  </span>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="text-sm font-bold text-[#142523]">80.000 € base</span>
+<span class="text-[11px] text-gray-500">(sin IVA)</span>
+</div>
+<span class="text-[11px] text-gray-600">VEC: 96.000 € con posible prórroga técnica de 3 meses.</span>
+</div>
+<!-- 4. Fecha límite -->
+<div class="p-3.5 bg-[#F5F6F1] rounded-lg border border-[#D0D7CF]/60 flex flex-col gap-1">
+<span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-[#9C2A2A]">event_busy</span>
+                    4. Fecha límite
+                  </span>
+<p class="text-xs text-[#9C2A2A] font-bold mt-0.5">
+                    Cierre en 12 días naturales a las 14:00h
+                  </p>
+<span class="text-[11px] text-gray-500">Plazo de ejemplo editable</span>
+</div>
+<!-- 5. Lugar y duración -->
+<div class="p-3.5 bg-[#F5F6F1] rounded-lg border border-[#D0D7CF]/60 flex flex-col gap-1">
+<span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-[#2D5A4C]">location_on</span>
+                    5. Lugar y duración
+                  </span>
+<p class="text-xs text-[#142523] font-semibold mt-0.5">
+                    Archivo Municipal (in situ)
+                  </p>
+<span class="text-[11px] text-gray-600">6 meses de ejecución continuada.</span>
+</div>
+<!-- 6. Procedimiento -->
+<div class="p-3.5 bg-[#F5F6F1] rounded-lg border border-[#D0D7CF]/60 flex flex-col gap-1">
+<span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-[#2D5A4C]">gavel</span>
+                    6. Procedimiento
+                  </span>
+<p class="text-xs text-[#142523] font-semibold mt-0.5">
+                    Abierto simplificado ordinario
+                  </p>
+<span class="text-[11px] text-gray-600">Tramitación ordinaria · Criterio precio + técnica.</span>
+</div>
+<!-- 7. Fuente oficial -->
+<div class="p-3.5 bg-[#F5F6F1] rounded-lg border border-[#D0D7CF]/60 flex flex-col gap-1">
+<span class="text-[11px] font-bold uppercase tracking-wider text-gray-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-[#2D5A4C]">link</span>
+                    7. Fuente oficial
+                  </span>
+<a class="text-xs font-semibold text-[#2D5A4C] hover:underline flex items-center gap-1 mt-0.5" href="#">
+                    Plataforma de Contratación (enlace simulado)
+                    <span class="material-symbols-outlined text-[13px]">open_in_new</span>
+</a>
+<span class="text-[11px] text-gray-500">Datos de ejemplo</span>
+</div>
+<!-- 8. Qué falta comprobar -->
+<div class="p-3.5 bg-[#FEF6E7] rounded-lg border border-[#FDE6B8] flex flex-col gap-1">
+<span class="text-[11px] font-bold uppercase tracking-wider text-[#9A6208] flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">help</span>
+                    8. Qué falta comprobar
+                  </span>
+<p class="text-xs text-[#9A6208] font-semibold mt-0.5 leading-relaxed">
+                    Acreditación de solvencia técnica mediante certificados de buena ejecución que sumen &gt; 50.000 € en servicios análogos.
+                  </p>
+</div>
+</div>
+<!-- Siguiente tarea inmediata banner -->
+<div class="mt-4 p-3.5 bg-[#2D5A4C] text-white rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
+<div class="flex items-center gap-3 min-w-0">
+<span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[#D7EF72] text-[20px]">assignment_late</span>
+</span>
+<div class="flex flex-col min-w-0">
+<span class="text-[10px] font-bold uppercase tracking-wider text-[#D7EF72]">Siguiente tarea inmediata vinculada</span>
+<p class="text-xs font-medium text-white truncate">
+                      Solicitar certificado de buena ejecución al Archivo de Alcalá por 24.500 € (Responsable: Carlos R. · Límite: 48h).
+                    </p>
+</div>
+</div>
+<button class="shrink-0 px-3 py-1.5 bg-[#D7EF72] text-[#181E00] text-xs font-bold rounded hover:bg-[#c6df5c] transition-colors" onclick="document.querySelector('[data-target=\'tab-tareas\']').click()" type="button">
+                  Ver en Tareas
+                </button>
+</div>
+</div>
+</div>
+<!-- 4. CONTENIDO DE LA PESTAÑA: REQUISITOS Y EVIDENCIAS -->
+<div class="tab-panel hidden flex flex-col gap-4" id="tab-requisitos">
+<!-- Barra superior de herramientas con filtros -->
+<div class="bg-white rounded-xl border border-[#D0D7CF] p-3 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<!-- Pill filters -->
+<div class="flex flex-wrap items-center gap-1.5 text-xs" id="filter-pills">
+<button class="filter-btn active px-2.5 py-1 rounded-md font-bold bg-[#142523] text-white" data-filter="all">Todos (5)</button>
+<button class="filter-btn px-2.5 py-1 rounded-md font-medium text-gray-600 bg-[#EEF1EC] hover:bg-gray-200" data-filter="confirmado-fuente">Confirmado en la fuente (2)</button>
+<button class="filter-btn px-2.5 py-1 rounded-md font-medium text-gray-600 bg-[#EEF1EC] hover:bg-gray-200" data-filter="aportado-empresa">Aportado por la empresa (1)</button>
+<button class="filter-btn px-2.5 py-1 rounded-md font-medium text-gray-600 bg-[#EEF1EC] hover:bg-gray-200" data-filter="pendiente-comprobar">Pendiente de comprobar (2)</button>
+<button class="filter-btn px-2.5 py-1 rounded-md font-medium text-gray-400 bg-[#F5F6F1]" data-filter="no-encontrado">No encontrado (0)</button>
+</div>
+<!-- Quick Search Input -->
+<div class="relative w-full sm:w-64">
+<span class="material-symbols-outlined absolute left-2.5 top-1.5 text-gray-400 text-[16px]">search</span>
+<input class="w-full pl-8 pr-3 py-1 bg-[#F5F6F1] border border-[#D0D7CF] rounded text-xs text-[#142523] placeholder:text-gray-400 focus:outline-none focus:border-[#2D5A4C]" id="req-search-input" placeholder="Buscar en requisitos..." type="text"/>
+</div>
+</div>
+<!-- Cinco grupos plegables / acordeones ordenados -->
+<div class="flex flex-col gap-3" id="accordion-groups">
+<!-- Grupo a: Solvencia técnica -->
+<div class="accordion-card bg-white rounded-xl border border-[#D0D7CF] shadow-sm overflow-hidden" data-group="a">
+<button class="accordion-toggle w-full p-3.5 bg-[#EEF1EC]/60 flex items-center justify-between hover:bg-[#EEF1EC] transition-colors text-left" type="button">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#2D5A4C] text-[18px]">engineering</span>
+<span class="text-xs font-bold uppercase tracking-wider text-[#142523]">a) Solvencia Técnica (Art. 90 LCSP)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-[#FEF6E7] text-[#9A6208] text-[10px] font-bold">1 Pendiente</span>
+<span class="px-2 py-0.5 rounded bg-[#E6F4EA] text-[#137333] text-[10px] font-bold">1 Confirmado en la fuente</span>
+<span class="material-symbols-outlined text-gray-400 text-[18px] transition-transform accordion-chevron">expand_more</span>
+</div>
+</button>
+<div class="accordion-content p-3.5 flex flex-col gap-3">
+<!-- Req 1.1: Pendiente de comprobar -->
+<div class="req-item p-3 rounded-lg border border-[#FDE6B8] bg-[#FFFDF8] flex flex-col gap-2" data-status="pendiente-comprobar">
+<div class="flex items-start justify-between gap-3">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-2">
+<span class="font-mono text-[10px] bg-gray-200 text-gray-800 px-1 rounded font-bold">Req. 1.1</span>
+<span class="text-[11px] text-gray-500 font-medium">PCAP Cláusula 7.2 (Página 14)</span>
+</div>
+<p class="text-xs font-semibold text-[#142523] mt-1">
+                          Relación de los principales servicios de catalogación o digitalización similares realizados en los últimos 3 años, por importe acumulado mínimo de 50.000 €.
+                        </p>
+</div>
+<span class="shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#FEF6E7] text-[#9A6208] text-[11px] font-bold uppercase">
+<span class="material-symbols-outlined text-[13px]">pending</span>
+                        Pendiente de comprobar
+                      </span>
+</div>
+<!-- Evidencia aportada + carencia -->
+<div class="p-2.5 bg-white rounded border border-[#EEF1EC] text-xs flex flex-col gap-1">
+<div class="flex items-center gap-1.5 text-gray-700">
+<span class="material-symbols-outlined text-gray-400 text-[15px]">description</span>
+<span class="font-medium">Evidencia aportada:</span>
+<span>Contrato anterior Archivo de Guadalajara (34.000 €).</span>
+</div>
+<div class="flex items-center gap-1.5 text-[#9C2A2A] font-medium">
+<span class="material-symbols-outlined text-[15px]">error</span>
+<span>Carencia identificada: Falta completar 16.000 € adicionales con segundo certificado oficial.</span>
+</div>
+</div>
+<!-- Botones de acción directa -->
+<div class="flex items-center gap-2 pt-1">
+<button class="px-2.5 py-1 bg-[#2D5A4C] text-white text-[11px] font-semibold rounded hover:bg-[#1E3E34] transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">add_link</span>
+<span>Añadir evidencia</span>
+</button>
+<button class="px-2.5 py-1 bg-[#EEF1EC] text-[#142523] text-[11px] font-medium rounded hover:bg-gray-200 transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">menu_book</span>
+<span>Ver fuente (pág. 14)</span>
+</button>
+</div>
+</div>
+<!-- Req 1.2: Confirmado en la fuente -->
+<div class="req-item p-3 rounded-lg border border-[#CEEAD6] bg-[#F8FCF9] flex flex-col gap-2" data-status="confirmado-fuente">
+<div class="flex items-start justify-between gap-3">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-2">
+<span class="font-mono text-[10px] bg-gray-200 text-gray-800 px-1 rounded font-bold">Req. 1.2</span>
+<span class="text-[11px] text-gray-500 font-medium">PPT Cláusula 4.1 (Página 8)</span>
+</div>
+<p class="text-xs font-semibold text-[#142523] mt-1">
+                          Disponibilidad de escáner cenital de conservación para formato hasta A2 con iluminación fría que no dañe documentos históricos.
+                        </p>
+</div>
+<span class="shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#E6F4EA] text-[#137333] text-[11px] font-bold uppercase">
+<span class="material-symbols-outlined text-[13px]">verified</span>
+                        Confirmado en la fuente
+                      </span>
+</div>
+<div class="p-2.5 bg-white rounded border border-[#EEF1EC] text-xs flex flex-col gap-1">
+<div class="flex items-center gap-1.5 text-gray-700">
+<span class="material-symbols-outlined text-[#137333] text-[15px]">check_circle</span>
+<span class="font-medium">Evidencia aportada:</span>
+<span>Ficha técnica Bookeye 4 V2 en propiedad y disponible en taller central.</span>
+</div>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button class="px-2.5 py-1 bg-[#EEF1EC] text-[#142523] text-[11px] font-medium rounded hover:bg-gray-200 transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">menu_book</span>
+<span>Ver fuente (pág. 8)</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Grupo b: Solvencia económica -->
+<div class="accordion-card bg-white rounded-xl border border-[#D0D7CF] shadow-sm overflow-hidden" data-group="b">
+<button class="accordion-toggle w-full p-3.5 bg-[#EEF1EC]/60 flex items-center justify-between hover:bg-[#EEF1EC] transition-colors text-left" type="button">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#2D5A4C] text-[18px]">account_balance_wallet</span>
+<span class="text-xs font-bold uppercase tracking-wider text-[#142523]">b) Solvencia Económica (Art. 87 LCSP)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-[#E8F0FE] text-[#1A73E8] text-[10px] font-bold">1 Aportado por la empresa</span>
+<span class="material-symbols-outlined text-gray-400 text-[18px] transition-transform accordion-chevron">expand_more</span>
+</div>
+</button>
+<div class="accordion-content p-3.5 flex flex-col gap-3">
+<div class="req-item p-3 rounded-lg border border-[#D2E3FC] bg-[#F8FAFD] flex flex-col gap-2" data-status="aportado-empresa">
+<div class="flex items-start justify-between gap-3">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-2">
+<span class="font-mono text-[10px] bg-gray-200 text-gray-800 px-1 rounded font-bold">Req. 2.1</span>
+<span class="text-[11px] text-gray-500 font-medium">PCAP Cláusula 7.1</span>
+</div>
+<p class="text-xs font-semibold text-[#142523] mt-1">
+                          Volumen anual de negocios referido al mejor ejercicio de los 3 últimos disponibles por valor mínimo de 120.000 €.
+                        </p>
+</div>
+<span class="shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#E8F0FE] text-[#1A73E8] text-[11px] font-bold uppercase">
+<span class="material-symbols-outlined text-[13px]">upload_file</span>
+                        Aportado por la empresa
+                      </span>
+</div>
+<div class="p-2.5 bg-white rounded border border-[#EEF1EC] text-xs flex flex-col gap-1">
+<div class="flex items-center gap-1.5 text-gray-700">
+<span class="material-symbols-outlined text-[#1A73E8] text-[15px]">receipt_long</span>
+<span class="font-medium">Evidencia aportada:</span>
+<span>Cuentas anuales oficiales del ejercicio 2023 registradas (facturación declarada &gt; 140.000 €).</span>
+</div>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button class="px-2.5 py-1 bg-[#EEF1EC] text-[#142523] text-[11px] font-medium rounded hover:bg-gray-200 transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">menu_book</span>
+<span>Ver fuente (PCAP p.12)</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Grupo c: Medios personales y materiales -->
+<div class="accordion-card bg-white rounded-xl border border-[#D0D7CF] shadow-sm overflow-hidden" data-group="c">
+<button class="accordion-toggle w-full p-3.5 bg-[#EEF1EC]/60 flex items-center justify-between hover:bg-[#EEF1EC] transition-colors text-left" type="button">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#2D5A4C] text-[18px]">badge</span>
+<span class="text-xs font-bold uppercase tracking-wider text-[#142523]">c) Medios Personales y Materiales</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-[#E6F4EA] text-[#137333] text-[10px] font-bold">1 Confirmado en la fuente</span>
+<span class="px-2 py-0.5 rounded bg-[#FEF6E7] text-[#9A6208] text-[10px] font-bold">1 Pendiente de comprobar</span>
+<span class="material-symbols-outlined text-gray-400 text-[18px] transition-transform accordion-chevron">expand_more</span>
+</div>
+</button>
+<div class="accordion-content p-3.5 flex flex-col gap-3">
+<!-- Req 3.1 -->
+<div class="req-item p-3 rounded-lg border border-[#CEEAD6] bg-[#F8FCF9] flex flex-col gap-2" data-status="confirmado-fuente">
+<div class="flex items-start justify-between gap-3">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-2">
+<span class="font-mono text-[10px] bg-gray-200 text-gray-800 px-1 rounded font-bold">Req. 3.1</span>
+<span class="text-[11px] text-gray-500 font-medium">PPT Cláusula 5.2</span>
+</div>
+<p class="text-xs font-semibold text-[#142523] mt-1">
+                          1 Responsable técnico con titulación universitaria en Información y Documentación o Historia, con mínimo 3 años de experiencia en archivos públicos.
+                        </p>
+</div>
+<span class="shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#E6F4EA] text-[#137333] text-[11px] font-bold uppercase">
+<span class="material-symbols-outlined text-[13px]">verified</span>
+                        Confirmado en la fuente
+                      </span>
+</div>
+<div class="p-2.5 bg-white rounded border border-[#EEF1EC] text-xs">
+<span class="text-gray-700 font-medium">Evidencia aportada:</span> CV y titulación de Carlos R. con 4 años como archivista municipal.
+                    </div>
+</div>
+<!-- Req 3.2 -->
+<div class="req-item p-3 rounded-lg border border-[#FDE6B8] bg-[#FFFDF8] flex flex-col gap-2" data-status="pendiente-comprobar">
+<div class="flex items-start justify-between gap-3">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-2">
+<span class="font-mono text-[10px] bg-gray-200 text-gray-800 px-1 rounded font-bold">Req. 3.2</span>
+<span class="text-[11px] text-gray-500 font-medium">PPT Cláusula 5.3</span>
+</div>
+<p class="text-xs font-semibold text-[#142523] mt-1">
+                          2 Técnicos auxiliares de digitalización con al menos 120h de formación específica acreditada.
+                        </p>
+</div>
+<span class="shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#FEF6E7] text-[#9A6208] text-[11px] font-bold uppercase">
+<span class="material-symbols-outlined text-[13px]">pending</span>
+                        Pendiente de comprobar
+                      </span>
+</div>
+<div class="p-2.5 bg-white rounded border border-[#EEF1EC] text-xs flex flex-col gap-1">
+<span class="text-gray-700"><span class="font-medium">Evidencia aportada:</span> 1 técnico acreditado con título.</span>
+<span class="text-[#9C2A2A] font-medium"><span class="material-symbols-outlined text-[14px] align-middle">error</span> Carencia identificada: El segundo auxiliar propuesto aún no ha localizado su certificado de 120h.</span>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<button class="px-2.5 py-1 bg-[#2D5A4C] text-white text-[11px] font-semibold rounded hover:bg-[#1E3E34] transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">add_link</span>
+<span>Añadir evidencia</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Grupo d: Documentación administrativa -->
+<div class="accordion-card bg-white rounded-xl border border-[#D0D7CF] shadow-sm overflow-hidden" data-group="d">
+<button class="accordion-toggle w-full p-3.5 bg-[#EEF1EC]/60 flex items-center justify-between hover:bg-[#EEF1EC] transition-colors text-left" type="button">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#2D5A4C] text-[18px]">folder_special</span>
+<span class="text-xs font-bold uppercase tracking-wider text-[#142523]">d) Documentación Administrativa</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-[#E6F4EA] text-[#137333] text-[10px] font-bold">Cumplido / Plantilla lista</span>
+<span class="material-symbols-outlined text-gray-400 text-[18px] transition-transform accordion-chevron">expand_more</span>
+</div>
+</button>
+<div class="accordion-content p-3.5 flex flex-col gap-3">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+<div class="p-2.5 bg-[#F5F6F1] rounded border border-[#D0D7CF]/60 flex items-center justify-between">
+<div>
+<span class="font-bold text-[#142523] block">Garantía provisional</span>
+<span class="text-gray-500 text-[11px]">No se exige (art. 106 LCSP)</span>
+</div>
+<span class="material-symbols-outlined text-[#137333]">check_circle</span>
+</div>
+<div class="p-2.5 bg-[#F5F6F1] rounded border border-[#D0D7CF]/60 flex items-center justify-between">
+<div>
+<span class="font-bold text-[#142523] block">Declaración DEUC</span>
+<span class="text-gray-500 text-[11px]">Plantilla lista en Mi Empresa</span>
+</div>
+<span class="material-symbols-outlined text-[#137333]">check_circle</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Grupo e: Condiciones de ejecución -->
+<div class="accordion-card bg-white rounded-xl border border-[#D0D7CF] shadow-sm overflow-hidden" data-group="e">
+<button class="accordion-toggle w-full p-3.5 bg-[#EEF1EC]/60 flex items-center justify-between hover:bg-[#EEF1EC] transition-colors text-left" type="button">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#2D5A4C] text-[18px]">verified_user</span>
+<span class="text-xs font-bold uppercase tracking-wider text-[#142523]">e) Condiciones Especiales de Ejecución</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-[#E6F4EA] text-[#137333] text-[10px] font-bold">Compatible / In situ</span>
+<span class="material-symbols-outlined text-gray-400 text-[18px] transition-transform accordion-chevron">expand_more</span>
+</div>
+</button>
+<div class="accordion-content p-3.5 flex flex-col gap-2">
+<div class="p-2.5 bg-[#F5F6F1] rounded border border-[#D0D7CF]/60 text-xs">
+<div class="flex items-center justify-between">
+<span class="font-bold text-[#142523]">Ejecución in-situ en dependencias del archivo municipal</span>
+<span class="font-mono text-[11px] text-gray-500">PPT Cláusula 3</span>
+</div>
+<p class="text-gray-600 mt-1">No se permite salida de documentación patrimonial protegida fuera de la sede municipal. Compatible con equipos de digitalización portátiles de la empresa.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 5. CONTENIDO DE LA PESTAÑA: DOCUMENTOS -->
+<div class="tab-panel hidden flex flex-col gap-4" id="tab-documentos">
+<div class="bg-white rounded-xl border border-[#D0D7CF] p-5 shadow-sm">
+<div class="flex items-center justify-between pb-3 border-b border-[#EEF1EC] mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#2D5A4C]">folder_open</span>
+<h2 class="font-bold text-base text-[#142523]">Pliegos Oficiales y Documentación Descargada</h2>
+</div>
+<span class="text-xs text-gray-500">3 pliegos oficiales disponibles</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Pliego 1: PCAP -->
+<div class="p-4 bg-[#F5F6F1] rounded-lg border border-[#D0D7CF] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<span class="w-10 h-10 rounded bg-[#E8F0FE] text-[#1A73E8] flex items-center justify-center font-bold text-xs shrink-0">PDF</span>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-[#142523]">Pliego de Cláusulas Administrativas Particulares (PCAP)</span>
+<span class="text-[11px] text-gray-500">PDF · 1.8 MB · Ejemplo editable</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 bg-white border border-[#D0D7CF] hover:bg-[#EEF1EC] text-xs font-semibold rounded text-[#142523] flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span>Abrir visor</span>
+</button>
+<button class="px-3 py-1.5 bg-white border border-[#D0D7CF] hover:bg-[#EEF1EC] text-xs font-semibold rounded text-[#142523] flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]">menu_book</span>
+<span>Ver fuente</span>
+</button>
+</div>
+</div>
+<!-- Pliego 2: PPT -->
+<div class="p-4 bg-[#F5F6F1] rounded-lg border border-[#D0D7CF] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<span class="w-10 h-10 rounded bg-[#E8F0FE] text-[#1A73E8] flex items-center justify-center font-bold text-xs shrink-0">PDF</span>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-[#142523]">Pliego de Prescripciones Técnicas (PPT)</span>
+<span class="text-[11px] text-gray-500">PDF · 2.4 MB · Ejemplo editable</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 bg-white border border-[#D0D7CF] hover:bg-[#EEF1EC] text-xs font-semibold rounded text-[#142523] flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span>Abrir visor</span>
+</button>
+<button class="px-3 py-1.5 bg-white border border-[#D0D7CF] hover:bg-[#EEF1EC] text-xs font-semibold rounded text-[#142523] flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]">menu_book</span>
+<span>Ver fuente</span>
+</button>
+</div>
+</div>
+<!-- Pliego 3: Anexo I -->
+<div class="p-4 bg-[#F5F6F1] rounded-lg border border-[#D0D7CF] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<span class="w-10 h-10 rounded bg-[#E6F4EA] text-[#137333] flex items-center justify-center font-bold text-xs shrink-0">DOCX</span>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-[#142523]">Anexo I - Modelo de proposición económica y DEUC</span>
+<span class="text-[11px] text-gray-500">Documento editable · Formato Word</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 bg-white border border-[#D0D7CF] hover:bg-[#EEF1EC] text-xs font-semibold rounded text-[#142523] flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span>Descargar plantilla</span>
+</button>
+<button class="px-3 py-1.5 bg-white border border-[#D0D7CF] hover:bg-[#EEF1EC] text-xs font-semibold rounded text-[#142523] flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px]">menu_book</span>
+<span>Ver fuente</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 6. CONTENIDO DE LA PESTAÑA: DECISIÓN -->
+<div class="tab-panel hidden flex flex-col gap-4" id="tab-decision">
+<div class="bg-white rounded-xl border border-[#D0D7CF] p-5 shadow-sm flex flex-col gap-4">
+<div class="flex items-center justify-between pb-3 border-b border-[#EEF1EC]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#2D5A4C]">gavel</span>
+<h2 class="font-bold text-base text-[#142523]">Matriz de Decisión y Análisis de Oportunidad</h2>
+</div>
+<span class="text-xs text-gray-500 font-medium">Evaluación cualitativa transparente (sin scores opacos)</span>
+</div>
+<!-- Selector destacado y accesible: GO / REVISAR / NO-GO -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<!-- GO -->
+<div class="cursor-pointer p-4 rounded-xl border border-[#D0D7CF] bg-[#F5F6F1] hover:bg-white transition-all text-center flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-[#137333] text-[28px]">check_circle</span>
+<span class="font-bold text-sm text-[#142523]">GO</span>
+<span class="text-[11px] text-gray-500">Presentar oferta con garantías</span>
+</div>
+<!-- REVISAR (Selected) -->
+<div class="p-4 rounded-xl border-2 border-[#9A6208] bg-[#FEF6E7] text-center flex flex-col items-center gap-1 shadow-sm relative">
+<span class="absolute top-2 right-2 px-1.5 py-0.2 rounded bg-[#9A6208] text-white text-[9px] font-bold uppercase">Activo</span>
+<span class="material-symbols-outlined text-[#9A6208] text-[28px]">hourglass_top</span>
+<span class="font-bold text-sm text-[#9A6208]">REVISAR</span>
+<span class="text-[11px] text-[#9A6208]/80 font-medium">Pendiente de comprobación clave</span>
+</div>
+<!-- NO-GO -->
+<div class="cursor-pointer p-4 rounded-xl border border-[#D0D7CF] bg-[#F5F6F1] hover:bg-white transition-all text-center flex flex-col items-center gap-1">
+<span class="material-symbols-outlined text-[#9C2A2A] text-[28px]">cancel</span>
+<span class="font-bold text-sm text-[#142523]">NO-GO</span>
+<span class="text-[11px] text-gray-500">Descartar y archivar</span>
+</div>
+</div>
+<!-- Tres bloques explicativos diáfanos -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-2">
+<!-- Por qué sube -->
+<div class="p-3.5 bg-[#F8FCF9] border border-[#CEEAD6] rounded-lg flex flex-col gap-1.5">
+<span class="text-xs font-bold text-[#137333] flex items-center gap-1 uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+                    Por qué sube (Ventajas y encaje)
+                  </span>
+<p class="text-xs text-gray-700 leading-relaxed">
+                    Cercanía geográfica, equipo con experiencia previa acreditada y precio dentro del umbral rentable estándar con escáner disponible.
+                  </p>
+</div>
+<!-- Por qué baja -->
+<div class="p-3.5 bg-[#FDF8F8] border border-[#FAD2CF] rounded-lg flex flex-col gap-1.5">
+<span class="text-xs font-bold text-[#9C2A2A] flex items-center gap-1 uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+                    Por qué baja (Riesgos e incertidumbres)
+                  </span>
+<p class="text-xs text-gray-700 leading-relaxed">
+                    El pliego exige firma estricta en plantilla municipal de certificados (no bastan facturas solas); penalización severa por retrasos.
+                  </p>
+</div>
+<!-- Qué falta para decidir -->
+<div class="p-3.5 bg-[#FFFDF8] border border-[#FDE6B8] rounded-lg flex flex-col gap-1.5">
+<span class="text-xs font-bold text-[#9A6208] flex items-center gap-1 uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px]">flag</span>
+                    Qué falta para decidir
+                  </span>
+<p class="text-xs text-gray-700 leading-relaxed">
+                    Validación del segundo certificado de archivo municipal antes del viernes para asegurar los 50.000 € mínimos de solvencia técnica.
+                  </p>
+</div>
+</div>
+<!-- Matriz de factores cualitativos -->
+<div class="mt-2 flex flex-col gap-2">
+<span class="text-xs font-bold uppercase tracking-wider text-gray-500">Matriz de Factores Cualitativos</span>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 text-xs">
+<div class="p-2.5 bg-[#F5F6F1] rounded border border-[#D0D7CF]/60 flex items-center justify-between">
+<span class="text-gray-600 font-medium">Encaje con empresa</span>
+<span class="font-bold text-[#137333]">Alto (Core business)</span>
+</div>
+<div class="p-2.5 bg-[#F5F6F1] rounded border border-[#D0D7CF]/60 flex items-center justify-between">
+<span class="text-gray-600 font-medium">Importe</span>
+<span class="font-bold text-[#142523]">80.000 € (Rentable)</span>
+</div>
+<div class="p-2.5 bg-[#F5F6F1] rounded border border-[#D0D7CF]/60 flex items-center justify-between">
+<span class="text-gray-600 font-medium">Plazo de preparación</span>
+<span class="font-bold text-[#137333]">12 días (Suficiente)</span>
+</div>
+<div class="p-2.5 bg-[#F5F6F1] rounded border border-[#D0D7CF]/60 flex items-center justify-between">
+<span class="text-gray-600 font-medium">Solvencia</span>
+<span class="font-bold text-[#9A6208]">En verificación (60%)</span>
+</div>
+<div class="p-2.5 bg-[#F5F6F1] rounded border border-[#D0D7CF]/60 flex items-center justify-between">
+<span class="text-gray-600 font-medium">Evidencias disponibles</span>
+<span class="font-bold text-[#9A6208]">3 de 5 cerradas</span>
+</div>
+<div class="p-2.5 bg-[#F5F6F1] rounded border border-[#D0D7CF]/60 flex items-center justify-between">
+<span class="text-gray-600 font-medium">Riesgo documental</span>
+<span class="font-bold text-[#137333]">Bajo (LCSP estándar)</span>
+</div>
+</div>
+</div>
+<!-- Botón principal de confirmación -->
+<div class="pt-3 border-t border-[#EEF1EC] flex justify-end">
+<button class="px-4 py-2 bg-[#2D5A4C] text-white text-xs font-bold rounded-lg hover:bg-[#1E3E34] transition-colors flex items-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Confirmar decisión y notificar al equipo</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 7. CONTENIDO DE LA PESTAÑA: TAREAS -->
+<div class="tab-panel hidden flex flex-col gap-4" id="tab-tareas">
+<div class="bg-white rounded-xl border border-[#D0D7CF] p-5 shadow-sm">
+<div class="flex items-center justify-between pb-3 border-b border-[#EEF1EC] mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#2D5A4C]">check_box</span>
+<h2 class="font-bold text-base text-[#142523]">Tareas Asignadas al Expediente</h2>
+</div>
+<button class="px-3 py-1.5 bg-[#2D5A4C] text-white text-xs font-semibold rounded-lg hover:bg-[#1E3E34] transition-colors flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span>+ Crear tarea</span>
+</button>
+</div>
+<!-- Lista de tareas -->
+<div class="flex flex-col gap-3">
+<!-- Tarea 1 -->
+<div class="p-4 bg-[#F5F6F1] rounded-lg border border-[#D0D7CF] flex flex-col gap-2">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+<div class="flex flex-col">
+<h3 class="text-xs font-bold text-[#142523] leading-snug">
+                        Solicitar certificado de buena ejecución al Archivo Histórico de Alcalá por importe de 24.500 €
+                      </h3>
+<span class="text-[11px] text-gray-500 font-medium mt-0.5">
+                        Vinculado a: <strong class="text-gray-700">Req. 1.1 Solvencia técnica</strong>
+</span>
+</div>
+<span class="shrink-0 px-2 py-0.5 rounded bg-[#E8F0FE] text-[#1A73E8] font-bold text-[11px] uppercase">
+                      En curso
+                    </span>
+</div>
+<p class="text-xs text-gray-600 bg-white p-2 rounded border border-[#D0D7CF]/60">
+<strong class="text-gray-700">Motivo de la tarea:</strong> Cubrir el importe mínimo acumulado de 50.000 € para superar el filtro excluyente de solvencia.
+                  </p>
+<div class="flex items-center justify-between pt-1 text-xs text-gray-500">
+<div class="flex items-center gap-2">
+<div class="w-5 h-5 rounded-full bg-[#142523] text-white flex items-center justify-center text-[10px] font-bold">
+                        CR
+                      </div>
+<span class="text-gray-700 font-semibold">Carlos R.</span>
+</div>
+<span class="text-[#9C2A2A] font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">event</span>
+                      Límite: en 48h
+                    </span>
+</div>
+</div>
+<!-- Tarea 2 -->
+<div class="p-4 bg-[#F5F6F1] rounded-lg border border-[#D0D7CF] flex flex-col gap-2">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-2">
+<div class="flex flex-col">
+<h3 class="text-xs font-bold text-[#142523] leading-snug">
+                        Verificar si el escáner Bookeye cumple la norma UNE-EN ISO 19264-1 exigida en PPT
+                      </h3>
+<span class="text-[11px] text-gray-500 font-medium mt-0.5">
+                        Vinculado a: <strong class="text-gray-700">Req. 1.2 Medios materiales</strong>
+</span>
+</div>
+<span class="shrink-0 px-2 py-0.5 rounded bg-[#FEF6E7] text-[#9A6208] font-bold text-[11px] uppercase">
+                      Pendiente
+                    </span>
+</div>
+<p class="text-xs text-gray-600 bg-white p-2 rounded border border-[#D0D7CF]/60">
+<strong class="text-gray-700">Motivo de la tarea:</strong> Cláusula técnica excluyente del PPT que exige certificación explícita de calidad de imagen histórica.
+                  </p>
+<div class="flex items-center justify-between pt-1 text-xs text-gray-500">
+<div class="flex items-center gap-2">
+<div class="w-5 h-5 rounded-full bg-[#2D5A4C] text-white flex items-center justify-center text-[10px] font-bold">
+                        LM
+                      </div>
+<span class="text-gray-700 font-semibold">Laura M.</span>
+</div>
+<span class="text-[#9A6208] font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">event</span>
+                      Límite: Mañana 12:00h
+                    </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 8. CONTENIDO DE LA PESTAÑA: HISTORIAL -->
+<div class="tab-panel hidden flex flex-col gap-4" id="tab-historial">
+<div class="bg-white rounded-xl border border-[#D0D7CF] p-5 shadow-sm">
+<div class="flex items-center justify-between pb-3 border-b border-[#EEF1EC] mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#2D5A4C]">history</span>
+<h2 class="font-bold text-base text-[#142523]">Historial de Actividad del Equipo</h2>
+</div>
+<span class="text-xs text-gray-500">Línea temporal de trabajo colaborativo</span>
+</div>
+<!-- Timeline -->
+<div class="relative pl-6 border-l-2 border-[#D0D7CF] flex flex-col gap-6 ml-2 my-2 text-xs">
+<!-- Item 1 -->
+<div class="relative">
+<span class="absolute -left-[31px] top-0.5 w-3 h-3 rounded-full bg-[#137333] border-2 border-white ring-2 ring-[#137333]/20"></span>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-bold text-[#142523]">Hoy 09:30</span>
+<span class="text-gray-400">·</span>
+<span class="font-medium text-gray-600">Laura M.</span>
+</div>
+<p class="text-gray-700 mt-0.5">
+                      Cambió el estado de <strong class="text-gray-800">Req. 1.2</strong> a <span class="px-1.5 py-0.2 rounded bg-[#E6F4EA] text-[#137333] font-semibold">Confirmado en la fuente</span> tras revisar la ficha técnica del escáner.
+                    </p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="relative">
+<span class="absolute -left-[31px] top-0.5 w-3 h-3 rounded-full bg-[#1A73E8] border-2 border-white ring-2 ring-[#1A73E8]/20"></span>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-bold text-[#142523]">Ayer 16:45</span>
+<span class="text-gray-400">·</span>
+<span class="font-medium text-gray-600">Carlos R.</span>
+</div>
+<p class="text-gray-700 mt-0.5">
+                      Vinculó documento de solvencia económica (<strong class="text-gray-800">Cuentas anuales 2023</strong>) al expediente.
+                    </p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="relative">
+<span class="absolute -left-[31px] top-0.5 w-3 h-3 rounded-full bg-[#9A6208] border-2 border-white ring-2 ring-[#9A6208]/20"></span>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-bold text-[#142523]">Hace 2 días</span>
+<span class="text-gray-400">·</span>
+<span class="font-medium text-gray-600">Laura M.</span>
+</div>
+<p class="text-gray-700 mt-0.5">
+                      Expediente creado desde el triaje de oportunidades por Laura M. con estado inicial <span class="px-1.5 py-0.2 rounded bg-[#FEF6E7] text-[#9A6208] font-bold">REVISAR</span>.
+                    </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Vanilla JS: Sistema interactivo para cambiar de pestañas, filtrar requisitos y alternar acordeones -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Manejo de Pestañas
+      const tabButtons = document.querySelectorAll('.tab-btn');
+      const tabPanels = document.querySelectorAll('.tab-panel');
+
+      tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const target = btn.getAttribute('data-target');
+
+          // Reset botón estilos
+          tabButtons.forEach(b => {
+            b.classList.remove('bg-[#142523]', 'text-white', 'font-bold');
+            b.classList.add('font-medium', 'text-gray-600');
+          });
+
+          // Activar botón actual
+          btn.classList.remove('font-medium', 'text-gray-600');
+          btn.classList.add('bg-[#142523]', 'text-white', 'font-bold');
+
+          // Alternar paneles
+          tabPanels.forEach(panel => {
+            if (panel.id === target) {
+              panel.classList.remove('hidden');
+            } else {
+              panel.classList.add('hidden');
+            }
+          });
+        });
+      });
+
+      // 2. Acordeones plegables en Requisitos
+      const accordionToggles = document.querySelectorAll('.accordion-toggle');
+      accordionToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+          const content = toggle.nextElementSibling;
+          const chevron = toggle.querySelector('.accordion-chevron');
+          if (content.classList.contains('hidden')) {
+            content.classList.remove('hidden');
+            chevron.style.transform = 'rotate(0deg)';
+          } else {
+            content.classList.add('hidden');
+            chevron.style.transform = 'rotate(-90deg)';
+          }
+        });
+      });
+
+      // 3. Filtros rápidos de requisitos
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const reqItems = document.querySelectorAll('.req-item');
+      const searchInput = document.getElementById('req-search-input');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => {
+            b.classList.remove('active', 'bg-[#142523]', 'text-white', 'font-bold');
+            b.classList.add('font-medium', 'text-gray-600', 'bg-[#EEF1EC]');
+          });
+
+          btn.classList.add('active', 'bg-[#142523]', 'text-white', 'font-bold');
+          btn.classList.remove('font-medium', 'text-gray-600', 'bg-[#EEF1EC]');
+
+          const filter = btn.getAttribute('data-filter');
+          applyFilter(filter, searchInput.value.toLowerCase());
+        });
+      });
+
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const activeFilter = document.querySelector('.filter-btn.active')?.getAttribute('data-filter') || 'all';
+          applyFilter(activeFilter, e.target.value.toLowerCase());
+        });
+      }
+
+      function applyFilter(filter, query) {
+        reqItems.forEach(item => {
+          const status = item.getAttribute('data-status');
+          const text = item.textContent.toLowerCase();
+
+          const matchesFilter = (filter === 'all' || status === filter);
+          const matchesQuery = !query || text.includes(query);
+
+          if (matchesFilter && matchesQuery) {
+            item.style.display = 'flex';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      }
+    });
+  </script>
+</body></html>
