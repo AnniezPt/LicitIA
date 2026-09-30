@@ -132,7 +132,7 @@ function renderMetrics() {
 function renderList() {
   const visible = visibleOpportunities();
   listElement.innerHTML = visible.length ? visible.map((item) => `
-    <article class="opportunity-card ${item.id === selectedId ? "selected" : ""}" data-id="${item.id}" tabindex="0" role="button" aria-label="Abrir ${escapeHtml(item.title)}">
+    <article class="opportunity-card decision-${decisionClass(item.decision)} ${item.id === selectedId ? "selected" : ""}" data-id="${item.id}" tabindex="0" role="button" aria-label="Abrir ${escapeHtml(item.title)}">
       <div class="card-topline"><span class="card-sector">${escapeHtml(item.sector)}</span><span class="decision-pill ${decisionClass(item.decision)}">${escapeHtml(item.decision)}</span></div>
       <h3>${escapeHtml(item.title)}</h3>
       <p class="card-organization">${escapeHtml(item.organization)}</p>
