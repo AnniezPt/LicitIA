@@ -84,6 +84,7 @@ h1, h2, h3, p { margin-top: 0; }
 .button-outline:hover { background: var(--surface-subtle); }
 
 .intro-section { display: flex; justify-content: space-between; gap: 30px; padding: 42px 0 30px; }
+.dashboard-section[hidden] { display: none !important; }
 .eyebrow { color: var(--brand); font-size: 10px; font-weight: 700; letter-spacing: .11em; margin: 0 0 12px; text-transform: uppercase; }
 .eyebrow-line { display: inline-block; width: 25px; height: 1px; vertical-align: middle; margin: 0 8px; background: currentColor; opacity: .7; }
 .eyebrow-muted { color: var(--ink-muted); margin-bottom: 8px; }
@@ -214,6 +215,35 @@ h1 { font-size: clamp(30px, 4vw, 46px); font-weight: 700; letter-spacing: -.055e
 .timeline-item p { color: var(--ink-muted); font-size: 9px; margin: 0; }
 .detail-note { color: var(--ink-muted); border-top: 1px solid var(--line-soft); padding-top: 11px; margin: 15px 0 0; font-size: 9px; line-height: 1.45; }
 
+.route-view { padding: 42px 0 20px; min-height: 610px; }
+.route-view[hidden] { display: none; }
+.route-header { max-width: 650px; margin-bottom: 28px; }
+.route-header h1 { margin-bottom: 12px; }
+.route-intro { color: var(--ink-soft); font-size: 13px; line-height: 1.55; margin: 0; }
+.route-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; max-width: 900px; }
+.route-card, .route-note { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 20px; }
+.route-card { display: grid; gap: 8px; align-content: start; min-height: 150px; }
+.route-card-accent { border-top: 3px solid var(--lime); }
+.route-card > span, .route-note > span { color: var(--ink-muted); font-size: 9px; font-weight: 700; letter-spacing: .1em; }
+.route-card strong { font-size: 15px; line-height: 1.35; letter-spacing: -.025em; }
+.route-card p, .route-note p { color: var(--ink-soft); font-size: 10px; line-height: 1.5; margin: 0; }
+.route-card a { color: var(--brand); font-size: 10px; font-weight: 700; text-decoration: none; }
+.route-progress { height: 6px; background: var(--surface-subtle); border-radius: 999px; overflow: hidden; margin: 3px 0 2px; }
+.route-progress i { display: block; width: 84%; height: 100%; background: var(--brand); border-radius: inherit; }
+.route-list { display: grid; gap: 7px; max-width: 900px; }
+.route-list-row { width: 100%; display: flex; align-items: center; gap: 12px; text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 12px; color: var(--ink); }
+.route-list-row:hover { border-color: var(--brand); box-shadow: var(--shadow); }
+.route-list-row > span:nth-child(2) { display: grid; gap: 4px; min-width: 0; flex: 1; }
+.route-list-row strong { font-size: 11px; }
+.route-list-row small { color: var(--ink-muted); font-size: 9px; }
+.route-list-status { flex: 0 0 auto; }
+.route-arrow { color: var(--brand); font-size: 18px; }
+.task-route-row { min-height: 60px; }
+.route-note { max-width: 900px; margin-bottom: 9px; }
+.route-note h3 { font-size: 16px; letter-spacing: -.035em; margin: 8px 0; }
+.route-note small { color: var(--ink-muted); font-size: 9px; }
+.route-card .button { justify-self: start; margin-top: 4px; }
+
 .app-footer { display: flex; justify-content: space-between; gap: 20px; color: var(--ink-muted); font-size: 9px; border-top: 1px solid var(--line); padding-top: 14px; margin-top: 35px; }
 .app-footer strong { color: var(--ink-soft); }
 .modal { position: fixed; inset: 0; display: grid; place-items: center; padding: 15px; background: rgba(20, 37, 35, .58); backdrop-filter: blur(2px); z-index: 20; }
@@ -264,6 +294,8 @@ h1 { font-size: clamp(30px, 4vw, 46px); font-weight: 700; letter-spacing: -.055e
   .detail-tab { white-space: nowrap; }
   .summary-grid, .decision-columns { grid-template-columns: 1fr; }
   .summary-cell.summary-wide { grid-column: auto; }
+  .route-view { padding: 34px 0 20px; }
+  .route-grid { grid-template-columns: 1fr; }
   .app-footer { display: block; line-height: 1.5; }
   .app-footer span { display: block; }
   .app-footer span + span { margin-top: 5px; }

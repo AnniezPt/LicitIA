@@ -77,6 +77,9 @@ let searchQuery = "";
 const listElement = document.querySelector("#opportunityList");
 const detailElement = document.querySelector("#detailPanel");
 const toastElement = document.querySelector("#toast");
+const routeElement = document.querySelector("#routeView");
+const dashboardSections = document.querySelectorAll(".dashboard-section");
+const breadcrumbElement = document.querySelector(".breadcrumbs strong");
 
 function loadOpportunities() {
   try {
@@ -237,6 +240,69 @@ function render() {
   renderList();
   renderDetail();
   document.querySelectorAll(".filter").forEach((button) => button.classList.toggle("active", button.dataset.filter === activeFilter));
+  renderRoute();
+}
+
+function currentRoute() {
+  const route = window.location.hash.replace("#", "");
+  return ["hoy", "oportunidades", "expedientes", "tareas", "empresa", "pruebas", "ajustes"].includes(route) ? route : "oportunidades";
+}
+
+function renderRoute() {
+  const route = currentRoute();
+  const breadcrumbLabels = { hoy: "Hoy", oportunidades: "Oportunidades", expedientes: "Expedientes", tareas: "Tareas", empresa: "Mi empresa", pruebas: "Notas de prueba", ajustes: "Ajustes" };
+  if (breadcrumbElement) breadcrumbElement.textContent = breadcrumbLabels[route];
+  dashboardSections.forEach((section) => { section.hidden = route !== "oportunidades"; });
+  routeElement.hidden = route === "oportunidades";
+  document.querySelectorAll(".nav-item[data-route]").forEach((item) => item.classList.toggle("active", item.dataset.route === route));
+  if (route === "oportunidades") return;
+
+  const selected = opportunities.find((item) => item.id === selectedId) || opportunities[0];
+  const routeData = {
+    hoy: {
+      eyebrow: "Espacio de trabajo · Hoy",
+      title: "Lo que necesita tu atención",
+      intro: "Una vista breve para empezar por lo que puede cambiar una decisión hoy.",
+      body: `<div class="route-grid"><article class="route-card route-card-accent"><span>REVISAR PRIMERO</span><strong>${escapeHtml(selected?.title || "Sin oportunidades")}</strong><p>${escapeHtml(selected?.nextStep || "Añade una oportunidad para empezar.")}</p><a href="#oportunidades">Abrir ficha →</a></article><article class="route-card"><span>RESUMEN</span><strong>${opportunities.filter((item) => item.decision === "REVISAR").length} oportunidades por revisar</strong><p>Empieza por las que tienen requisitos o evidencias pendientes.</p><a href="#oportunidades">Ver oportunidades →</a></article></div>`
+    },
+    expedientes: {
+      eyebrow: "Espacio de trabajo · Expedientes",
+      title: "Expedientes de prueba",
+      intro: "Casos locales que estamos usando para comprobar la búsqueda y la decisión.",
+      body: `<div class="route-list">${opportunities.map((item) => `<button class="route-list-row" data-open-opportunity="${escapeAttribute(item.id)}" type="button"><span class="route-list-status decision-pill ${decisionClass(item.decision)}">${escapeHtml(item.decision)}</span><span><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml(item.organization)} · ${escapeHtml(item.amount)}</small></span><span class="route-arrow">→</span></button>`).join("")}</div>`
+    },
+    tareas: {
+      eyebrow: "Espacio de trabajo · Tareas",
+      title: "Tareas pendientes",
+      intro: "Acciones que deben cerrar una duda antes de convertir REVISAR en GO o NO-GO.",
+      body: `<div class="route-list"><div class="route-list-row task-route-row"><span class="task-state task-state-review">En curso</span><span><strong>${escapeHtml(selected?.nextStep || "Seleccionar una oportunidad")}</strong><small>${escapeHtml(selected?.nextDate || "Fecha por confirmar")}</small></span></div><div class="route-list-row task-route-row"><span class="task-state task-state-pending">Pendiente</span><span><strong>Asociar evidencia a cada requisito decisivo</strong><small>Responsable por asignar · Fecha por confirmar</small></span></div></div>`
+    },
+    empresa: {
+      eyebrow: "Espacio de trabajo · Mi empresa",
+      title: "Perfil de empresa",
+      intro: "La ficha que permitirá contrastar una oportunidad con capacidades, solvencia y proximidad.",
+      body: `<div class="route-grid"><article class="route-card"><span>ESTADO DEL PERFIL</span><strong>84% preparado · ejemplo local</strong><div class="route-progress"><i></i></div><p>Aún no se conecta ninguna cuenta ni documento real.</p></article><article class="route-card"><span>PRÓXIMO PASO</span><strong>Definir capacidades y evidencias</strong><p>En la siguiente iteración añadiremos sectores, experiencia, medios, solvencia económica y área geográfica.</p></article></div>`
+    },
+    pruebas: {
+      eyebrow: "Espacio de trabajo · Notas de prueba",
+      title: "Notas del benchmark",
+      intro: "Lugar para registrar qué hemos probado, qué ha fallado y qué debe cambiar.",
+      body: `<div class="route-note"><span>NOTA ACTIVA</span><h3>La decisión debe poder explicarse</h3><p>Separar siempre el hecho del pliego, la evidencia de la empresa y la duda pendiente. Esta regla guía la búsqueda y las pestañas del expediente.</p><small>Guardado local · No se publica ni se envía a ningún servidor.</small></div><div class="route-note"><span>PENDIENTE</span><h3>Conectar casos reales</h3><p>Usar el benchmark de búsqueda para comparar resultados, falsos positivos y requisitos que el primer MVP no encuentra.</p></div>`
+    },
+    ajustes: {
+      eyebrow: "Espacio de trabajo · Ajustes",
+      title: "Ajustes del prototipo",
+      intro: "Controles básicos de esta versión local.",
+      body: `<div class="route-grid"><article class="route-card"><span>ALMACENAMIENTO</span><strong>Datos guardados en este navegador</strong><p>Esta beta utiliza localStorage. No hay usuarios ni sincronización todavía.</p><button class="button button-outline" data-route-reset type="button">Restaurar ejemplos</button></article><article class="route-card"><span>IDENTIDAD</span><strong>Pliego Claro · nombre de trabajo</strong><p>El repositorio y la pantalla original de Stitch se mantienen separados.</p></article></div>`
+    }
+  }[route];
+  routeElement.innerHTML = `<div class="route-header"><p class="eyebrow">${routeData.eyebrow}</p><h1>${routeData.title}</h1><p class="route-intro">${routeData.intro}</p></div>${routeData.body}`;
+  routeElement.querySelectorAll("[data-open-opportunity]").forEach((button) => button.addEventListener("click", () => {
+    selectedId = button.dataset.openOpportunity;
+    activeDetailTab = "summary";
+    window.location.hash = "oportunidades";
+  }));
+  routeElement.querySelector("[data-route-reset]")?.addEventListener("click", () => document.querySelector("#resetDemo").click());
 }
 
 function selectOpportunity(id) {
@@ -255,6 +321,8 @@ document.querySelectorAll(".filter").forEach((button) => button.addEventListener
   activeFilter = button.dataset.filter;
   render();
 }));
+
+window.addEventListener("hashchange", renderRoute);
 
 document.querySelector("#globalSearch")?.addEventListener("input", (event) => {
   searchQuery = event.target.value.trim();

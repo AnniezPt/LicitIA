@@ -50,6 +50,7 @@ La integración actual traslada al MVP la navegación de espacio de trabajo, la 
 - [x] Alta manual de oportunidades.
 - [x] Primera integración visual y estructural basada en Stitch.
 - [x] Búsqueda local de oportunidades y pestañas del expediente.
+- [x] Vistas internas funcionales para Hoy, Expedientes, Tareas, Mi empresa, Notas de prueba y Ajustes.
 - [ ] Validación con llamadas reales.
 - [ ] Nombre e identidad definitivos.
 - [ ] Backend y usuarios.

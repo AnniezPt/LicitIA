@@ -25,13 +25,13 @@
 
         <nav class="nav-list">
           <span class="nav-heading">Espacio de trabajo</span>
-          <a class="nav-item" href="#hoy"><span class="nav-icon">⌂</span>Hoy <span class="nav-count">3</span></a>
-          <a class="nav-item active" href="#oportunidades"><span class="nav-icon">◈</span>Oportunidades</a>
-          <a class="nav-item" href="#expedientes"><span class="nav-icon">□</span>Expedientes</a>
-          <a class="nav-item" href="#tareas"><span class="nav-icon">✓</span>Tareas <span class="nav-count nav-count-muted">4</span></a>
-          <a class="nav-item" href="#empresa"><span class="nav-icon">○</span>Mi empresa</a>
-          <a class="nav-item" href="#pruebas"><span class="nav-icon">✦</span>Notas de prueba</a>
-          <a class="nav-item" href="#ajustes"><span class="nav-icon">⚙</span>Ajustes</a>
+          <a class="nav-item" data-route="hoy" href="#hoy"><span class="nav-icon">⌂</span>Hoy <span class="nav-count">3</span></a>
+          <a class="nav-item active" data-route="oportunidades" href="#oportunidades"><span class="nav-icon">◈</span>Oportunidades</a>
+          <a class="nav-item" data-route="expedientes" href="#expedientes"><span class="nav-icon">□</span>Expedientes</a>
+          <a class="nav-item" data-route="tareas" href="#tareas"><span class="nav-icon">✓</span>Tareas <span class="nav-count nav-count-muted">4</span></a>
+          <a class="nav-item" data-route="empresa" href="#empresa"><span class="nav-icon">○</span>Mi empresa</a>
+          <a class="nav-item" data-route="pruebas" href="#pruebas"><span class="nav-icon">✦</span>Notas de prueba</a>
+          <a class="nav-item" data-route="ajustes" href="#ajustes"><span class="nav-icon">⚙</span>Ajustes</a>
         </nav>
 
         <div class="sidebar-bottom">
@@ -59,7 +59,7 @@
           </div>
         </header>
 
-        <section class="intro-section" aria-labelledby="pageTitle">
+        <section class="intro-section dashboard-section" aria-labelledby="pageTitle">
           <div>
             <p class="eyebrow">Pliego Claro <span class="eyebrow-line"></span> MVP · datos locales</p>
             <h1 id="pageTitle">Decidir antes de preparar.</h1>
@@ -72,7 +72,7 @@
           </div>
         </section>
 
-        <section class="metrics" aria-label="Resumen de oportunidades">
+        <section class="metrics dashboard-section" aria-label="Resumen de oportunidades">
           <article class="metric-card metric-primary">
             <span class="metric-label">Para revisar</span>
             <strong id="metricReview">0</strong>
@@ -95,7 +95,7 @@
           </article>
         </section>
 
-        <section class="workspace" id="oportunidades">
+        <section class="workspace dashboard-section" id="oportunidades">
           <div class="list-column">
             <div class="section-heading">
               <div>
@@ -121,6 +121,8 @@
             </div>
           </article>
         </section>
+
+        <section class="route-view" id="routeView" hidden aria-live="polite"></section>
 
         <footer class="app-footer">
           <span><strong>Pliego Claro</strong> es un prototipo de prueba.</span>
