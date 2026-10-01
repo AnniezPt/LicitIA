@@ -92,3 +92,16 @@ Probar tres sesiones cortas con una oportunidad real en cada una:
 6. registrar en `Notas de prueba` qué ha sido confuso.
 
 No mediremos solo si la pantalla gusta. Mediremos si la persona encuentra el bloqueo, entiende la evidencia que falta y termina con una acción concreta.
+
+## Control de calidad posterior — 1 de octubre de 2026
+
+Se corrigieron problemas detectados al revisar la beta con datos guardados:
+
+- progreso lateral fijo del perfil sustituido por progreso calculado;
+- fecha antigua en el resumen de la ficha sustituida por la fecha exacta disponible;
+- contador de oportunidades actualizado al filtrar o buscar;
+- preferencias de visibilidad de etiquetas aplicadas a la ficha;
+- enlaces de fuente vacíos tratados como “pendiente”, sin navegación falsa;
+- búsqueda global llevada a Oportunidades cuando se utiliza desde otra ruta;
+- importación local validada para evitar oportunidades o enlaces mal formados;
+- versión de recursos cambiada para que el navegador no conserve una interfaz antigua en caché.

@@ -133,7 +133,7 @@ function loadOpportunities() {
     if (!Array.isArray(saved) || !saved.length) return structuredClone(seedOpportunities);
     return saved.map((item) => {
       const seed = seedOpportunities.find((entry) => entry.id === item.id);
-      return { ...(seed || {}), ...item, requirements: Array.isArray(item.requirements) ? item.requirements : structuredClone(seed?.requirements || []), deadlineDate: item.deadlineDate ?? seed?.deadlineDate ?? null, nextStepDone: item.nextStepDone ?? false };
+      return { ...(seed || {}), ...item, source: safeHttpUrl(item.source), requirements: Array.isArray(item.requirements) ? item.requirements : structuredClone(seed?.requirements || []), deadlineDate: item.deadlineDate ?? seed?.deadlineDate ?? null, nextStepDone: item.nextStepDone ?? false };
     });
   } catch (error) {
     return structuredClone(seedOpportunities);
@@ -216,6 +216,14 @@ function deadlineLabel(item) {
   if (days < 0) return `Cerró el ${formatDate(date)}`;
   if (days === 0) return `Cierra hoy · ${formatDate(date)}`;
   return `Cierra el ${formatDate(date)} · ${days} días`;
+}
+
+function deadlineCompactLabel(item) {
+  const date = getDeadlineDate(item);
+  const days = daysUntil(date);
+  if (!date) return item.deadline || "Fecha por confirmar";
+  if (days < 0) return `Cerró · ${formatDate(date)}`;
+  return `${formatDate(date)} · ${days} días`;
 }
 
 function upcomingOpportunities() {
@@ -327,6 +335,7 @@ function visibleOpportunities() {
 function renderMetrics() {
   const openTasks = allTasks().filter((task) => task.status === "pending" || task.status === "in_progress");
   const upcoming = upcomingOpportunities();
+  const profile = profileCompletion();
   document.querySelector("#metricReview").textContent = opportunities.filter((item) => item.decision === "REVISAR").length;
   document.querySelector("#metricGo").textContent = opportunities.filter((item) => item.decision === "GO").length;
   document.querySelector("#metricNoGo").textContent = opportunities.filter((item) => item.decision === "NO-GO").length;
@@ -334,17 +343,22 @@ function renderMetrics() {
   document.querySelector("#opportunityCount").textContent = `${opportunities.length} ${opportunities.length === 1 ? "caso" : "casos"}`;
   document.querySelector('[data-route-count="hoy"]')?.replaceChildren(document.createTextNode(compactCount(openTasks.length)));
   document.querySelector('[data-route-count="tareas"]')?.replaceChildren(document.createTextNode(compactCount(openTasks.length)));
+  document.querySelector("[data-workspace-name]")?.replaceChildren(document.createTextNode(settings.workspaceName || "Mi empresa"));
+  const profileProgress = document.querySelector("[data-profile-progress]");
+  if (profileProgress) profileProgress.style.width = `${profile.percentage}%`;
   document.documentElement.dataset.density = settings.density;
 }
 
 function renderList() {
   const visible = visibleOpportunities();
+  const countLabel = document.querySelector("#opportunityCount");
+  if (countLabel) countLabel.textContent = visible.length === opportunities.length ? `${opportunities.length} ${opportunities.length === 1 ? "caso" : "casos"}` : `${visible.length} de ${opportunities.length}`;
   listElement.innerHTML = visible.length ? visible.map((item) => `
     <article class="opportunity-card decision-${decisionClass(item.decision)} ${item.id === selectedId ? "selected" : ""}" data-id="${item.id}" tabindex="0" role="button" aria-label="Abrir ${escapeHtml(item.title)}">
       <div class="card-topline"><span class="card-sector">${escapeHtml(item.sector)}</span><span class="decision-pill ${decisionClass(item.decision)}">${escapeHtml(item.decision)}</span></div>
       <h3>${escapeHtml(item.title)}</h3>
       <p class="card-organization">${escapeHtml(item.organization)}</p>
-      <div class="card-meta"><span>Importe <strong>${escapeHtml(item.amount)}</strong></span><span>Cierre <strong>${escapeHtml(deadlineLabel(item))}</strong></span></div>
+      <div class="card-meta"><span>Importe <strong>${escapeHtml(item.amount)}</strong></span><span>Cierre <strong>${escapeHtml(deadlineCompactLabel(item))}</strong></span></div>
     </article>
   `).join("") : `<div class="empty-list"><strong>No hay casos con este filtro.</strong><span>Prueba otra vista o añade una oportunidad.</span></div>`;
 
@@ -364,6 +378,8 @@ function renderDetail() {
   }
   const confirmedCount = item.requirements.filter((req) => req.status === "confirmed").length;
   const statusLabels = { confirmed: "Confirmado en la fuente", pending: "Pendiente de comprobar", unknown: "No encontrado" };
+  const exampleBadge = settings.showExampleLabels ? `<span class="example-label">Datos de ejemplo · editable</span>` : "";
+  const sourceLink = item.source ? `<a class="source-link" href="${escapeAttribute(item.source)}" target="_blank" rel="noreferrer">Abrir ${escapeHtml(item.sourceLabel || "fuente oficial")} ↗</a>` : `<span class="source-link source-link-muted">Fuente pendiente de asociar</span>`;
   const requirementsView = `
     <div class="requirements-view">
       <div class="view-heading"><div><p class="detail-section-title">Control de requisitos</p><h3>Requisitos y evidencias</h3></div><span class="completion-label">${confirmedCount}/${item.requirements.length} claros</span></div>
@@ -377,13 +393,13 @@ function renderDetail() {
               ${item.source ? `<a class="requirement-action" href="${escapeAttribute(item.source)}" target="_blank" rel="noreferrer">Ver fuente ↗</a>` : `<span class="requirement-action requirement-action-muted">Fuente pendiente</span>`}
             </div>`).join("")}
           </div>
-          <a class="source-link" href="${escapeAttribute(item.source)}" target="_blank" rel="noreferrer">Abrir ${escapeHtml(item.sourceLabel)} ↗</a>
+          ${sourceLink}
         </section>
       </div>
     </div>`;
   const summaryView = `
     <div class="summary-view">
-      <div class="view-heading"><div><p class="detail-section-title">Lectura rápida</p><h3>Resumen del expediente</h3></div><span class="example-label">Datos de ejemplo · editable</span></div>
+      <div class="view-heading"><div><p class="detail-section-title">Lectura rápida</p><h3>Resumen del expediente</h3></div>${exampleBadge}</div>
       <div class="summary-grid">
         <div class="summary-cell summary-wide"><span>Qué se compra</span><strong>${escapeHtml(item.summary)}</strong></div>
         <div class="summary-cell"><span>Quién lo compra</span><strong>${escapeHtml(item.organization)}</strong></div>
@@ -395,7 +411,7 @@ function renderDetail() {
       <div class="next-step"><p class="detail-section-title">Siguiente paso inmediato</p><p>${escapeHtml(item.nextStep)}</p><span>${escapeHtml(item.nextDate)}</span></div>
     </div>`;
   const documentsView = `
-    <div class="documents-view"><div class="view-heading"><div><p class="detail-section-title">Documentación</p><h3>Fuentes del expediente</h3></div><span class="example-label">No sincronizado</span></div>
+    <div class="documents-view"><div class="view-heading"><div><p class="detail-section-title">Documentación</p><h3>Fuentes del expediente</h3></div>${settings.showExampleLabels ? `<span class="example-label">No sincronizado</span>` : ""}</div>
       <p class="view-intro">Esta lista es estructural: hasta conectar una fuente oficial, no afirma que los documentos estén descargados o verificados.</p>
       <div class="document-list">${["PCAP · Pliego de cláusulas administrativas", "PPT · Prescripciones técnicas", "Anexos · Modelos y declaraciones"].map((name, index) => `<div class="document-row"><span class="document-icon">${index === 0 ? "PDF" : index === 1 ? "DOC" : "ZIP"}</span><div><strong>${name}</strong><span>Fuente pendiente de asociar · ejemplo editable</span></div>${item.source ? `<a class="document-action" href="${escapeAttribute(item.source)}" target="_blank" rel="noreferrer">Ver fuente ↗</a>` : `<span class="document-action document-action-muted">Pendiente</span>`}</div>`).join("")}</div>
     </div>`;
@@ -418,7 +434,7 @@ function renderDetail() {
   detailElement.innerHTML = `
     <div class="detail-content">
       <div class="detail-topline"><div><span class="detail-eyebrow">Ficha de decisión · ${escapeHtml(item.fit)} encaje</span><h2>${escapeHtml(item.title)}</h2><p class="detail-organization">${escapeHtml(item.organization)} · ${escapeHtml(item.sector)} · <span class="mono">${escapeHtml(item.amount)}</span></p></div><span class="decision-pill ${decisionClass(item.decision)}">${escapeHtml(item.decision)}</span></div>
-      <div class="detail-summary"><div><span>Presupuesto</span><strong>${escapeHtml(item.amount)}</strong></div><div><span>Plazo / estado</span><strong>${escapeHtml(item.deadline)}</strong></div><div><span>Evidencias</span><strong>${confirmedCount}/${item.requirements.length} claras</strong></div></div>
+      <div class="detail-summary"><div><span>Presupuesto</span><strong>${escapeHtml(item.amount)}</strong></div><div><span>Plazo / estado</span><strong>${escapeHtml(deadlineLabel(item))}</strong></div><div><span>Evidencias</span><strong>${confirmedCount}/${item.requirements.length} claras</strong></div></div>
       <nav class="detail-tabs" aria-label="Secciones del expediente">${[["summary","Resumen"],["requirements","Requisitos y evidencias"],["documents","Documentos"],["decision","Decisión"],["tasks","Tareas"],["history","Historial"]].map(([id,label]) => `<button class="detail-tab ${activeDetailTab === id ? "active" : ""}" data-tab="${id}" type="button">${label}${id === "requirements" ? `<small>${item.requirements.length}</small>` : id === "tasks" ? `<small>${taskItems(item).length}</small>` : ""}</button>`).join("")}</nav>
       <div class="detail-tab-panel">${tabViews[activeDetailTab]}</div>
       <p class="detail-note">La información de esta ficha debe contrastarse siempre con el expediente oficial. Los datos visibles están rotulados como ejemplo cuando aún no existe conexión documental.</p>
@@ -640,6 +656,7 @@ function renderRoute() {
   routeElement.querySelectorAll("[data-setting]").forEach((control) => control.addEventListener("change", () => {
     settings[control.dataset.setting] = control.type === "checkbox" ? control.checked : control.value;
     persistSettings();
+    renderMetrics();
     document.documentElement.dataset.density = settings.density;
   }));
   routeElement.querySelector("[data-settings-defaults]")?.addEventListener("click", () => {
@@ -666,8 +683,8 @@ function renderRoute() {
     reader.addEventListener("load", () => {
       try {
         const payload = JSON.parse(String(reader.result));
-        if (!Array.isArray(payload.opportunities)) throw new Error("Formato no reconocido");
-        opportunities = payload.opportunities;
+        if (!Array.isArray(payload.opportunities) || !payload.opportunities.length || payload.opportunities.some((item) => !item || typeof item !== "object" || typeof item.title !== "string" || !Array.isArray(item.requirements))) throw new Error("Formato no reconocido");
+        opportunities = payload.opportunities.map((item) => ({ ...item, source: safeHttpUrl(item.source), requirements: item.requirements.map((requirement) => ({ text: String(requirement.text || "Requisito sin nombre"), source: String(requirement.source || "Fuente pendiente"), status: ["confirmed", "pending", "unknown"].includes(requirement.status) ? requirement.status : "unknown" })) }));
         settings = { ...defaultSettings, ...(payload.settings || {}) };
         selectedId = opportunities[0]?.id;
         localStorage.setItem(STORAGE_KEY, JSON.stringify(opportunities));
@@ -694,6 +711,15 @@ function escapeHtml(value = "") {
 
 function escapeAttribute(value = "") { return escapeHtml(value).replace(/`/g, "&#96;"); }
 
+function safeHttpUrl(value = "") {
+  try {
+    const url = new URL(String(value || "").trim());
+    return ["http:", "https:"].includes(url.protocol) ? url.href : "";
+  } catch (error) {
+    return "";
+  }
+}
+
 document.querySelectorAll(".filter").forEach((button) => button.addEventListener("click", () => {
   activeFilter = button.dataset.filter;
   render();
@@ -703,6 +729,10 @@ window.addEventListener("hashchange", renderRoute);
 
 document.querySelector("#globalSearch")?.addEventListener("input", (event) => {
   searchQuery = event.target.value.trim();
+  if (searchQuery && currentRoute() !== "oportunidades") {
+    window.location.hash = "oportunidades";
+    return;
+  }
   renderList();
 });
 
@@ -741,6 +771,7 @@ document.querySelector("#addForm").addEventListener("submit", (event) => {
   const title = String(formData.get("title") || "").trim();
   if (!title) return;
   const id = `custom-${Date.now()}`;
+  const source = safeHttpUrl(formData.get("source"));
   opportunities.unshift({
     id,
     title,
@@ -751,8 +782,8 @@ document.querySelector("#addForm").addEventListener("submit", (event) => {
     sector: String(formData.get("sector") || "Sin clasificar").trim(),
     decision: settings.defaultDecision === "GO" && settings.strictLCSP ? "REVISAR" : settings.defaultDecision,
     fit: "Por comprobar",
-    source: String(formData.get("source") || "").trim(),
-    sourceLabel: String(formData.get("source") || "").trim() ? "Fuente aportada" : "Fuente pendiente",
+    source,
+    sourceLabel: source ? "Fuente aportada" : "Fuente pendiente",
     summary: "Caso añadido durante una prueba. Completa los requisitos y la fuente después de revisar el expediente.",
     why: ["Todavía no se ha revisado con la ficha.", "Es una oportunidad aportada durante una conversación."],
     nextStep: "Añadir los tres requisitos que más pueden cambiar la decisión.",

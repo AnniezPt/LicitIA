@@ -60,7 +60,7 @@ h1, h2, h3, p { margin-top: 0; }
 .company-summary span { color: var(--ink-muted); font-size: 10px; display: flex; align-items: center; gap: 5px; }
 .note-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--brand); }
 .profile-progress { display: block !important; height: 5px; background: var(--surface-subtle); border-radius: 999px; overflow: hidden; }
-.profile-progress i { display: block; width: 84%; height: 100%; background: var(--brand); border-radius: inherit; }
+.profile-progress i { display: block; width: 0%; height: 100%; background: var(--brand); border-radius: inherit; }
 .text-button { color: var(--ink-muted); font-size: 10px; background: transparent; border: 0; padding: 0; margin-top: 15px; text-decoration: underline; text-underline-offset: 3px; }
 .text-button:hover { color: var(--brand); }
 
@@ -198,6 +198,7 @@ h1 { font-size: clamp(29px, 3.4vw, 40px); font-weight: 700; letter-spacing: -.05
 .requirement-action-muted, .document-action-muted { color: var(--ink-muted); font-weight: 500; }
 .source-link { color: var(--brand); display: inline-flex; margin-top: 10px; font-size: 10px; text-decoration: none; border-bottom: 1px solid #9fc3b5; padding-bottom: 2px; }
 .source-link:hover { border-color: var(--brand); }
+.source-link-muted { color: var(--ink-muted); border-bottom-color: var(--line); }
 .document-list, .task-list { display: grid; gap: 7px; }
 .document-row, .task-row { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line-soft); border-radius: 5px; padding: 10px; }
 .document-icon { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 4px; color: var(--brand); background: var(--surface-subtle); font: 700 8px "JetBrains Mono", monospace; }
@@ -249,7 +250,7 @@ h1 { font-size: clamp(29px, 3.4vw, 40px); font-weight: 700; letter-spacing: -.05
 .route-inline-action { justify-self: start; border: 0; padding: 0; background: transparent; color: var(--brand); font-size: 10px; font-weight: 700; cursor: pointer; }
 .route-inline-action:hover { text-decoration: underline; }
 .route-progress { height: 6px; background: var(--surface-subtle); border-radius: 999px; overflow: hidden; margin: 3px 0 2px; }
-.route-progress i { display: block; width: 84%; height: 100%; background: var(--brand); border-radius: inherit; }
+.route-progress i { display: block; width: 0%; height: 100%; background: var(--brand); border-radius: inherit; }
 .route-list { display: grid; gap: 7px; max-width: 900px; }
 .route-list-row { width: 100%; display: flex; align-items: center; gap: 12px; text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 12px; color: var(--ink); }
 .route-list-row:hover { border-color: var(--brand); box-shadow: var(--shadow); }

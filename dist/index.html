@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=20261001b" />
   </head>
   <body>
     <div class="app-shell">
@@ -36,9 +36,9 @@
 
         <div class="sidebar-bottom">
           <div class="company-summary">
-            <strong>Mi empresa (ejemplo)</strong>
+            <strong data-workspace-name>Mi empresa (ejemplo)</strong>
             <span><i class="note-dot"></i> Datos locales · Modo prueba</span>
-            <span class="profile-progress"><i></i></span>
+            <span class="profile-progress" aria-label="Progreso del perfil"><i data-profile-progress></i></span>
           </div>
           <button class="text-button" id="resetDemo" type="button">Restaurar ejemplos</button>
         </div>
@@ -158,6 +158,6 @@
     </div>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script src="app.js"></script>
+    <script src="app.js?v=20261001b"></script>
   </body>
 </html>
