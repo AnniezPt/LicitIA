@@ -273,6 +273,8 @@ h1 { font-size: clamp(29px, 3.4vw, 40px); font-weight: 700; letter-spacing: -.05
 .task-board-copy { display: grid; gap: 4px; min-width: 0; }
 .task-board-copy strong { font-size: 10px; line-height: 1.35; }
 .task-board-copy span { color: var(--ink-muted); font-size: 9px; line-height: 1.4; }
+.task-board-copy small { color: var(--ink-muted); font-size: 8px; line-height: 1.35; }
+.task-board-copy small b { color: var(--brand); font-weight: 700; }
 .task-state-completed { color: var(--go); background: var(--go-bg); }
 .task-state-blocked { color: var(--no-go); background: var(--no-go-bg); }
 .route-row-action { border: 0; padding: 0; color: var(--brand); background: transparent; font-size: 9px; font-weight: 700; white-space: nowrap; cursor: pointer; }
@@ -281,6 +283,41 @@ h1 { font-size: clamp(29px, 3.4vw, 40px); font-weight: 700; letter-spacing: -.05
 .route-note h3 { font-size: 16px; letter-spacing: -.035em; margin: 8px 0; }
 .route-note small { color: var(--ink-muted); font-size: 9px; }
 .route-card .button { justify-self: start; margin-top: 4px; }
+.assistance-shell, .team-shell { display: grid; gap: 12px; max-width: 1080px; }
+.route-card-assistance { max-width: 700px; border-top: 3px solid var(--lime); }
+.route-card-assistance > strong { max-width: 520px; font-size: 20px; }
+.assistance-context { display: grid; gap: 4px; margin: 5px 0; padding: 10px; border: 1px solid var(--line-soft); background: var(--surface-subtle); border-radius: 5px; }
+.assistance-context b { color: var(--ink-muted); font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
+.assistance-context span { font-size: 10px; font-weight: 700; }
+.route-card a.assistance-primary { color: var(--surface); text-decoration: none; }
+.assistance-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
+.assistance-card { display: grid; align-content: start; gap: 8px; min-height: 205px; padding: 17px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.assistance-card > span { color: var(--ink-muted); font-size: 9px; font-weight: 800; letter-spacing: .1em; }
+.assistance-card h2 { margin: 0; font-size: 14px; line-height: 1.25; letter-spacing: -.03em; }
+.assistance-card p { margin: 0; color: var(--ink-soft); font-size: 10px; line-height: 1.5; }
+.assistance-card a { align-self: end; color: var(--brand); font-size: 10px; font-weight: 700; text-decoration: none; }
+.assistance-card-review { border-top: 3px solid var(--review); }
+.assistance-card-go { border-top: 3px solid var(--go); }
+.assistance-card-neutral { border-top: 3px solid var(--line); }
+.principle-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.principle-list > div { display: grid; gap: 5px; padding: 12px; border: 1px solid var(--line-soft); border-radius: 5px; background: var(--surface); }
+.principle-list b { color: var(--brand); font-size: 10px; }
+.principle-list span { color: var(--ink-muted); font-size: 9px; line-height: 1.4; }
+.team-summary { display: flex; gap: 9px; margin-top: 5px; }
+.team-summary > div { display: grid; gap: 3px; min-width: 100px; padding: 9px; border: 1px solid var(--line-soft); border-radius: 5px; background: var(--surface-subtle); }
+.team-summary b { font: 700 18px "JetBrains Mono", monospace; }
+.team-summary span { color: var(--ink-muted); font-size: 9px; }
+.team-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; max-width: 900px; }
+.team-card { display: flex; align-items: center; gap: 9px; min-width: 0; padding: 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+.team-card > div:nth-child(2) { display: grid; gap: 3px; min-width: 0; flex: 1; }
+.team-card strong { font-size: 10px; }
+.team-card span, .team-card small { color: var(--ink-muted); font-size: 9px; line-height: 1.35; }
+.team-avatar { width: 28px; height: 28px; display: grid; place-items: center; flex: 0 0 28px; border-radius: 50%; background: var(--surface-subtle); color: var(--brand); font-size: 9px; font-weight: 800; }
+.team-delete { margin-top: 0; color: var(--no-go); }
+.team-composer { max-width: 900px; }
+.team-form { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end; }
+.team-form .button { min-height: 40px; }
+.team-note { margin: 0; color: var(--ink-muted); font-size: 9px; line-height: 1.45; }
 .profile-checklist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; max-width: 900px; }
 .profile-check-row { display: flex; align-items: center; gap: 9px; padding: 11px; border: 1px solid var(--line-soft); border-radius: 5px; background: var(--surface); }
 .profile-check-row > span:last-child { display: grid; gap: 3px; }
@@ -424,10 +461,12 @@ h1 { font-size: clamp(29px, 3.4vw, 40px); font-weight: 700; letter-spacing: -.05
   .summary-cell.summary-wide { grid-column: auto; }
   .route-view { padding: 34px 0 20px; }
   .route-grid { grid-template-columns: 1fr; }
-  .route-summary-strip, .profile-checklist, .notes-board { grid-template-columns: 1fr; }
+  .route-summary-strip, .profile-checklist, .notes-board, .assistance-grid, .principle-list, .team-grid { grid-template-columns: 1fr; }
   .route-toolbar { align-items: flex-start; flex-direction: column; gap: 7px; }
   .task-board-row { grid-template-columns: 26px minmax(0, 1fr); }
   .task-board-row .task-state, .task-board-row .route-row-action { grid-column: 2; justify-self: start; }
+  .team-form { grid-template-columns: 1fr; }
+  .team-form .button { justify-self: start; }
   .note-form { grid-template-columns: 1fr; }
   .note-form .field-wide, .note-form .modal-actions { grid-column: auto; }
   .settings-header { display: block; padding: 32px 0 20px; }

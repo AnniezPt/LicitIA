@@ -116,3 +116,16 @@ La revisión en navegador cubrió las siete rutas, la consola, los filtros de Op
 - los filtros de Expedientes devuelven `3 de 3`, `2 de 3`, `0 de 3` y `1 de 3` según el estado;
 - la búsqueda se limpia al salir de Oportunidades para no mostrar un filtro aparentemente activo en Tareas, Mi empresa, Notas o Ajustes;
 - se incrementó de nuevo la versión de los recursos para que la corrección llegue también a pestañas antiguas.
+
+## Iteración de producto — 2 de octubre de 2026
+
+Se incorpora una primera versión local de las superficies que deben acompañar a la búsqueda:
+
+- Tareas con filtros por abiertas, prioridad alta, evidencia, colaboración, completadas y todas;
+- metadatos visibles de tipo de trabajo, prioridad y fecha límite;
+- Asistencia para separar capacidad, evidencia, solvencia, colaboración y siguiente acción;
+- Equipo local con roles y colaboradores de referencia, sin cuentas ni invitaciones;
+- exportación e importación de los roles locales junto con la copia de oportunidades y ajustes;
+- plan documentado para conectar datos oficiales sin presentar todavía una sincronización real.
+
+Esta iteración mantiene fuera el calendario externo, las notificaciones nativas, el análisis avanzado de precios y el backend multiusuario.

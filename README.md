@@ -33,6 +33,7 @@ Los cambios de ejemplo se guardan en `localStorage` del navegador para que se pu
 - [Método de benchmark de búsqueda y decisión](docs/METODO_BENCHMARK_BUSQUEDA_Y_DECISION_2026-09-30.md)
 - [Guía de Ajustes del MVP](docs/GUIA_AJUSTES_MVP_PLIEGO_CLARO_2026-09-30.md)
 - [Auditoría de apartados del MVP](docs/AUDITORIA_APARTADOS_MVP_2026-09-30.md)
+- [Plan de datos, tareas y asistencia](docs/PLAN_DATOS_TAREAS_ASISTENCIA_2026-10-02.md)
 
 ## Diseño y trazabilidad
 
@@ -52,7 +53,11 @@ La integración actual traslada al MVP la navegación de espacio de trabajo, la 
 - [x] Alta manual de oportunidades.
 - [x] Primera integración visual y estructural basada en Stitch.
 - [x] Búsqueda local de oportunidades y pestañas del expediente.
-- [x] Vistas internas funcionales para Hoy, Expedientes, Tareas, Mi empresa, Notas de prueba y Ajustes.
+- [x] Vistas internas funcionales para Hoy, Expedientes, Tareas, Asistencia, Equipo, Mi empresa, Notas de prueba y Ajustes.
+- [x] Tareas organizadas por estado, prioridad y tipo de trabajo.
+- [x] Asistencia local para detectar brechas de evidencia, solvencia y colaboración.
+- [x] Roles locales de equipo, sin cuentas ni sincronización externa.
 - [ ] Validación con llamadas reales.
 - [ ] Nombre e identidad definitivos.
+- [ ] Primera ingesta de datos oficiales y base de datos persistente.
 - [ ] Backend y usuarios.

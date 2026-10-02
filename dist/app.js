@@ -1,6 +1,11 @@
 const STORAGE_KEY = "pliego-claro-mvp-opportunities-v3";
 const SETTINGS_KEY = "pliego-claro-mvp-settings-v1";
 const NOTES_KEY = "pliego-claro-mvp-benchmark-notes-v1";
+const TEAM_KEY = "pliego-claro-mvp-team-v1";
+
+const defaultTeam = [
+  { id: "role-owner", name: "Responsable del proyecto", role: "Decisión y coordinación", note: "Rol local · sin invitaciones externas" }
+];
 
 const defaultSettings = {
   workspaceName: "Mi empresa (ejemplo)",
@@ -114,9 +119,11 @@ const seedNotes = [
 let opportunities = loadOpportunities();
 let settings = loadSettings();
 let notes = loadNotes();
+let team = loadTeam();
 let selectedId = opportunities[0]?.id;
 let activeFilter = "all";
 let activeExpedientFilter = "all";
+let activeTaskFilter = "open";
 let activeDetailTab = "summary";
 let searchQuery = "";
 
@@ -158,6 +165,15 @@ function loadNotes() {
   }
 }
 
+function loadTeam() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(TEAM_KEY));
+    return Array.isArray(saved) && saved.length ? saved : structuredClone(defaultTeam);
+  } catch (error) {
+    return structuredClone(defaultTeam);
+  }
+}
+
 function persistSettings(message = "Ajustes guardados") {
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
   showToast(message);
@@ -165,6 +181,11 @@ function persistSettings(message = "Ajustes guardados") {
 
 function persistNotes(message = "Nota guardada") {
   localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
+  showToast(message);
+}
+
+function persistTeam(message = "Equipo local actualizado") {
+  localStorage.setItem(TEAM_KEY, JSON.stringify(team));
   showToast(message);
 }
 
@@ -239,17 +260,23 @@ function taskItems(item) {
     title: item.nextStep || "Definir el siguiente paso",
     detail: item.nextDate || "Fecha por confirmar",
     status: item.nextStepDone ? "completed" : item.decision === "NO-GO" ? "blocked" : "in_progress",
-    kind: "next"
+    kind: "next",
+    taskType: "decision",
+    priority: item.nextStepDone ? "normal" : "high",
+    dueDate: item.deadlineDate || ""
   }];
   (item.requirements || []).forEach((requirement, requirementIndex) => {
-    if (requirement.status === "confirmed") return;
+    const isCollaboration = /colaboraci[oó]n|subcontrat|medios externos|UTE|asociaci[oó]n/i.test(requirement.text);
     tasks.push({
       id: `requirement-${item.id}-${requirementIndex}`,
       opportunityId: item.id,
       title: `Comprobar: ${requirement.text}`,
       detail: requirement.source || "Fuente por asociar",
-      status: "pending",
+      status: requirement.status === "confirmed" ? "completed" : "pending",
       kind: "requirement",
+      taskType: isCollaboration ? "collaboration" : "evidence",
+      priority: requirement.status === "unknown" ? "high" : "normal",
+      dueDate: item.deadlineDate || "",
       requirementIndex
     });
   });
@@ -260,8 +287,30 @@ function allTasks() {
   return opportunities.flatMap((item) => taskItems(item));
 }
 
+function visibleTasks() {
+  const tasks = allTasks();
+  if (activeTaskFilter === "open") return tasks.filter((task) => ["pending", "in_progress"].includes(task.status));
+  if (activeTaskFilter === "urgent") return tasks.filter((task) => task.status !== "completed" && task.priority === "high");
+  if (activeTaskFilter === "evidence") return tasks.filter((task) => task.taskType === "evidence");
+  if (activeTaskFilter === "collaboration") return tasks.filter((task) => task.taskType === "collaboration");
+  if (activeTaskFilter === "completed") return tasks.filter((task) => task.status === "completed");
+  return tasks;
+}
+
 function taskStatusLabel(status) {
   return { completed: "Completada", in_progress: "En curso", pending: "Pendiente", blocked: "Aparcada" }[status] || "Pendiente";
+}
+
+function taskTypeLabel(type) {
+  return { decision: "Decisión", evidence: "Evidencia", collaboration: "Colaboración" }[type] || "Trabajo";
+}
+
+function taskPriorityLabel(priority) {
+  return priority === "high" ? "Prioridad alta" : "Prioridad normal";
+}
+
+function taskDueLabel(task) {
+  return task.dueDate ? `Antes del ${formatDate(getDeadlineDate({ deadlineDate: task.dueDate }))}` : "Fecha por confirmar";
 }
 
 function compactCount(value) {
@@ -294,7 +343,7 @@ function taskRowMarkup(task, showOpportunity = true) {
   const completed = task.status === "completed";
   return `<div class="task-board-row ${completed ? "task-board-row-completed" : ""}">
     <button class="task-check-button ${taskStateClass(task.status)}" data-task-complete="${escapeAttribute(task.id)}" type="button" aria-label="${completed ? "Reabrir" : "Completar"} tarea">${completed ? "✓" : "○"}</button>
-    <div class="task-board-copy"><strong>${escapeHtml(task.title)}</strong><span>${escapeHtml(task.detail)}${showOpportunity && item ? ` · ${escapeHtml(item.title)}` : ""}</span></div>
+    <div class="task-board-copy"><strong>${escapeHtml(task.title)}</strong><span>${escapeHtml(task.detail)}${showOpportunity && item ? ` · ${escapeHtml(item.title)}` : ""}</span><small><b>${escapeHtml(taskTypeLabel(task.taskType))}</b> · ${escapeHtml(taskPriorityLabel(task.priority))} · ${escapeHtml(taskDueLabel(task))}</small></div>
     <span class="task-state ${taskStateClass(task.status)}">${taskStatusLabel(task.status)}</span>
     ${item ? `<button class="route-row-action" data-open-opportunity="${escapeAttribute(item.id)}" type="button">Abrir →</button>` : ""}
   </div>`;
@@ -476,11 +525,54 @@ function render() {
 
 function currentRoute() {
   const route = window.location.hash.replace("#", "");
-  return ["hoy", "oportunidades", "expedientes", "tareas", "empresa", "pruebas", "ajustes"].includes(route) ? route : "oportunidades";
+  return ["hoy", "oportunidades", "expedientes", "tareas", "asistencia", "equipo", "empresa", "pruebas", "ajustes"].includes(route) ? route : "oportunidades";
+}
+
+function assistanceItems(item) {
+  const requirements = item?.requirements || [];
+  const unresolved = requirements.filter((requirement) => requirement.status !== "confirmed");
+  const needsTechnical = unresolved.some((requirement) => /experiencia|personal|medios|certificad/i.test(requirement.text));
+  const needsCollaboration = unresolved.some((requirement) => /colaboraci[oó]n|subcontrat|medios externos|UTE|asociaci[oó]n/i.test(requirement.text));
+  return [
+    {
+      label: "CAPACIDAD",
+      title: needsTechnical ? "¿Puedes demostrar que sabes hacerlo?" : "¿Qué evidencia respalda tu capacidad?",
+      text: "Separamos saber hacer de poder demostrarlo. La experiencia, los medios y los certificados deben quedar ligados a un documento concreto.",
+      action: needsTechnical ? "Revisar tareas de evidencia" : "Completar perfil",
+      href: needsTechnical ? "#tareas" : "#ajustes",
+      tone: needsTechnical ? "review" : "go"
+    },
+    {
+      label: "COLABORACIÓN",
+      title: needsCollaboration ? "¿Necesitas completar capacidades con otra empresa?" : "¿Cuándo tendría sentido colaborar?",
+      text: "La asistencia no afirma que una UTE, un medio externo o una subcontratación sean válidos automáticamente: ayuda a detectar qué hay que comprobar.",
+      action: "Ver requisitos de colaboración",
+      href: "#tareas",
+      tone: needsCollaboration ? "review" : "neutral"
+    },
+    {
+      label: "SOLVENCIA",
+      title: "¿Qué te puede bloquear antes de preparar la oferta?",
+      text: `${unresolved.length ? `${unresolved.length} requisitos siguen sin confirmarse en el caso seleccionado.` : "No quedan requisitos pendientes en el caso seleccionado."} La siguiente acción debe cerrar una duda, no generar más trabajo difuso.`,
+      action: "Abrir la oportunidad",
+      href: "#oportunidades",
+      tone: unresolved.length ? "review" : "go"
+    }
+  ];
+}
+
+function assistanceMarkup(item) {
+  const cards = assistanceItems(item);
+  return `<div class="assistance-shell"><section class="route-card route-card-assistance"><span>ASISTENCIA DE DECISIÓN</span><strong>Preguntas concretas antes de invertir tiempo</strong><p>Una guía local para ordenar experiencia, solvencia, colaboración y evidencias. No sustituye asesoramiento jurídico ni decide por ti.</p><div class="assistance-context"><b>Caso de referencia</b><span>${escapeHtml(item?.title || "Selecciona una oportunidad")}</span></div><a class="button button-dark assistance-primary" href="#tareas">Ver tareas que desbloquean la decisión →</a></section><section class="assistance-grid">${cards.map((card) => `<article class="assistance-card assistance-card-${card.tone}"><span>${escapeHtml(card.label)}</span><h2>${escapeHtml(card.title)}</h2><p>${escapeHtml(card.text)}</p><a href="${card.href}">${escapeHtml(card.action)} →</a></article>`).join("")}</section><section class="route-section assistance-principles"><div class="route-section-heading"><div><p class="eyebrow eyebrow-muted">CÓMO AYUDA</p><h2>La respuesta siempre debe dejar un siguiente paso</h2></div></div><div class="principle-list"><div><b>1 · Hecho</b><span>Qué dice realmente el expediente.</span></div><div><b>2 · Encaje</b><span>Qué puedes demostrar hoy.</span></div><div><b>3 · Brecha</b><span>Qué falta y quién debe comprobarlo.</span></div><div><b>4 · Acción</b><span>Qué hacer antes de decidir.</span></div></div></section></div>`;
+}
+
+function teamMarkup() {
+  const openTasks = allTasks().filter((task) => ["pending", "in_progress"].includes(task.status));
+  return `<div class="team-shell"><section class="route-card route-card-accent"><span>COLABORACIÓN LOCAL</span><strong>Un lugar para saber quién tiene que cerrar cada duda</strong><p>Esta primera versión organiza roles y trabajo en el navegador. Todavía no envía invitaciones ni sincroniza cuentas.</p><div class="team-summary"><div><b>${team.length}</b><span>roles locales</span></div><div><b>${openTasks.length}</b><span>tareas abiertas</span></div><div><b>${opportunities.length}</b><span>expedientes</span></div></div></section><section class="route-section"><div class="route-section-heading"><div><p class="eyebrow eyebrow-muted">ROLES DEL ESPACIO</p><h2>Equipo y colaboradores</h2></div><span class="count-label">Solo en este navegador</span></div><div class="team-grid">${team.map((member) => `<article class="team-card"><div class="team-avatar">${escapeHtml(member.name.slice(0, 2).toUpperCase())}</div><div><strong>${escapeHtml(member.name)}</strong><span>${escapeHtml(member.role)}</span><small>${escapeHtml(member.note || "Rol local")}</small></div>${team.length > 1 ? `<button class="text-button team-delete" data-team-delete="${escapeAttribute(member.id)}" type="button">Quitar</button>` : ""}</article>`).join("")}</div></section><section class="route-note team-composer"><div class="route-section-heading"><div><p class="eyebrow eyebrow-muted">AÑADIR ROL</p><h2>¿Quién puede ayudar?</h2></div></div><form data-team-form class="team-form"><label class="field"><span>Nombre o referencia</span><input name="name" required placeholder="Ej. Colaborador técnico" /></label><label class="field"><span>Rol</span><input name="role" required placeholder="Ej. Solvencia y medios" /></label><button class="button button-dark" type="submit">Añadir al espacio</button></form><p class="team-note">Más adelante podremos asignar tareas, permisos y comentarios. Primero validamos si esta organización ayuda a trabajar mejor.</p></section></div>`;
 }
 
 function renderSettingsMarkup() {
-  const storageBytes = new Blob([JSON.stringify({ opportunities, settings })]).size;
+  const storageBytes = new Blob([JSON.stringify({ opportunities, settings, team })]).size;
   return `
     <div class="settings-header">
       <div>
@@ -580,7 +672,7 @@ function renderRoute() {
     const searchInput = document.querySelector("#globalSearch");
     if (searchInput) searchInput.value = "";
   }
-  const breadcrumbLabels = { hoy: "Hoy", oportunidades: "Oportunidades", expedientes: "Expedientes", tareas: "Tareas", empresa: "Mi empresa", pruebas: "Notas de prueba", ajustes: "Ajustes" };
+  const breadcrumbLabels = { hoy: "Hoy", oportunidades: "Oportunidades", expedientes: "Expedientes", tareas: "Tareas", asistencia: "Asistencia", equipo: "Equipo", empresa: "Mi empresa", pruebas: "Notas de prueba", ajustes: "Ajustes" };
   if (breadcrumbElement) breadcrumbElement.textContent = breadcrumbLabels[route];
   dashboardSections.forEach((section) => { section.hidden = route !== "oportunidades"; });
   routeElement.hidden = route === "oportunidades";
@@ -616,7 +708,19 @@ function renderRoute() {
       eyebrow: "Espacio de trabajo · Tareas",
       title: "Tareas pendientes",
       intro: "Acciones que deben cerrar una duda antes de convertir REVISAR en GO o NO-GO.",
-      body: `<div class="route-summary-strip"><article class="route-card"><span>ABIERTAS</span><strong>${openTasks.length}</strong><p>Se generan desde la siguiente acción y los requisitos no confirmados.</p></article><article class="route-card"><span>COMPLETADAS</span><strong>${completedTasks.length}</strong><p>Las comprobaciones confirmadas dejan de bloquear la decisión.</p></article><article class="route-card"><span>APARCADAS</span><strong>${parkedTasks.length}</strong><p>Quedan fuera del trabajo activo hasta que cambie el contexto.</p></article></div><section class="route-section"><div class="route-section-heading"><div><p class="eyebrow eyebrow-muted">LISTA DE TRABAJO</p><h2>Qué toca hacer</h2></div><span class="count-label">Guardado local</span></div><div class="task-board">${openTasks.length ? openTasks.map((task) => taskRowMarkup(task)).join("") : `<div class="empty-list"><strong>No hay tareas pendientes.</strong><span>Cuando aparezca una duda, la encontrarás aquí.</span></div>`}</div></section>`
+      body: `<div class="route-summary-strip"><article class="route-card"><span>ABIERTAS</span><strong>${openTasks.length}</strong><p>Se generan desde la siguiente acción y los requisitos no confirmados.</p></article><article class="route-card"><span>COMPLETADAS</span><strong>${completedTasks.length}</strong><p>Las comprobaciones confirmadas dejan de bloquear la decisión.</p></article><article class="route-card"><span>APARCADAS</span><strong>${parkedTasks.length}</strong><p>Quedan fuera del trabajo activo hasta que cambie el contexto.</p></article></div><section class="route-section"><div class="route-section-heading"><div><p class="eyebrow eyebrow-muted">LISTA DE TRABAJO</p><h2>Qué toca hacer</h2></div><span class="count-label">${visibleTasks().length} visibles</span></div><div class="filters task-filters" role="toolbar" aria-label="Filtrar tareas"><button class="filter ${activeTaskFilter === "open" ? "active" : ""}" data-task-filter="open" type="button">Abiertas</button><button class="filter ${activeTaskFilter === "urgent" ? "active" : ""}" data-task-filter="urgent" type="button">Prioridad alta</button><button class="filter ${activeTaskFilter === "evidence" ? "active" : ""}" data-task-filter="evidence" type="button">Evidencia</button><button class="filter ${activeTaskFilter === "collaboration" ? "active" : ""}" data-task-filter="collaboration" type="button">Colaboración</button><button class="filter ${activeTaskFilter === "completed" ? "active" : ""}" data-task-filter="completed" type="button">Completadas</button><button class="filter ${activeTaskFilter === "all" ? "active" : ""}" data-task-filter="all" type="button">Todas</button></div><div class="task-board">${visibleTasks().length ? visibleTasks().map((task) => taskRowMarkup(task)).join("") : `<div class="empty-list"><strong>No hay tareas en esta vista.</strong><span>Prueba otro filtro o registra una nueva oportunidad.</span></div>`}</div></section>`
+    },
+    asistencia: {
+      eyebrow: "Espacio de trabajo · Asistencia",
+      title: "Asistencia para decidir",
+      intro: "Preguntas guiadas para detectar encaje, brechas de evidencia y posibles colaboraciones.",
+      body: assistanceMarkup(selected)
+    },
+    equipo: {
+      eyebrow: "Espacio de trabajo · Equipo",
+      title: "Equipo y colaboración",
+      intro: "Organiza roles y responsabilidades sin fingir todavía una cuenta multiusuario.",
+      body: teamMarkup()
     },
     empresa: {
       eyebrow: "Espacio de trabajo · Mi empresa",
@@ -648,6 +752,10 @@ function renderRoute() {
     activeExpedientFilter = button.dataset.expedientFilter;
     renderRoute();
   }));
+  routeElement.querySelectorAll("[data-task-filter]").forEach((button) => button.addEventListener("click", () => {
+    activeTaskFilter = button.dataset.taskFilter;
+    renderRoute();
+  }));
   routeElement.querySelector("[data-note-form]")?.addEventListener("submit", (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -660,6 +768,21 @@ function renderRoute() {
   routeElement.querySelectorAll("[data-note-delete]").forEach((button) => button.addEventListener("click", () => {
     notes = notes.filter((note) => note.id !== button.dataset.noteDelete);
     persistNotes("Nota eliminada");
+    renderRoute();
+  }));
+  routeElement.querySelector("[data-team-form]")?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const name = String(formData.get("name") || "").trim();
+    const role = String(formData.get("role") || "").trim();
+    if (!name || !role) return;
+    team.push({ id: `role-${Date.now()}`, name, role, note: "Rol local · pendiente de validar" });
+    persistTeam();
+    renderRoute();
+  });
+  routeElement.querySelectorAll("[data-team-delete]").forEach((button) => button.addEventListener("click", () => {
+    team = team.filter((member) => member.id !== button.dataset.teamDelete);
+    persistTeam("Rol local eliminado");
     renderRoute();
   }));
   routeElement.querySelector("[data-route-reset]")?.addEventListener("click", () => document.querySelector("#resetDemo").click());
@@ -676,7 +799,7 @@ function renderRoute() {
     showToast("Ajustes restaurados.");
   });
   routeElement.querySelector("[data-export-local]")?.addEventListener("click", () => {
-    const payload = { format: "pliego-claro-mvp", exportedAt: new Date().toISOString(), opportunities, settings };
+    const payload = { format: "pliego-claro-mvp", exportedAt: new Date().toISOString(), opportunities, settings, team };
     const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
@@ -696,9 +819,11 @@ function renderRoute() {
         if (!Array.isArray(payload.opportunities) || !payload.opportunities.length || payload.opportunities.some((item) => !item || typeof item !== "object" || typeof item.title !== "string" || !Array.isArray(item.requirements))) throw new Error("Formato no reconocido");
         opportunities = payload.opportunities.map((item) => ({ ...item, source: safeHttpUrl(item.source), requirements: item.requirements.map((requirement) => ({ text: String(requirement.text || "Requisito sin nombre"), source: String(requirement.source || "Fuente pendiente"), status: ["confirmed", "pending", "unknown"].includes(requirement.status) ? requirement.status : "unknown" })) }));
         settings = { ...defaultSettings, ...(payload.settings || {}) };
+        team = Array.isArray(payload.team) && payload.team.length ? payload.team : structuredClone(defaultTeam);
         selectedId = opportunities[0]?.id;
         localStorage.setItem(STORAGE_KEY, JSON.stringify(opportunities));
         localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+        localStorage.setItem(TEAM_KEY, JSON.stringify(team));
         render();
         showToast("Copia local importada.");
       } catch (error) {
