@@ -4,10 +4,11 @@ Fecha: 2 de octubre de 2026
 
 ## Decisión de esta iteración
 
-El MVP incorpora tres superficies locales para probar el flujo de trabajo antes de conectar cuentas o fuentes externas:
+El MVP incorpora cuatro superficies locales para probar el flujo de trabajo antes de conectar cuentas o fuentes externas:
 
 - **Tareas**: trabajo abierto, prioridad, tipo, estado, fecha límite y oportunidad relacionada.
-- **Asistencia**: guía estructurada para separar capacidad, evidencia, solvencia y colaboración.
+- **Cómo participar**: guía contextual para entender si una carencia de experiencia, solvencia o medios puede cubrirse antes de descartar una oportunidad.
+- **Radar territorial**: mapa local de prueba para relacionar oportunidades con cobertura, desplazamiento y modalidad de servicio.
 - **Equipo**: roles locales y colaboradores de referencia, sin invitaciones ni sincronización multiusuario.
 
 Se mantiene fuera de esta iteración:
@@ -29,14 +30,23 @@ Una tarea debe cerrar una duda concreta. Tipos iniciales:
 
 Cada tarea debe poder responder: qué hay que hacer, quién podría hacerlo, antes de qué fecha, qué documento lo prueba y qué cambia en la decisión.
 
-### Asistencia
+### Cómo participar
 
-La asistencia local no da una conclusión jurídica automática. Ayuda a formular la siguiente comprobación:
+La guía no da una conclusión jurídica automática. Ayuda a formular la siguiente comprobación:
 
 1. qué dice el expediente;
 2. qué puede demostrar la empresa;
 3. qué brecha existe;
-4. qué acción debe cerrarla.
+4. si procede estudiar capacidad propia, UTE, medios externos o subcontratación;
+5. qué acción debe cerrarla.
+
+La interfaz debe distinguir experiencia específica, solvencia económica, solvencia técnica, medios humanos/materiales y cobertura territorial. “Mismo gremio” puede ser una forma de explicarlo en contenido, pero el producto debe leer el requisito concreto del pliego.
+
+### Radar territorial
+
+La primera versión muestra ubicaciones de prueba sobre una representación visual de España. No calcula todavía distancias reales ni implica preferencia legal por proximidad. Su función es responder si una empresa podría ejecutar por capacidad logística, presencialidad, transporte o radio de servicio.
+
+La futura versión necesitará sede o puntos de operación, provincias/municipios atendidos, radio o tiempo máximo de desplazamiento, modalidad remota/presencial y fuente de la ubicación del contrato.
 
 ### Equipo
 

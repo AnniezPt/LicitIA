@@ -123,7 +123,8 @@ Se incorpora una primera versión local de las superficies que deben acompañar 
 
 - Tareas con filtros por abiertas, prioridad alta, evidencia, colaboración, completadas y todas;
 - metadatos visibles de tipo de trabajo, prioridad y fecha límite;
-- Asistencia para separar capacidad, evidencia, solvencia, colaboración y siguiente acción;
+- guía “Cómo participar” para separar capacidad, evidencia, solvencia, colaboración y siguiente acción, reflejando la hipótesis original sobre carencias de experiencia, solvencia y medios;
+- Radar territorial con representación visual de España, casos demo, modalidad de servicio y advertencia de que proximidad no equivale a aptitud legal;
 - Equipo local con roles y colaboradores de referencia, sin cuentas ni invitaciones;
 - exportación e importación de los roles locales junto con la copia de oportunidades y ajustes;
 - plan documentado para conectar datos oficiales sin presentar todavía una sincronización real.

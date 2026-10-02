@@ -53,9 +53,10 @@ La integración actual traslada al MVP la navegación de espacio de trabajo, la 
 - [x] Alta manual de oportunidades.
 - [x] Primera integración visual y estructural basada en Stitch.
 - [x] Búsqueda local de oportunidades y pestañas del expediente.
-- [x] Vistas internas funcionales para Hoy, Expedientes, Tareas, Asistencia, Equipo, Mi empresa, Notas de prueba y Ajustes.
+- [x] Vistas internas funcionales para Hoy, Expedientes, Tareas, Cómo participar, Radar territorial, Equipo, Mi empresa, Notas de prueba y Ajustes.
 - [x] Tareas organizadas por estado, prioridad y tipo de trabajo.
-- [x] Asistencia local para detectar brechas de evidencia, solvencia y colaboración.
+- [x] Guía local de Cómo participar para detectar experiencia específica, solvencia, colaboración y cobertura territorial.
+- [x] Radar territorial visual con oportunidades de prueba y advertencia de proximidad.
 - [x] Roles locales de equipo, sin cuentas ni sincronización externa.
 - [ ] Validación con llamadas reales.
 - [ ] Nombre e identidad definitivos.

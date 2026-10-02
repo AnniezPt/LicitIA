@@ -34,6 +34,7 @@ const seedOpportunities = [
     deadline: "Cierre en 12 días",
     deadlineDate: "2026-10-12",
     sector: "Servicios digitales",
+    territory: { city: "Madrid", province: "Madrid", mode: "Presencial + remoto", mapX: 232, mapY: 145, note: "Ubicación de prueba" },
     decision: "REVISAR",
     fit: "Por comprobar",
     source: "https://contrataciondelestado.es/",
@@ -58,6 +59,7 @@ const seedOpportunities = [
     deadline: "Cierre en 18 días",
     deadlineDate: "2026-10-18",
     sector: "Formación",
+    territory: { city: "Valladolid", province: "Valladolid", mode: "Remoto + desplazamiento puntual", mapX: 190, mapY: 91, note: "Ubicación de prueba" },
     decision: "REVISAR",
     fit: "Por comprobar",
     source: "https://contrataciondelestado.es/",
@@ -82,6 +84,7 @@ const seedOpportunities = [
     deadline: "Aparcado por ahora",
     deadlineDate: null,
     sector: "Mantenimiento",
+    territory: { city: "Guadalajara", province: "Guadalajara", mode: "Presencial", mapX: 249, mapY: 139, note: "Ubicación de prueba" },
     decision: "NO-GO",
     fit: "Baja por ahora",
     source: "https://contrataciondelestado.es/",
@@ -525,45 +528,68 @@ function render() {
 
 function currentRoute() {
   const route = window.location.hash.replace("#", "");
-  return ["hoy", "oportunidades", "expedientes", "tareas", "asistencia", "equipo", "empresa", "pruebas", "ajustes"].includes(route) ? route : "oportunidades";
+  return ["hoy", "oportunidades", "expedientes", "tareas", "asistencia", "radar", "equipo", "empresa", "pruebas", "ajustes"].includes(route) ? route : "oportunidades";
 }
 
 function assistanceItems(item) {
   const requirements = item?.requirements || [];
   const unresolved = requirements.filter((requirement) => requirement.status !== "confirmed");
   const needsTechnical = unresolved.some((requirement) => /experiencia|personal|medios|certificad/i.test(requirement.text));
+  const needsEconomic = unresolved.some((requirement) => /volumen|econ[oó]mic|seguro|patrimonio/i.test(requirement.text));
   const needsCollaboration = unresolved.some((requirement) => /colaboraci[oó]n|subcontrat|medios externos|UTE|asociaci[oó]n/i.test(requirement.text));
   return [
     {
-      label: "CAPACIDAD",
-      title: needsTechnical ? "¿Puedes demostrar que sabes hacerlo?" : "¿Qué evidencia respalda tu capacidad?",
-      text: "Separamos saber hacer de poder demostrarlo. La experiencia, los medios y los certificados deben quedar ligados a un documento concreto.",
-      action: needsTechnical ? "Revisar tareas de evidencia" : "Completar perfil",
+      label: "EXPERIENCIA ESPECÍFICA",
+      title: needsTechnical ? "¿Puedes demostrar que sabes hacerlo?" : "¿Qué experiencia pide exactamente?",
+      text: "No basta con pertenecer a un sector parecido: hay que identificar trabajos similares, periodo, importe y documento que los acredite.",
+      action: needsTechnical ? "Revisar evidencia" : "Ver perfil de empresa",
       href: needsTechnical ? "#tareas" : "#ajustes",
       tone: needsTechnical ? "review" : "go"
     },
     {
-      label: "COLABORACIÓN",
-      title: needsCollaboration ? "¿Necesitas completar capacidades con otra empresa?" : "¿Cuándo tendría sentido colaborar?",
-      text: "La asistencia no afirma que una UTE, un medio externo o una subcontratación sean válidos automáticamente: ayuda a detectar qué hay que comprobar.",
-      action: "Ver requisitos de colaboración",
+      label: "SOLVENCIA Y MEDIOS",
+      title: needsEconomic ? "¿Qué solvencia económica te exige?" : "¿Qué puedes acreditar hoy?",
+      text: "Separamos solvencia económica, solvencia técnica, personas, titulaciones y medios materiales. Cada afirmación necesita una evidencia.",
+      action: "Revisar requisitos",
+      href: "#tareas",
+      tone: needsEconomic ? "review" : "neutral"
+    },
+    {
+      label: "VÍAS DE PARTICIPACIÓN",
+      title: needsCollaboration ? "¿Puedes cubrir la carencia con otra empresa?" : "¿Cuándo tendría sentido colaborar?",
+      text: "Hay que distinguir UTE, medios externos y subcontratación. No son intercambiables y el pliego determina qué se admite y quién debe ejecutar.",
+      action: "Ver tareas de colaboración",
       href: "#tareas",
       tone: needsCollaboration ? "review" : "neutral"
     },
     {
-      label: "SOLVENCIA",
-      title: "¿Qué te puede bloquear antes de preparar la oferta?",
-      text: `${unresolved.length ? `${unresolved.length} requisitos siguen sin confirmarse en el caso seleccionado.` : "No quedan requisitos pendientes en el caso seleccionado."} La siguiente acción debe cerrar una duda, no generar más trabajo difuso.`,
-      action: "Abrir la oportunidad",
-      href: "#oportunidades",
-      tone: unresolved.length ? "review" : "go"
+      label: "COBERTURA TERRITORIAL",
+      title: "¿Puedes ejecutar desde tu capacidad real?",
+      text: "La proximidad sirve para estimar desplazamientos, logística y cobertura. No demuestra por sí sola solvencia ni preferencia legal.",
+      action: "Abrir Radar territorial",
+      href: "#radar",
+      tone: item?.territory ? "go" : "neutral"
     }
   ];
 }
 
 function assistanceMarkup(item) {
   const cards = assistanceItems(item);
-  return `<div class="assistance-shell"><section class="route-card route-card-assistance"><span>ASISTENCIA DE DECISIÓN</span><strong>Preguntas concretas antes de invertir tiempo</strong><p>Una guía local para ordenar experiencia, solvencia, colaboración y evidencias. No sustituye asesoramiento jurídico ni decide por ti.</p><div class="assistance-context"><b>Caso de referencia</b><span>${escapeHtml(item?.title || "Selecciona una oportunidad")}</span></div><a class="button button-dark assistance-primary" href="#tareas">Ver tareas que desbloquean la decisión →</a></section><section class="assistance-grid">${cards.map((card) => `<article class="assistance-card assistance-card-${card.tone}"><span>${escapeHtml(card.label)}</span><h2>${escapeHtml(card.title)}</h2><p>${escapeHtml(card.text)}</p><a href="${card.href}">${escapeHtml(card.action)} →</a></article>`).join("")}</section><section class="route-section assistance-principles"><div class="route-section-heading"><div><p class="eyebrow eyebrow-muted">CÓMO AYUDA</p><h2>La respuesta siempre debe dejar un siguiente paso</h2></div></div><div class="principle-list"><div><b>1 · Hecho</b><span>Qué dice realmente el expediente.</span></div><div><b>2 · Encaje</b><span>Qué puedes demostrar hoy.</span></div><div><b>3 · Brecha</b><span>Qué falta y quién debe comprobarlo.</span></div><div><b>4 · Acción</b><span>Qué hacer antes de decidir.</span></div></div></section></div>`;
+  const unresolved = (item?.requirements || []).filter((requirement) => requirement.status !== "confirmed").length;
+  return `<div class="assistance-shell"><section class="route-card route-card-assistance"><span>CÓMO PARTICIPAR</span><strong>No descartes una oportunidad sin entender primero la carencia.</strong><p>Esta guía convierte la duda “no tengo toda la experiencia” en comprobaciones concretas. Ordena el pliego, tu evidencia y las vías posibles de colaboración. No declara aptitud jurídica.</p><div class="assistance-context"><b>Caso de referencia</b><span>${escapeHtml(item?.title || "Selecciona una oportunidad")}</span><small>${unresolved ? `${unresolved} requisitos todavía necesitan comprobación.` : "Los requisitos visibles están confirmados en esta prueba."}</small></div><div class="assistance-actions"><a class="button button-dark assistance-primary" href="#tareas">Ver tareas que desbloquean la decisión →</a><a class="button button-light" href="#radar">Explorar cobertura territorial</a></div></section><section class="assistance-grid">${cards.map((card) => `<article class="assistance-card assistance-card-${card.tone}"><span>${escapeHtml(card.label)}</span><h2>${escapeHtml(card.title)}</h2><p>${escapeHtml(card.text)}</p><a href="${card.href}">${escapeHtml(card.action)} →</a></article>`).join("")}</section><section class="route-section assistance-principles"><div class="route-section-heading"><div><p class="eyebrow eyebrow-muted">AYUDA RÁPIDA</p><h2>Cómo leer una carencia antes de decidir</h2></div><a class="route-inline-action" href="#oportunidades">Volver a oportunidades →</a></div><div class="principle-list"><div><b>1 · Hecho</b><span>Qué exige realmente el expediente.</span></div><div><b>2 · Encaje</b><span>Qué puedes demostrar hoy.</span></div><div><b>3 · Vía</b><span>Si procede estudiar UTE, medios externos o subcontratación.</span></div><div><b>4 · Acción</b><span>Qué documento o conversación cierra la duda.</span></div></div></section></div>`;
+}
+
+function radarMarkup() {
+  const points = opportunities.filter((item) => item.territory?.mapX && item.territory?.mapY);
+  const selectedTerritory = settings.locations?.trim() ? settings.locations : "Sede o zonas de servicio pendientes de completar";
+  const modeCounts = points.reduce((counts, item) => {
+    const mode = item.territory.mode;
+    counts[mode] = (counts[mode] || 0) + 1;
+    return counts;
+  }, {});
+  const markers = points.map((item, index) => `<g class="radar-marker ${item.id === selectedId ? "is-selected" : ""}" data-radar-open="${escapeAttribute(item.id)}" tabindex="0" role="button" aria-label="Abrir ${escapeHtml(item.territory.city)}: ${escapeHtml(item.title)}"><circle cx="${item.territory.mapX}" cy="${item.territory.mapY}" r="${item.id === selectedId ? 8 : 6}"></circle><circle class="radar-marker-core" cx="${item.territory.mapX}" cy="${item.territory.mapY}" r="2.5"></circle><text x="${item.territory.mapX + 10}" y="${item.territory.mapY + 4}">${escapeHtml(item.territory.city)}</text></g>`).join("");
+  const cards = points.map((item) => `<button class="radar-opportunity ${item.id === selectedId ? "is-selected" : ""}" data-open-opportunity="${escapeAttribute(item.id)}" type="button"><span><b>${escapeHtml(item.territory.city)}</b><small>${escapeHtml(item.territory.province)} · ${escapeHtml(item.territory.mode)}</small></span><strong>${escapeHtml(item.decision)}</strong><i>→</i></button>`).join("");
+  return `<div class="radar-shell"><section class="route-card route-card-radar"><div><span>RADAR TERRITORIAL · DATOS DE PRUEBA</span><strong>¿Dónde puedes ejecutar de verdad?</strong><p>Una vista para relacionar cada oportunidad con tu cobertura, desplazamiento y modo de servicio. El mapa es orientativo: no sustituye el pliego ni crea preferencia local.</p></div><a class="button button-light" href="#ajustes">Configurar zonas de servicio</a></section><div class="radar-layout"><section class="map-card"><div class="map-card-head"><div><p class="eyebrow eyebrow-muted">VISTA TERRITORIAL</p><h2>Oportunidades por territorio</h2></div><span class="example-label">${points.length} casos demo</span></div><div class="map-stage"><svg class="spain-map" viewBox="0 0 390 270" role="img" aria-label="Mapa ilustrativo de España con oportunidades de prueba"><path class="spain-outline" d="M60 98 74 79 101 68 128 72 147 61 176 68 195 58 222 68 248 65 274 78 302 80 323 97 350 107 348 124 333 131 338 147 323 157 301 162 291 180 270 184 258 203 239 211 219 205 204 216 182 208 166 214 149 202 127 204 111 190 92 190 83 176 64 171 55 154 61 137 47 123Z"></path><path class="spain-relief" d="M78 96 119 88 158 95 193 82 224 91 254 83 292 101 324 111 M89 145 126 132 161 144 198 130 234 144 272 127 319 139 M115 177 148 163 186 178 226 165 267 174 304 153"></path><path class="island-shape island-canarias" d="M53 231 63 226 73 230 67 239 55 240Z M85 239 97 235 106 241 97 248 86 247Z"></path><path class="island-shape island-baleares" d="M311 64 319 58 327 63 321 70Z M335 74 343 69 351 74 344 80Z"></path>${markers}</svg><div class="map-legend"><span><i class="legend-dot legend-dot-active"></i>Oportunidad de prueba</span><span><i class="legend-dot legend-dot-base"></i>${escapeHtml(selectedTerritory)}</span></div></div><p class="map-disclaimer">La geometría es una vista visual del MVP. La distancia, el tiempo de desplazamiento y la cobertura real se calcularán cuando conectemos ubicación y fuente oficial.</p></section><aside class="radar-side"><section class="radar-side-card"><p class="eyebrow eyebrow-muted">TU COBERTURA DECLARADA</p><h2>${escapeHtml(selectedTerritory)}</h2><p>Completa la sede, provincias, radios y modalidad en Mi empresa para que este panel pueda comparar capacidad y territorio.</p><a href="#ajustes">Editar perfil →</a></section><section class="radar-side-card"><p class="eyebrow eyebrow-muted">CASOS EN EL RADAR</p><div class="radar-count-list">${Object.entries(modeCounts).map(([mode, count]) => `<div><span>${escapeHtml(mode)}</span><b>${count}</b></div>`).join("")}</div></section></aside></div><section class="route-section radar-opportunities"><div class="route-section-heading"><div><p class="eyebrow eyebrow-muted">ABRIR CASO</p><h2>Qué significa cada punto</h2></div><span class="count-label">Haz clic para ver encaje y carencias</span></div><div class="radar-opportunity-list">${cards || `<div class="empty-list"><strong>Aún no hay ubicaciones en los casos.</strong><span>Añade una oportunidad con territorio para probar el radar.</span></div>`}</div></section><section class="route-note radar-note"><strong>Regla de interpretación</strong><p>“Cerca” puede reducir desplazamiento o facilitar la ejecución, pero no demuestra experiencia, solvencia ni derecho a participar. El pliego manda.</p></section></div>`;
 }
 
 function teamMarkup() {
@@ -672,7 +698,7 @@ function renderRoute() {
     const searchInput = document.querySelector("#globalSearch");
     if (searchInput) searchInput.value = "";
   }
-  const breadcrumbLabels = { hoy: "Hoy", oportunidades: "Oportunidades", expedientes: "Expedientes", tareas: "Tareas", asistencia: "Asistencia", equipo: "Equipo", empresa: "Mi empresa", pruebas: "Notas de prueba", ajustes: "Ajustes" };
+  const breadcrumbLabels = { hoy: "Hoy", oportunidades: "Oportunidades", expedientes: "Expedientes", tareas: "Tareas", asistencia: "Cómo participar", radar: "Radar territorial", equipo: "Equipo", empresa: "Mi empresa", pruebas: "Notas de prueba", ajustes: "Ajustes" };
   if (breadcrumbElement) breadcrumbElement.textContent = breadcrumbLabels[route];
   dashboardSections.forEach((section) => { section.hidden = route !== "oportunidades"; });
   routeElement.hidden = route === "oportunidades";
@@ -711,10 +737,16 @@ function renderRoute() {
       body: `<div class="route-summary-strip"><article class="route-card"><span>ABIERTAS</span><strong>${openTasks.length}</strong><p>Se generan desde la siguiente acción y los requisitos no confirmados.</p></article><article class="route-card"><span>COMPLETADAS</span><strong>${completedTasks.length}</strong><p>Las comprobaciones confirmadas dejan de bloquear la decisión.</p></article><article class="route-card"><span>APARCADAS</span><strong>${parkedTasks.length}</strong><p>Quedan fuera del trabajo activo hasta que cambie el contexto.</p></article></div><section class="route-section"><div class="route-section-heading"><div><p class="eyebrow eyebrow-muted">LISTA DE TRABAJO</p><h2>Qué toca hacer</h2></div><span class="count-label">${visibleTasks().length} visibles</span></div><div class="filters task-filters" role="toolbar" aria-label="Filtrar tareas"><button class="filter ${activeTaskFilter === "open" ? "active" : ""}" data-task-filter="open" type="button">Abiertas</button><button class="filter ${activeTaskFilter === "urgent" ? "active" : ""}" data-task-filter="urgent" type="button">Prioridad alta</button><button class="filter ${activeTaskFilter === "evidence" ? "active" : ""}" data-task-filter="evidence" type="button">Evidencia</button><button class="filter ${activeTaskFilter === "collaboration" ? "active" : ""}" data-task-filter="collaboration" type="button">Colaboración</button><button class="filter ${activeTaskFilter === "completed" ? "active" : ""}" data-task-filter="completed" type="button">Completadas</button><button class="filter ${activeTaskFilter === "all" ? "active" : ""}" data-task-filter="all" type="button">Todas</button></div><div class="task-board">${visibleTasks().length ? visibleTasks().map((task) => taskRowMarkup(task)).join("") : `<div class="empty-list"><strong>No hay tareas en esta vista.</strong><span>Prueba otro filtro o registra una nueva oportunidad.</span></div>`}</div></section>`
     },
     asistencia: {
-      eyebrow: "Espacio de trabajo · Asistencia",
-      title: "Asistencia para decidir",
-      intro: "Preguntas guiadas para detectar encaje, brechas de evidencia y posibles colaboraciones.",
+      eyebrow: "Espacio de trabajo · Cómo participar",
+      title: "Cómo participar",
+      intro: "Una guía para entender si una carencia se puede cubrir antes de descartar una oportunidad.",
       body: assistanceMarkup(selected)
+    },
+    radar: {
+      eyebrow: "Espacio de trabajo · Radar territorial",
+      title: "Radar territorial",
+      intro: "Relaciona oportunidades con tu capacidad de servicio y desplazamiento.",
+      body: radarMarkup()
     },
     equipo: {
       eyebrow: "Espacio de trabajo · Equipo",
@@ -747,6 +779,17 @@ function renderRoute() {
     activeDetailTab = "summary";
     window.location.hash = "oportunidades";
   }));
+  routeElement.querySelectorAll("[data-radar-open]").forEach((marker) => {
+    const openMarker = () => {
+      selectedId = marker.dataset.radarOpen;
+      activeDetailTab = "summary";
+      window.location.hash = "oportunidades";
+    };
+    marker.addEventListener("click", openMarker);
+    marker.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openMarker(); }
+    });
+  });
   routeElement.querySelectorAll("[data-task-complete]").forEach((button) => button.addEventListener("click", () => completeTask(button.dataset.taskComplete)));
   routeElement.querySelectorAll("[data-expedient-filter]").forEach((button) => button.addEventListener("click", () => {
     activeExpedientFilter = button.dataset.expedientFilter;

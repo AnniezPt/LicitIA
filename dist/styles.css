@@ -79,6 +79,8 @@ h1, h2, h3, p { margin-top: 0; }
 .button { border: 0; border-radius: 6px; min-height: 36px; padding: 0 12px; font-size: 11px; font-weight: 700; transition: background .15s ease, border .15s ease; }
 .button-dark { color: var(--surface); background: var(--brand); }
 .button-dark:hover { background: var(--brand-dark); }
+.button-light { color: var(--brand); background: var(--surface-subtle); border: 1px solid var(--line); text-decoration: none; }
+.button-light:hover { color: var(--ink); border-color: var(--brand); background: var(--surface); }
 .button-dark span { color: var(--lime); font-size: 16px; line-height: 0; vertical-align: -1px; margin-right: 3px; }
 .button-quiet { background: var(--surface-deep); color: var(--ink-soft); }
 .button-outline { background: var(--surface); border: 1px solid var(--line); color: var(--ink); }
@@ -289,6 +291,8 @@ h1 { font-size: clamp(29px, 3.4vw, 40px); font-weight: 700; letter-spacing: -.05
 .assistance-context { display: grid; gap: 4px; margin: 5px 0; padding: 10px; border: 1px solid var(--line-soft); background: var(--surface-subtle); border-radius: 5px; }
 .assistance-context b { color: var(--ink-muted); font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
 .assistance-context span { font-size: 10px; font-weight: 700; }
+.assistance-context small { color: var(--ink-muted); font-size: 9px; line-height: 1.35; }
+.assistance-actions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 3px; }
 .route-card a.assistance-primary { color: var(--surface); text-decoration: none; }
 .assistance-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
 .assistance-card { display: grid; align-content: start; gap: 8px; min-height: 205px; padding: 17px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
@@ -303,6 +307,52 @@ h1 { font-size: clamp(29px, 3.4vw, 40px); font-weight: 700; letter-spacing: -.05
 .principle-list > div { display: grid; gap: 5px; padding: 12px; border: 1px solid var(--line-soft); border-radius: 5px; background: var(--surface); }
 .principle-list b { color: var(--brand); font-size: 10px; }
 .principle-list span { color: var(--ink-muted); font-size: 9px; line-height: 1.4; }
+.radar-shell { display: grid; gap: 12px; max-width: 1120px; }
+.route-card-radar { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; border-top: 3px solid var(--brand); }
+.route-card-radar > div { display: grid; gap: 7px; }
+.route-card-radar > div > span { color: var(--ink-muted); font-size: 9px; font-weight: 800; letter-spacing: .1em; }
+.route-card-radar > div > strong { max-width: 570px; font-size: 20px; letter-spacing: -.04em; }
+.route-card-radar > div > p { max-width: 670px; margin: 0; color: var(--ink-soft); font-size: 10px; line-height: 1.5; }
+.radar-layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(250px, .7fr); gap: 12px; align-items: start; }
+.map-card { min-width: 0; padding: 17px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.map-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.map-card-head h2 { margin: 4px 0 0; font-size: 16px; letter-spacing: -.035em; }
+.map-stage { position: relative; min-height: 310px; display: grid; place-items: center; margin-top: 10px; padding: 8px; border: 1px solid var(--line-soft); border-radius: 6px; background: linear-gradient(145deg, #fbfcf8 0%, #f1f5ed 100%); overflow: hidden; }
+.spain-map { width: min(100%, 520px); height: auto; overflow: visible; }
+.spain-outline { fill: #e2eadb; stroke: var(--brand); stroke-width: 2; stroke-linejoin: round; }
+.spain-relief { fill: none; stroke: #c8d6c4; stroke-width: 1.4; stroke-linecap: round; opacity: .85; }
+.island-shape { fill: #e2eadb; stroke: var(--brand); stroke-width: 1.5; }
+.radar-marker { cursor: pointer; outline: none; }
+.radar-marker > circle:first-child { fill: var(--brand); stroke: var(--surface); stroke-width: 3; transition: r .15s ease, fill .15s ease; }
+.radar-marker-core { fill: var(--lime); pointer-events: none; }
+.radar-marker text { fill: var(--ink-soft); font: 700 8px "Plus Jakarta Sans", sans-serif; pointer-events: none; }
+.radar-marker:hover > circle:first-child, .radar-marker:focus > circle:first-child, .radar-marker.is-selected > circle:first-child { fill: var(--review); }
+.radar-marker.is-selected text { fill: var(--ink); }
+.map-legend { display: flex; flex-wrap: wrap; gap: 11px; margin-top: -2px; color: var(--ink-muted); font-size: 9px; }
+.legend-dot { width: 7px; height: 7px; display: inline-block; margin-right: 5px; border-radius: 50%; vertical-align: 1px; }
+.legend-dot-active { background: var(--brand); box-shadow: inset 0 0 0 2px var(--lime); }
+.legend-dot-base { background: var(--line); }
+.map-disclaimer { margin: 12px 0 0; color: var(--ink-muted); font-size: 9px; line-height: 1.45; }
+.radar-side { display: grid; gap: 9px; }
+.radar-side-card { display: grid; gap: 7px; padding: 15px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.radar-side-card h2 { margin: 0; font-size: 15px; letter-spacing: -.03em; }
+.radar-side-card p:not(.eyebrow) { margin: 0; color: var(--ink-soft); font-size: 10px; line-height: 1.5; }
+.radar-side-card a { color: var(--brand); font-size: 10px; font-weight: 700; text-decoration: none; }
+.radar-count-list { display: grid; gap: 6px; }
+.radar-count-list > div { display: flex; justify-content: space-between; gap: 10px; padding-top: 6px; border-top: 1px solid var(--line-soft); color: var(--ink-muted); font-size: 9px; }
+.radar-count-list b { color: var(--ink); font: 700 12px "JetBrains Mono", monospace; }
+.radar-opportunities { max-width: 900px; }
+.radar-opportunity-list { display: grid; gap: 6px; }
+.radar-opportunity { display: grid; grid-template-columns: minmax(0, 1fr) auto 18px; align-items: center; gap: 12px; padding: 11px 13px; border: 1px solid var(--line-soft); border-left: 3px solid var(--line); border-radius: 5px; background: var(--surface); color: var(--ink); text-align: left; cursor: pointer; }
+.radar-opportunity:hover, .radar-opportunity:focus, .radar-opportunity.is-selected { border-color: var(--brand); border-left-color: var(--brand); background: var(--surface-subtle); outline: none; }
+.radar-opportunity > span { display: grid; gap: 3px; min-width: 0; }
+.radar-opportunity b { font-size: 10px; }
+.radar-opportunity small { overflow: hidden; color: var(--ink-muted); font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.radar-opportunity strong { color: var(--review); font-size: 9px; }
+.radar-opportunity i { color: var(--brand); font-style: normal; font-size: 14px; }
+.radar-note { max-width: 900px; border-left: 3px solid var(--lime); }
+.radar-note strong { color: var(--brand); font-size: 10px; }
+.radar-note p { margin: 5px 0 0; color: var(--ink-soft); font-size: 10px; line-height: 1.45; }
 .team-summary { display: flex; gap: 9px; margin-top: 5px; }
 .team-summary > div { display: grid; gap: 3px; min-width: 100px; padding: 9px; border: 1px solid var(--line-soft); border-radius: 5px; background: var(--surface-subtle); }
 .team-summary b { font: 700 18px "JetBrains Mono", monospace; }
@@ -462,6 +512,9 @@ h1 { font-size: clamp(29px, 3.4vw, 40px); font-weight: 700; letter-spacing: -.05
   .route-view { padding: 34px 0 20px; }
   .route-grid { grid-template-columns: 1fr; }
   .route-summary-strip, .profile-checklist, .notes-board, .assistance-grid, .principle-list, .team-grid { grid-template-columns: 1fr; }
+  .route-card-radar { align-items: flex-start; flex-direction: column; }
+  .radar-layout { grid-template-columns: 1fr; }
+  .map-stage { min-height: 250px; }
   .route-toolbar { align-items: flex-start; flex-direction: column; gap: 7px; }
   .task-board-row { grid-template-columns: 26px minmax(0, 1fr); }
   .task-board-row .task-state, .task-board-row .route-row-action { grid-column: 2; justify-self: start; }
