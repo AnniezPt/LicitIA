@@ -105,3 +105,14 @@ Se corrigieron problemas detectados al revisar la beta con datos guardados:
 - búsqueda global llevada a Oportunidades cuando se utiliza desde otra ruta;
 - importación local validada para evitar oportunidades o enlaces mal formados;
 - versión de recursos cambiada para que el navegador no conserve una interfaz antigua en caché.
+
+## Control de calidad posterior — 2 de octubre de 2026
+
+La revisión en navegador cubrió las siete rutas, la consola, los filtros de Oportunidades y Expedientes, la búsqueda con resultados y sin resultados y el cambio de ruta tras buscar.
+
+- no se detectaron errores de consola ni advertencias durante la revisión;
+- los filtros de Oportunidades muestran el número visible y conservan el orden por fecha en “Más próximas”;
+- la búsqueda devuelve un caso, muestra `0 de 3` cuando no encuentra coincidencias y presenta un estado vacío explicativo;
+- los filtros de Expedientes devuelven `3 de 3`, `2 de 3`, `0 de 3` y `1 de 3` según el estado;
+- la búsqueda se limpia al salir de Oportunidades para no mostrar un filtro aparentemente activo en Tareas, Mi empresa, Notas o Ajustes;
+- se incrementó de nuevo la versión de los recursos para que la corrección llegue también a pestañas antiguas.

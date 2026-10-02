@@ -575,12 +575,22 @@ function renderSettingsMarkup() {
 
 function renderRoute() {
   const route = currentRoute();
+  if (route !== "oportunidades" && searchQuery) {
+    searchQuery = "";
+    const searchInput = document.querySelector("#globalSearch");
+    if (searchInput) searchInput.value = "";
+  }
   const breadcrumbLabels = { hoy: "Hoy", oportunidades: "Oportunidades", expedientes: "Expedientes", tareas: "Tareas", empresa: "Mi empresa", pruebas: "Notas de prueba", ajustes: "Ajustes" };
   if (breadcrumbElement) breadcrumbElement.textContent = breadcrumbLabels[route];
   dashboardSections.forEach((section) => { section.hidden = route !== "oportunidades"; });
   routeElement.hidden = route === "oportunidades";
   document.querySelectorAll(".nav-item[data-route]").forEach((item) => item.classList.toggle("active", item.dataset.route === route));
-  if (route === "oportunidades") return;
+  if (route === "oportunidades") {
+    renderList();
+    renderDetail();
+    document.querySelectorAll(".filter").forEach((button) => button.classList.toggle("active", button.dataset.filter === activeFilter));
+    return;
+  }
 
   const selected = opportunities.find((item) => item.id === selectedId) || opportunities[0];
   const openTasks = allTasks().filter((task) => task.status === "pending" || task.status === "in_progress");
